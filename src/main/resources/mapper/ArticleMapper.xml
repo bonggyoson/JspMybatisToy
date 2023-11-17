@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.JspMybatisSample.mapper.article.ArticleMapper">
+
+    <sql id="articleColumns">
+        ,
+
+
+    </sql>
+
+    <select id="selectArticles" resultType="com.example.JspMybatisSample.domain.article.dto.ArticleDto">
+        select *
+        from board.article
+    </select>
+
+<!--    <insert id="insertArticle" parameterType="com.example.JspMybatisSample.domain.article.dto.ArticleDto">-->
+<!--        insert into sample.board.article-->
+<!--        values (#{})-->
+<!--    </insert>-->
+
+</mapper>
