@@ -9,12 +9,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Article</title>
 </head>
 <body>
-
-<c:if test="test">
-    <p>테스트 입니다.</p>
-</c:if>
+<div>게시판 JSP & MYBATIS & AJAX 연습 ><</div>
 </body>
 </html>

@@ -8,6 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib uri="http://example.com/functions" prefix="f" %>
+
 <html>
 <head>
     <title>게시물 리스트</title>
@@ -17,7 +19,8 @@
 
 <div class="container">
     <button class="btn btn-dark" onclick="location.href='/article_insert.jsp'">글쓰기</button>
-    <table class="table table-hover">
+    <table class="table">
+        <thead>
         <tr>
             <th></th>
             <th>제목</th>
@@ -25,14 +28,18 @@
             <th>날짜</th>
             <th>조회수</th>
         </tr>
-        <c:forEach var="i" items="${articles}">
+        </thead>
+        <tbody>
+        <c:forEach var="articles" items="${articles}">
             <tr>
-                <td>${i.title}</td>
-                <td>${i.writer}</td>
-                <td><fmt:formatDate value="${i.createdAt}" pattern="yyyy-MM-dd"/></td>
-                <td>${i.viewCnt}</td>
+                <td></td>
+                <td>${articles.articleTitle}</td>
+                <td>${articles.articleWriter}</td>
+                <td>${f:formatLocalDateTime(articles.createdAt, 'YYYY.MM.dd')}</td>
+                <td>${articles.articleView}</td>
             </tr>
         </c:forEach>
+        </tbody>
     </table>
 </div>
 </body>

@@ -6,7 +6,4 @@
         <!-- 카멜 케이스 설정-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
-    <mappers>
-        <mapper resource="mapper/ArticleMapper.xml"/>
-    </mappers>
 </configuration>

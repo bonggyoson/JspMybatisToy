@@ -19,7 +19,7 @@ public class ArticleDto {
     private String articleContent;
 
     /*작성자 */
-    private String articleWiter;
+    private String articleWriter;
 
     /* 조회수 */
     private int articleView;

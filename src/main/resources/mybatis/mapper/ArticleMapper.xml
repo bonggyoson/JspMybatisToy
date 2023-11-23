@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.JspMybatisSample.mapper.article.ArticleMapper">
+
+    <resultMap id="articleDto" type="com.example.JspMybatisSample.domain.article.dto.ArticleDto">
+      <id column="article_id" property="articleId"/>
+      <result column="article_title" property="articleTitle"/>
+      <result column="article_content" property="articleContent"/>
+      <result column="article_writer" property="articleWriter"/>
+      <result column="article_view" property="articleView"/>
+      <result column="created_at" property="createdAt"/>
+      <result column="updated_at" property="updatedAt"/>
+    </resultMap>
+
+  <select id="selectArticles" resultMap="articleDto">
+    SELECT *
+    FROM board.article
+  </select>
+
+</mapper>
