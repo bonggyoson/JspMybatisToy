@@ -11,7 +11,7 @@
 
   <function>
     <name>formatLocalDateTime</name>
-    <function-class>com.example.JspMybatisSample.config.JspDatesConfig</function-class>
+    <function-class>com.example.JspMybatisSample.global.config.JspDatesConfig</function-class>
     <function-signature>java.lang.String formatLocalDateTime(java.time.LocalDateTime,
       java.lang.String)
     </function-signature>

@@ -1,4 +1,4 @@
-package com.example.JspMybatisSample.config;
+package com.example.JspMybatisSample.global.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

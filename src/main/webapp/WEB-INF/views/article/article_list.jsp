@@ -9,20 +9,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://example.com/functions" prefix="f" %>
-
-<html>
-<head>
-    <title>게시물 리스트</title>
-</head>
-<body>
-<h2 class="list-container">게시물 리스트</h2>
-
+<script src="${pageContext.request.contextPath}/static/js/article.js"></script>
 <div class="container">
-    <button class="btn btn-dark" onclick="location.href='/article_insert.jsp'">글쓰기</button>
-    <table class="table">
+    <div class="row mt-4">
+        <div class="col-11 text-center">
+            <h2> ~ 게시판 놀이 ~ </h2>
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-outline-light" onclick="location.href='article/insertArticle'">
+                글쓰기
+            </button>
+        </div>
+    </div>
+    <table class="table table-striped caption-top table-hover" id="list-template">
+        <%--        <caption> 총 ${articles.size()} 건</caption>--%>
         <thead>
         <tr>
-            <th></th>
+            <th>#</th>
             <th>제목</th>
             <th>작성자</th>
             <th>날짜</th>
@@ -30,17 +33,39 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="articles" items="${articles}">
-            <tr>
-                <td></td>
-                <td>${articles.articleTitle}</td>
-                <td>${articles.articleWriter}</td>
-                <td>${f:formatLocalDateTime(articles.createdAt, 'YYYY.MM.dd')}</td>
-                <td>${articles.articleView}</td>
-            </tr>
-        </c:forEach>
+        <%--        <c:forEach var="articles" items="${articles}">--%>
+        <%--            <tr>--%>
+        <%--                <td>${articles.articleId}</td>--%>
+        <%--                <td>${articles.articleTitle}</td>--%>
+        <%--                <td>${articles.articleWriter}</td>--%>
+        <%--                <td>${f:formatLocalDateTime(articles.createdAt, 'YYYY.MM.dd')}</td>--%>
+        <%--                <td>${articles.articleView}</td>--%>
+        <%--            </tr>--%>
+        <%--        </c:forEach>--%>
         </tbody>
     </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>
-</body>
-</html>
+<script id="list-template" type="text/x-handlebars-template">
+    {{#each .}}
+    <tr>
+
+    </tr>
+    {{/each}}
+</script>

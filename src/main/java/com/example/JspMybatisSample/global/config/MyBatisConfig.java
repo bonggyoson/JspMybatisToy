@@ -1,4 +1,4 @@
-package com.example.JspMybatisSample.config;
+package com.example.JspMybatisSample.global.config;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSessionFactory;

@@ -3,11 +3,13 @@ package com.example.JspMybatisSample.domain.article;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import lombok.NoArgsConstructor;
 
 /**
  * 게시판 도메인
  */
 @Getter
+@NoArgsConstructor
 public class Article {
 
     /* 번호 (PK) */

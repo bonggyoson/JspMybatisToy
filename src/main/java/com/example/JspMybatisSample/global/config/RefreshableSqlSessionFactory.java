@@ -1,4 +1,4 @@
-package com.example.JspMybatisSample.config;
+package com.example.JspMybatisSample.global.config;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationHandler;

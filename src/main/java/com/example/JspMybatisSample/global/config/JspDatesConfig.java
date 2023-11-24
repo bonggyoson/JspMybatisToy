@@ -1,4 +1,4 @@
-package com.example.JspMybatisSample.config;
+package com.example.JspMybatisSample.global.config;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

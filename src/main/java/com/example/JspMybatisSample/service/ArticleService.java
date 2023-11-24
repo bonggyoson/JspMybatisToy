@@ -17,4 +17,8 @@ public class ArticleService {
         return articleMapper.selectArticles();
     }
 
+    public ArticleDto selectArticle(long articleId) {
+        return articleMapper.selectArticle(articleId);
+    }
+
 }

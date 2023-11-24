@@ -4,19 +4,44 @@
 
 <mapper namespace="com.example.JspMybatisSample.mapper.article.ArticleMapper">
 
-    <resultMap id="articleDto" type="com.example.JspMybatisSample.domain.article.dto.ArticleDto">
-      <id column="article_id" property="articleId"/>
-      <result column="article_title" property="articleTitle"/>
-      <result column="article_content" property="articleContent"/>
-      <result column="article_writer" property="articleWriter"/>
-      <result column="article_view" property="articleView"/>
-      <result column="created_at" property="createdAt"/>
-      <result column="updated_at" property="updatedAt"/>
-    </resultMap>
+  <resultMap id="articleDto" type="com.example.JspMybatisSample.domain.article.dto.ArticleDto">
+    <id column="article_id" property="articleId"/>
+    <result column="article_title" property="articleTitle"/>
+    <result column="article_content" property="articleContent"/>
+    <result column="article_writer" property="articleWriter"/>
+    <result column="article_view" property="articleView"/>
+    <result column="created_at" property="createdAt"/>
+    <result column="updated_at" property="updatedAt"/>
+  </resultMap>
 
   <select id="selectArticles" resultMap="articleDto">
     SELECT *
     FROM board.article
   </select>
+
+  <select id="selectArticle" parameterType="java.lang.Long" resultMap="articleDto">
+    SELECT *
+    FROM board.article
+    WHERE article_id = #{articleId}
+  </select>
+
+<!--  <insert id="insertArticle" parameterMap="ArticleDto">-->
+<!--    <selectKey keyProperty="seq_article" resultType="java.lang.Long" order="BEFORE">-->
+<!--      SELECT seq_article.NEXTVAL FROM DAUL-->
+<!--    </selectKey>-->
+<!--    <![CDATA[-->
+<!--        INSERT INTO board.article-->
+<!--        (article_id, article_title, article_content)-->
+<!--                                VALUES-->
+<!--        (-->
+<!--         #{seq_article},-->
+<!--         #{articleTitle},-->
+<!--         #{articleContent},-->
+<!--         #{articleWriter},-->
+<!--         #{createdAt},-->
+<!--         #{updatedAt}-->
+<!--        )-->
+<!--    ]]>-->
+<!--  </insert>-->
 
 </mapper>

@@ -6,16 +6,16 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-<c:set var="requestURI" value="${requestScope['javax.servlet.forward.request_uri']}"/>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Toy Article</title>
+    <%-- css --%>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/main.css">
 
-<ul>
-    <c:forEach var="menu" items="${menuList}">
-        <li>
-            <a href="${menu.menuUrl}" title="${menu.menuName}">
-                <c:out value="${menu.menuName}"/>
-            </a>
-        </li>
-    </c:forEach>
-</ul>
+    <%-- js --%>
+    <script src="${pageContext.request.contextPath}/static/js/bootstrap.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+</head>

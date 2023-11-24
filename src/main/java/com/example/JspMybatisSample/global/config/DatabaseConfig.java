@@ -1,4 +1,4 @@
-package com.example.JspMybatisSample.config;
+package com.example.JspMybatisSample.global.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -15,18 +15,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 // <tx:annotation-driven>
 @EnableTransactionManagement
 public class DatabaseConfig {
-
-//    @Value("${spring.datasource.driver-class-name}")
-//    private String driverClassName;
-//
-//    @Value("${spring.datasource.url}")
-//    private String url;
-//
-//    @Value("${spring.datasource.username}")
-//    private String username;
-//
-//    @Value("${spring.datasource.password}")
-//    private String password;
 
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource.hikari")
