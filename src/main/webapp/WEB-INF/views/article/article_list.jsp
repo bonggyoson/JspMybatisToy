@@ -21,7 +21,7 @@
             </button>
         </div>
     </div>
-    <table class="table table-striped caption-top table-hover" id="list-template">
+    <table class="table table-striped caption-top table-hover">
         <%--        <caption> 총 ${articles.size()} 건</caption>--%>
         <thead>
         <tr>
@@ -32,16 +32,7 @@
             <th>조회수</th>
         </tr>
         </thead>
-        <tbody>
-        <%--        <c:forEach var="articles" items="${articles}">--%>
-        <%--            <tr>--%>
-        <%--                <td>${articles.articleId}</td>--%>
-        <%--                <td>${articles.articleTitle}</td>--%>
-        <%--                <td>${articles.articleWriter}</td>--%>
-        <%--                <td>${f:formatLocalDateTime(articles.createdAt, 'YYYY.MM.dd')}</td>--%>
-        <%--                <td>${articles.articleView}</td>--%>
-        <%--            </tr>--%>
-        <%--        </c:forEach>--%>
+        <tbody id="listData">
         </tbody>
     </table>
     <nav aria-label="Page navigation example">
@@ -65,7 +56,11 @@
 <script id="list-template" type="text/x-handlebars-template">
     {{#each .}}
     <tr>
-
+        <td>{{articleId}}</td>
+        <td>{{articleTitle}}</td>
+        <td>{{articleWriter}}</td>
+        <td>{{f:formatLocalDateTime(data.createdAt, 'YYYY.MM.dd')}}</td>
+        <td>{{articleView}}</td>
     </tr>
     {{/each}}
 </script>
