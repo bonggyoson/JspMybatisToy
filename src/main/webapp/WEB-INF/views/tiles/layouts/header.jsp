@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width", initial-scale="1">
     <title>Toy Article</title>
     <%-- css --%>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.min.css"/>

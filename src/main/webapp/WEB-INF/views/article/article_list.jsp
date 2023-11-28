@@ -11,16 +11,6 @@
 <%@taglib uri="http://example.com/functions" prefix="f" %>
 <script src="${pageContext.request.contextPath}/static/js/article.js"></script>
 <div class="container">
-    <div class="row mt-4">
-        <div class="col-11 text-center">
-            <h2> ~ 게시판 놀이 ~ </h2>
-        </div>
-        <div class="col-auto">
-            <button class="btn btn-outline-light" onclick="location.href='article/insertArticle'">
-                글쓰기
-            </button>
-        </div>
-    </div>
     <table class="table table-striped caption-top table-hover">
         <%--        <caption> 총 ${articles.size()} 건</caption>--%>
         <thead>

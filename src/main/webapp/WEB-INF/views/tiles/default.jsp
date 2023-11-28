@@ -10,6 +10,7 @@
 <html data-bs-theme="dark">
 <!-- Page Header -->
 <tiles:insertAttribute name="header"/>
+<tiles:insertAttribute name="nav"/>
 <!-- Page Contents -->
 <tiles:insertAttribute name="body"/>
 <!-- Page Footer -->
