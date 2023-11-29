@@ -1,4 +1,4 @@
-function ajax(type, url, param, callback) {
+function common(type, url, param, callback) {
   $.ajax({
     type: type,
     url: url,

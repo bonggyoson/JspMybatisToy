@@ -1,12 +1,10 @@
-package com.example.JspMybatisSample.controller.article;
+package com.example.JspMybatisSample.controller.article.view;
 
-import com.example.JspMybatisSample.service.ArticleService;
+import com.example.JspMybatisSample.service.command.ArticleCommandService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -15,18 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 public class ArticleController {
 
-    private final ArticleService articleService;
+    private final ArticleCommandService articleService;
 
     @GetMapping("")
-    public String selectArticles(Model model) {
-//        model.addAttribute("articles", articleService.selectArticles());
+    public String selectArticles() {
 
         return "article/article_list";
     }
 
     @GetMapping("/{articleId}")
-    public String selectArticle(Model model, @PathVariable long articleId) {
-        model.addAttribute("article", articleService.selectArticle(articleId));
+    public String selectArticle() {
 
         return "article/article_detail";
     }

@@ -1,4 +1,4 @@
-package com.example.JspMybatisSample.api.controller.member;
+package com.example.JspMybatisSample.controller.member.api;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

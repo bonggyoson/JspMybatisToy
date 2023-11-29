@@ -1,12 +1,10 @@
 package com.example.JspMybatisSample.api.controller.article;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.example.JspMybatisSample.common.config.BaseTestConfig;
-import com.example.JspMybatisSample.service.ArticleService;
+import com.example.JspMybatisSample.controller.article.api.ArticleApiController;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

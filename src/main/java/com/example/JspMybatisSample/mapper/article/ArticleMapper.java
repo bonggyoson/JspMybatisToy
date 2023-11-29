@@ -1,6 +1,8 @@
 package com.example.JspMybatisSample.mapper.article;
 
 import com.example.JspMybatisSample.domain.article.dto.ArticleDto;
+import com.example.JspMybatisSample.domain.article.dto.InsertArticleDto;
+import com.example.JspMybatisSample.domain.article.dto.UpdateArticleDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -12,11 +14,9 @@ public interface ArticleMapper {
 
     ArticleDto selectArticle(long articleId);
 
-    int insertArticle(ArticleDto articleDto);
+    int insertArticle(InsertArticleDto insertArticleDto);
 
-    int updateArticle(ArticleDto articleDto);
+    int updateArticle(UpdateArticleDto updateArticleDto);
 
-    void deleteArticle(long articleId);
-
-
+    int deleteArticle(long articleId);
 }

@@ -25,23 +25,31 @@
     WHERE article_id = #{articleId}
   </select>
 
-<!--  <insert id="insertArticle" parameterMap="ArticleDto">-->
-<!--    <selectKey keyProperty="seq_article" resultType="java.lang.Long" order="BEFORE">-->
-<!--      SELECT seq_article.NEXTVAL FROM DAUL-->
-<!--    </selectKey>-->
-<!--    <![CDATA[-->
-<!--        INSERT INTO board.article-->
-<!--        (article_id, article_title, article_content)-->
-<!--                                VALUES-->
-<!--        (-->
-<!--         #{seq_article},-->
-<!--         #{articleTitle},-->
-<!--         #{articleContent},-->
-<!--         #{articleWriter},-->
-<!--         #{createdAt},-->
-<!--         #{updatedAt}-->
-<!--        )-->
-<!--    ]]>-->
-<!--  </insert>-->
+  <insert id="insertArticle"
+    parameterType="com.example.JspMybatisSample.domain.article.dto.InsertArticleDto">
+    <selectKey keyProperty="seq_article" resultType="java.lang.Long" order="BEFORE">
+      SELECT seq_article.NEXTVAL FROM DUAL
+    </selectKey>
+    <![CDATA[
+        INSERT INTO board.article
+        (
+            article_id,
+            article_title,
+            article_content,
+            article_writer,
+            created_at,
+            updated_at
+        )
+            VALUES
+        (
+            #{seq_article},
+            #{articleTitle},
+            #{articleContent},
+            #{articleWriter},
+            now(),
+            now()
+        )
+    ]]>
+  </insert>
 
 </mapper>
