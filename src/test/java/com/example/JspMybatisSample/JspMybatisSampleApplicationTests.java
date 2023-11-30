@@ -8,6 +8,7 @@ class JspMybatisSampleApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }
