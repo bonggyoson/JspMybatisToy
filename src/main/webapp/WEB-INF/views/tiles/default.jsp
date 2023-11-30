@@ -8,11 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <html data-bs-theme="dark">
-<!-- Page Header -->
+<!-- Pagination Header -->
 <tiles:insertAttribute name="header"/>
 <tiles:insertAttribute name="nav"/>
-<!-- Page Contents -->
+<!-- Pagination Contents -->
 <tiles:insertAttribute name="body"/>
-<!-- Page Footer -->
+<tiles:insertAttribute name="pagination"/>
+<!-- Pagination Footer -->
 <tiles:insertAttribute name="footer"/>
 </html>
