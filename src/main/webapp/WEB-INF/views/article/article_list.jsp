@@ -10,6 +10,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://example.com/functions" prefix="f" %>
 <script src="${pageContext.request.contextPath}/static/js/article.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/common/helper.js"></script>
 <div class="container">
     <table class="table table-striped caption-top table-hover">
         <%--        <caption> 총 ${articles.size()} 건</caption>--%>
@@ -25,23 +26,6 @@
         <tbody id="listData">
         </tbody>
     </table>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
 </div>
 <script id="list-template" type="text/x-handlebars-template">
     {{#each .}}
@@ -49,7 +33,7 @@
         <td>{{articleId}}</td>
         <td>{{articleTitle}}</td>
         <td>{{articleWriter}}</td>
-        <td>{{f:formatLocalDateTime(data.createdAt, 'YYYY.MM.dd')}}</td>
+        <td>{{formatDate createdAt "YYYY-MM-DD hh:ss:mm"}}</td>
         <td>{{articleView}}</td>
     </tr>
     {{/each}}
