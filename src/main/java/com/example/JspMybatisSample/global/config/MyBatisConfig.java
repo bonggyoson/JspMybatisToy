@@ -1,5 +1,7 @@
 package com.example.JspMybatisSample.global.config;
 
+import com.github.pagehelper.PageInterceptor;
+import java.util.Properties;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -29,6 +31,14 @@ public class MyBatisConfig {
             applicationContext.getResource("classpath:/mybatis/mybatis-config.xml"));
         sqlSessionFactoryBean.setMapperLocations(
             applicationContext.getResources("classpath:/mybatis/mapper/*.xml"));
+
+        PageInterceptor pageInterceptor = new PageInterceptor();
+        Properties properties = new Properties();
+
+        properties.put("helperDialect", "postgresql");
+        properties.put("reasonable", "true");
+        pageInterceptor.setProperties(properties);
+        sqlSessionFactoryBean.setPlugins(pageInterceptor);
 
         return sqlSessionFactoryBean;
     }

@@ -3,7 +3,11 @@ package com.example.JspMybatisSample.controller.article.api;
 import com.example.JspMybatisSample.domain.article.dto.ArticleDto;
 import com.example.JspMybatisSample.domain.search.SearchDto;
 import com.example.JspMybatisSample.global.common.CommonResponse;
+import com.example.JspMybatisSample.global.common.page.Pagination;
 import com.example.JspMybatisSample.service.command.ArticleCommandService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,12 +30,12 @@ public class ArticleApiController {
 
     @PostMapping("")
     public ResponseEntity<CommonResponse<List<ArticleDto>>> selectArticles(
-        SearchDto searchDto) {
-
-        List<ArticleDto> articles = articleService.selectArticles();
+        @RequestParam(required = false, defaultValue = "1") Integer page) {
 
         return ResponseEntity.status(HttpStatus.OK)
-            .body(CommonResponse.res(HttpStatus.OK, "게시글 리스트 조회 성공", articles));
+            .body(CommonResponse.res(HttpStatus.OK, "게시글 리스트 조회 성공",
+                articleService.selectArticles(page)
+            ));
     }
 
     @PostMapping("/{articleId}")
