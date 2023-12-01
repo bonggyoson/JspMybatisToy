@@ -13,7 +13,6 @@
 <tiles:insertAttribute name="nav"/>
 <!-- Pagination Contents -->
 <tiles:insertAttribute name="body"/>
-<tiles:insertAttribute name="pagination"/>
 <!-- Pagination Footer -->
 <tiles:insertAttribute name="footer"/>
 </html>

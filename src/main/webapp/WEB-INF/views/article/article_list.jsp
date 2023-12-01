@@ -9,11 +9,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://example.com/functions" prefix="f" %>
-<script src="${pageContext.request.contextPath}/static/js/article.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/common/helper.js"></script>
 <div class="container">
+    <h1 class="mt-4">TOY</h1>
     <table class="table table-striped caption-top table-hover">
-        <%--        <caption> 총 ${articles.size()} 건</caption>--%>
+        <caption>총 <em id="totalNum"></em> 건</caption>
         <thead>
         <tr>
             <th>#</th>
@@ -26,15 +25,44 @@
         <tbody id="listData">
         </tbody>
     </table>
+    <nav id="pageData" aria-label="Page navigation example">
+    </nav>
 </div>
+<script>
+  $(function () {
+    getListAjax('post', '/api/article', 'json');
+  });
+</script>
 <script id="list-template" type="text/x-handlebars-template">
-    {{#each .}}
+    {{#each list}}
     <tr>
         <td>{{articleId}}</td>
-        <td>{{articleTitle}}</td>
+        <td><a href="${pageContext.request.contextPath}/article/{{articleId}}">{{articleTitle}}</a>
+        </td>
         <td>{{articleWriter}}</td>
         <td>{{formatDate createdAt "YYYY-MM-DD hh:ss:mm"}}</td>
         <td>{{articleView}}</td>
     </tr>
     {{/each}}
+</script>
+<script id="page-template" type="text/x-handlebars-template">
+    <ul class="pagination justify-content-center">
+        {{#ifCond hasPreviousPage '==' true}}
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        {{/ifCond}}
+        {{#each navigatepageNums}}
+        <li class="page-item"><a class="page-link" href="#">{{math @index "+" 1}}</a></li>
+        {{/each}}
+        {{#ifCond hasNextPage '==' true}}
+        <li class="page-item" id="next">
+            <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+        {{/ifCond}}
+    </ul>
 </script>

@@ -1,6 +1,5 @@
 package com.example.JspMybatisSample.service.query;
 
-import com.example.JspMybatisSample.domain.article.Article;
 import com.example.JspMybatisSample.domain.article.dto.InsertArticleDto;
 import com.example.JspMybatisSample.domain.article.dto.UpdateArticleDto;
 import com.example.JspMybatisSample.mapper.article.ArticleMapper;
@@ -17,8 +16,8 @@ public class ArticleQueryService {
         return articleMapper.insertArticle(insertArticleDto);
     }
 
-    public int updateArticle(UpdateArticleDto updateArticleDto) {
-        return articleMapper.updateArticle(updateArticleDto);
+    public int updateArticle(long articleId, UpdateArticleDto updateArticleDto) {
+        return articleMapper.updateArticle(articleId, updateArticleDto);
     }
 
     public int deleteArticle(long articleId) {

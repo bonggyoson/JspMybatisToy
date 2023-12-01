@@ -1,13 +1,70 @@
-function common(type, url, param, callback) {
+function getListAjax(type, url, param, dataType) {
   $.ajax({
     type: type,
     url: url,
-    data: param,
-    success: function (data, status, xr) {
-      // $("#test").html(data);
+    param: param,
+    dataType: dataType,
+    success: function (data) {
+      if (data.status === "OK") {
+        // 총 개수
+        $("#totalNum").html(data.data.total);
+
+        // 데이터
+        let list = $("#list-template").html();
+        let listTemplate = Handlebars.compile(list);
+        let listView = listTemplate(data.data);
+
+        $("#listData").html(listView);
+
+        // 페이지네이션
+        let pagination = $("#page-template").html();
+        let pageTemplate = Handlebars.compile(pagination);
+        let pageView = pageTemplate(data.data);
+
+        $("#pageData").html(pageView);
+      }
     },
-    error: function (xhr, status, error) {
-      return callback(data)
+    error: function () {
+      alert("요청이 실패 했습니다.");
     }
   });
+}
+
+function getAjax(type, url, data, dataType) {
+  $.ajax({
+    type: type,
+    url: url,
+    data: JSON.stringify(data),
+    dataType: dataType,
+    contentType: "application/json",
+    success: function (data) {
+      if (data.status === "OK") {
+        if (data.data === 1) {
+          alert("요청이 성공하였습니다.");
+          window.location.href = "/article";
+        }
+
+        // 데이터
+        let list = $("#template").html();
+        let listTemplate = Handlebars.compile(list);
+        let listView = listTemplate(data.data);
+
+        $("#data").html(listView);
+      }
+    },
+    error: function () {
+      alert("요청이 실패 했습니다.");
+    }
+  });
+}
+
+function getFormData($form) {
+  let unindexed_array = $form.serializeArray();
+  let indexed_array = {};
+
+  $.map(unindexed_array, function (n, i) {
+    indexed_array[n['name']] = n['value'];
+  });
+
+  return indexed_array;
 }

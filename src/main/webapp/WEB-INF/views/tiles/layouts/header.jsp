@@ -21,4 +21,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+    <script src="${pageContext.request.contextPath}/static/js/common/common.js"></script>
+    <script src="${pageContext.request.contextPath}/static/js/common/helper.js"></script>
 </head>

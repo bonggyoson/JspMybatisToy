@@ -25,6 +25,12 @@
     WHERE article_id = #{articleId}
   </select>
 
+  <update id="selectArticlePlusViewCount" parameterType="java.lang.Long">
+    UPDATE board.article
+    SET article_view_count = article_view_count + 1
+    WHERE article_id = #{articleId}
+  </update>
+
   <insert id="insertArticle"
     parameterType="com.example.JspMybatisSample.domain.article.dto.InsertArticleDto">
     <selectKey keyProperty="seq_article" resultType="java.lang.Long" order="BEFORE">
@@ -51,5 +57,20 @@
         )
     ]]>
   </insert>
+
+  <update id="updateArticle"
+    parameterType="com.example.JspMybatisSample.domain.article.dto.UpdateArticleDto">
+    UPDATE board.article
+    SET article_title   = #{updateArticle.articleTitle},
+        article_content = #{updateArticle.articleContent},
+        updated_at      = now()
+    WHERE article_id = #{articleId}
+  </update>
+
+  <delete id="deleteArticle" parameterType="java.lang.Long">
+    DELETE
+    FROM board.article
+    WHERE article_id = #{articleId}
+  </delete>
 
 </mapper>

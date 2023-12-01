@@ -7,30 +7,55 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
-<head>
-    <title>Insert Page</title>
-</head>
-<body>
-<h2>게시글 작성</h2>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib uri="http://example.com/functions" prefix="f" %>
 <div class="container">
-    <form action="${pageContext.request.contextPath}/insert" method="post">
-        <div class="form-group">
-            <label for="title">제목</label>
-            <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요.">
+    <div class="container-fluid px-4 mt-5">
+        <div class="card mb-4">
+            <div class="card-body" id="data">
+            </div>
         </div>
-        <div class="form-group">
-            <label for="writer">작성자</label>
-            <input type="text" class="form-control" id="writer" name="writer" placeholder="작성자를 입력하세요.">
-        </div>
-        <div class="form-group">
-            <label for="content">내용</label>
-            <textarea class="form-control" id="content" name="content" rows="3"></textarea>
-        </div>
-        <button type="submit" class="btn btn-dark">작성</button>
-    </form>
-
+    </div>
 </div>
-</body>
-</html>
+<script>
+  $(function () {
+    getAjax('post', '/api/article/' + ${articleId}, 'json');
+  });
+</script>
+<script id="template" type="text/x-handlebars-template">
+    <form>
+        <div class="mb-3 mt-3">
+            <label for="articleId" class="form-label">번호</label>
+            <input type="text"
+                   class="form-control"
+                   id="articleId"
+                   name="articleId"
+                   value="{{articleId}}"
+                   disabled>
+        </div>
+        <div class="mb-3">
+            <label for="articleTitle" class="form-label">제목</label> <input
+                type="text" class="form-control" id="articleTitle" name="articleTitle"
+                value="{{articleTitle}}" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="articleContent" class="form-label">내용</label>
+            <textarea class="form-control" id="articleContent" name="articleContent"
+                      disabled>{{articleContent}}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="createdAt" class="form-label">등록일</label> <input
+                type="text" class="form-control" id="createdAt" name="createdAt"
+                value="{{createdAt}}" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="articleWriter" class="form-label">글쓴이</label> <input
+                type="text" class="form-control" id="articleWriter" name="articleWriter"
+                value="{{articleWriter}}" disabled>
+        </div>
+        <a href="${pageContext.request.contextPath}/article"
+           class="btn btn-outline-secondary">돌아가기</a>
+        <a href="${pageContext.request.contextPath}/article/updateArticle/${articleId}"
+           class="btn btn-outline-warning">수정</a>
+    </form>
+</script>

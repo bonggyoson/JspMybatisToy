@@ -7,7 +7,6 @@ import com.github.pagehelper.PageHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -22,12 +21,11 @@ public class ArticleCommandService {
         return articleMapper.selectArticles();
     }
 
-    public int selectArticlesCount() {
-        return articleMapper.selectArticlesCount();
-    }
-
     public ArticleDto selectArticle(long articleId) {
+
+        // 조회수 증가
+        articleMapper.selectArticlePlusViewCount(articleId);
+
         return articleMapper.selectArticle(articleId);
     }
-
 }
