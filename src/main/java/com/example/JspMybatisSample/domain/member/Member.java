@@ -1,5 +1,8 @@
 package com.example.JspMybatisSample.domain.member;
 
+import com.example.JspMybatisSample.domain.member.dto.MemberDto;
+import com.example.JspMybatisSample.domain.member.dto.UpdateMemberDto;
+import com.example.JspMybatisSample.global.common.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,17 +15,13 @@ import lombok.NoArgsConstructor;
  */
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
+public class Member extends BaseEntity {
 
     private Long id;
 
     private String email;
 
     private String password;
-
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
 
     private Role role;
 
@@ -31,6 +30,11 @@ public class Member {
         this.email = email;
         this.password = password;
         this.role = role;
+    }
+
+    public void updateMember(UpdateMemberDto updateMemberDto) {
+        this.email = updateMemberDto.getMemberEmail();
+        this.password = updateMemberDto.getMemberPassword();
     }
 
 }

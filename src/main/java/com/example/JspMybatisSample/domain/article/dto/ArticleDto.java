@@ -1,13 +1,13 @@
 package com.example.JspMybatisSample.domain.article.dto;
 
+import com.example.JspMybatisSample.global.common.BaseEntity;
+
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
 @Getter
 @Setter
-public class ArticleDto {
+public class ArticleDto extends BaseEntity {
 
     /* 번호 (PK) */
     private Long articleId;
@@ -22,11 +22,6 @@ public class ArticleDto {
     private String articleWriter;
 
     /* 조회수 */
-    private int articleView;
+    private int articleViewCount;
 
-    /* 등록일 */
-    private LocalDateTime createdAt;
-
-    /* 수정일 */
-    private LocalDateTime updatedAt;
 }
