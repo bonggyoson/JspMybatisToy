@@ -26,6 +26,8 @@
   function update_article() {
     if (confirm("정말로 수정하시겠습니까?")) {
       getAjax('put', '/api/article/${articleId}/update', getFormData($("#frm")), '');
+    } else {
+      return 0;
     }
   }
 

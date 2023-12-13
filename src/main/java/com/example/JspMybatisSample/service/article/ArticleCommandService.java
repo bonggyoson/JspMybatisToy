@@ -1,4 +1,4 @@
-package com.example.JspMybatisSample.service.command;
+package com.example.JspMybatisSample.service.article;
 
 import com.example.JspMybatisSample.domain.article.dto.ArticleDto;
 import com.example.JspMybatisSample.mapper.article.ArticleMapper;
@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class ArticleCommandService {
 
     private final ArticleMapper articleMapper;
@@ -21,6 +22,7 @@ public class ArticleCommandService {
         return articleMapper.selectArticles();
     }
 
+    @Transactional
     public ArticleDto selectArticle(long articleId) {
 
         // 조회수 증가

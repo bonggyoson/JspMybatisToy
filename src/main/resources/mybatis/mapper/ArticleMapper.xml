@@ -9,7 +9,7 @@
     <result column="article_title" property="articleTitle"/>
     <result column="article_content" property="articleContent"/>
     <result column="article_writer" property="articleWriter"/>
-    <result column="article_view" property="articleView"/>
+    <result column="article_view_count" property="articleViewCount"/>
     <result column="created_at" property="createdAt"/>
     <result column="updated_at" property="updatedAt"/>
   </resultMap>
@@ -17,6 +17,7 @@
   <select id="selectArticles" resultMap="articleDto">
     SELECT *
     FROM board.article
+    ORDER BY article_id
   </select>
 
   <select id="selectArticle" parameterType="java.lang.Long" resultMap="articleDto">

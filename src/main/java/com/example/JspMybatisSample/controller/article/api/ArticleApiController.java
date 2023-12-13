@@ -4,15 +4,14 @@ import com.example.JspMybatisSample.domain.article.dto.ArticleDto;
 import com.example.JspMybatisSample.domain.article.dto.InsertArticleDto;
 import com.example.JspMybatisSample.domain.article.dto.UpdateArticleDto;
 import com.example.JspMybatisSample.global.common.CommonResponse;
-import com.example.JspMybatisSample.service.command.ArticleCommandService;
-import com.example.JspMybatisSample.service.query.ArticleQueryService;
+import com.example.JspMybatisSample.service.article.ArticleCommandService;
+import com.example.JspMybatisSample.service.article.ArticleQueryService;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -33,7 +32,7 @@ public class ArticleApiController {
 
     @PostMapping("")
     public ResponseEntity<CommonResponse<?>> selectArticles(
-        @RequestParam(required = false, defaultValue = "1") Integer page) {
+        @RequestParam(required = false, defaultValue = "1") int page) {
 
         return ResponseEntity.status(HttpStatus.OK)
             .body(CommonResponse.res(HttpStatus.OK, "게시글 조회 성공",

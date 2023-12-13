@@ -1,4 +1,4 @@
-package com.example.JspMybatisSample.service.query;
+package com.example.JspMybatisSample.service.article;
 
 import com.example.JspMybatisSample.domain.article.dto.InsertArticleDto;
 import com.example.JspMybatisSample.domain.article.dto.UpdateArticleDto;

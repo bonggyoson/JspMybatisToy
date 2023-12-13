@@ -41,7 +41,7 @@
         </td>
         <td>{{articleWriter}}</td>
         <td>{{formatDate createdAt "YYYY-MM-DD hh:ss:mm"}}</td>
-        <td>{{articleView}}</td>
+        <td>{{articleViewCount}}</td>
     </tr>
     {{/each}}
 </script>
@@ -49,13 +49,26 @@
     <ul class="pagination justify-content-center">
         {{#ifCond hasPreviousPage '==' true}}
         <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
+            <a class="page-link" aria-label="Previous"
+               onclick="getListAjax('post', '/api/article?page={{math pageNum '-' 1}}', 'json')">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
         {{/ifCond}}
         {{#each navigatepageNums}}
-        <li class="page-item"><a class="page-link" href="#">{{math @index "+" 1}}</a></li>
+        <li class="page-item">
+            <button class="page-link ${'{{math @index "+" 1}}' eq '{{../pageNum}}' ? 'active' : 'none'}"
+                    onclick="getListAjax('post', '/api/article?page={{math @index '+' 1}}', 'json')">
+                {{math @index "+" 1}}
+            </button>
+            <%--            {{/ifCond}}--%>
+            <%--            {{#ifCond {{../pageNum}} '!=' {{math @index '+' 1}}}}--%>
+            <%--            <a class="page-link"--%>
+            <%--               onclick="getListAjax('post', '/api/article?page={{math @index '+' 1}}', 'json')">--%>
+            <%--                {{math @index "+" 1}}--%>
+            <%--            </a>--%>
+            <%--            {{/ifCond}}--%>
+        </li>
         {{/each}}
         {{#ifCond hasNextPage '==' true}}
         <li class="page-item" id="next">
