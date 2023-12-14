@@ -26,10 +26,10 @@ public class Member extends BaseEntity {
     private Role role;
 
     @Builder
-    public Member(String email, String password, Role role) {
-        this.email = email;
-        this.password = password;
-        this.role = role;
+    public Member(MemberDto memberDto) {
+        this.email = memberDto.getMemberEmail();
+        this.password = memberDto.getMemberPassword();
+        this.role = memberDto.getMemberRole();
     }
 
     public void updateMember(UpdateMemberDto updateMemberDto) {
