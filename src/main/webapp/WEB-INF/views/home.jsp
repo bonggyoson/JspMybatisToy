@@ -30,7 +30,7 @@
                     <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                         <button type="submit" class="btn btn-secondary" id="login">로그인</button>
                         <button type="button" class="btn btn-outline-secondary"
-                                onclick="location.href='/signup'">
+                                onclick="location.href='/join'">
                             회원가입
                         </button>
                     </div>

@@ -7,7 +7,6 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
 import lombok.NoArgsConstructor;
 
 /**
@@ -17,24 +16,26 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member extends BaseEntity {
 
-    private Long id;
+    private Long memberId;
 
-    private String email;
+    private String memberEmail;
 
-    private String password;
+    private String memberPassword;
 
-    private Role role;
+    private String memberName;
+
+    private Role memberRole;
 
     @Builder
     public Member(MemberDto memberDto) {
-        this.email = memberDto.getMemberEmail();
-        this.password = memberDto.getMemberPassword();
-        this.role = memberDto.getMemberRole();
+        this.memberEmail = memberDto.getMemberEmail();
+        this.memberPassword = memberDto.getMemberPassword();
+        this.memberRole = memberDto.getMemberRole();
     }
 
     public void updateMember(UpdateMemberDto updateMemberDto) {
-        this.email = updateMemberDto.getMemberEmail();
-        this.password = updateMemberDto.getMemberPassword();
+        this.memberEmail = updateMemberDto.getMemberEmail();
+        this.memberPassword = updateMemberDto.getMemberPassword();
     }
 
 }
