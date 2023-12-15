@@ -1,5 +1,6 @@
 package com.example.JspMybatisSample.domain.article;
 
+import com.example.JspMybatisSample.global.common.BaseEntity;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -10,26 +11,20 @@ import lombok.NoArgsConstructor;
  */
 @Getter
 @NoArgsConstructor
-public class Article {
+public class Article extends BaseEntity {
 
     /* 번호 (PK) */
-    private Long id;
+    private Long articleId;
 
     /* 제목 */
-    private String title;
+    private String articleTitle;
 
     /* 내용 */
-    private String content;
+    private String articleContent;
 
     /* 작성자 */
-    private String writer;
+    private String articleWriter;
 
     /* 조회수 */
-    private int viewCnt;
-
-    /* 등록일 */
-    private LocalDateTime createdAt;
-
-    /* 수정일 */
-    private LocalDateTime updatedAt;
+    private int ArticleViewCount;
 }
