@@ -19,4 +19,7 @@ public class MemberCommandService {
         return memberMapper.selectMembers();
     }
 
+    public MemberDto selectMember(long memberId) {
+        return memberMapper.selectMember(memberId);
+    }
 }

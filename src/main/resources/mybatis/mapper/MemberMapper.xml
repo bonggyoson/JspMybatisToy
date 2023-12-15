@@ -4,9 +4,27 @@
 
 <mapper namespace="com.example.JspMybatisSample.mapper.member.MemberMapper">
 
+  <resultMap id="memberDto" type="com.example.JspMybatisSample.domain.member.dto.MemberDto">
+    <id column="member_id" property="memberId"/>
+    <result column="member_email" property="memberEmail"/>
+    <result column="member_email" property="memberEmail"/>
+    <result column="member_email" property="memberEmail"/>
+    <result column="member_email" property="memberEmail"/>
+    <result column="member_email" property="memberEmail"/>
+    <result column="member_email" property="memberEmail"/>
+
+  </resultMap>
+
   <select id="selectMembers" resultMap="memberDto">
     SELECT *
     FROM board.member
+    ORDER BY member_id
+  </select>
+
+  <select id="selectMember" resultMap="memberDto">
+    SELECT *
+    FROM board.member
+    WHERE member_email = #{memberEmail}
     ORDER BY member_id
   </select>
 
