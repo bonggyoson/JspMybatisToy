@@ -30,12 +30,14 @@ public class Member extends BaseEntity {
     public Member(MemberDto memberDto) {
         this.memberEmail = memberDto.getMemberEmail();
         this.memberPassword = memberDto.getMemberPassword();
+        this.memberName = memberDto.getMemberName();
         this.memberRole = memberDto.getMemberRole();
     }
 
     public void updateMember(UpdateMemberDto updateMemberDto) {
         this.memberEmail = updateMemberDto.getMemberEmail();
         this.memberPassword = updateMemberDto.getMemberPassword();
+        this.memberName = updateMemberDto.getMemberName();
     }
 
 }

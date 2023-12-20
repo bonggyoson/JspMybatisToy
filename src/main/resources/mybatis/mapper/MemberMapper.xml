@@ -28,12 +28,12 @@
     ORDER BY member_id
   </select>
 
-  <select id="selectMember" resultMap="memberDto">
-    SELECT *
-    FROM board.member
-    WHERE member_email = #{memberEmail}
-    ORDER BY member_id
-  </select>
+<!--  <select id="selectMember" resultMap="memberDto">-->
+<!--    SELECT *-->
+<!--    FROM board.member-->
+<!--    WHERE member_email = #{memberEmail}-->
+<!--    ORDER BY member_id-->
+<!--  </select>-->
 
   <insert id="insertMember"
     parameterType="com.example.JspMybatisSample.domain.member.dto.InsertMemberDto">

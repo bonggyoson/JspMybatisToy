@@ -16,6 +16,8 @@ public class MemberDto extends BaseEntity {
 
     private String memberPassword;
 
+    private String memberName;
+
     private Role memberRole;
 
 }

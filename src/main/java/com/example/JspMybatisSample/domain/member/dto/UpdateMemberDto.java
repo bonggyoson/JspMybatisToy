@@ -9,4 +9,6 @@ public class UpdateMemberDto {
 
     private String memberPassword;
 
+    private String memberName;
+
 }
