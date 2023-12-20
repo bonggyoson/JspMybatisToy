@@ -35,7 +35,7 @@ public class ArticleApiController {
         @RequestParam(required = false, defaultValue = "1") int page) {
 
         return ResponseEntity.status(HttpStatus.OK)
-            .body(CommonResponse.res(HttpStatus.OK, "게시글 조회 성공",
+            .body(CommonResponse.res("게시글 조회 성공",
                 new PageInfo<>(articleCommandService.selectArticles(page))
             ));
     }
@@ -45,7 +45,7 @@ public class ArticleApiController {
         @PathVariable long articleId) {
 
         return ResponseEntity.status(HttpStatus.OK)
-            .body(CommonResponse.res(HttpStatus.OK, "게시글 상세 조회 성공",
+            .body(CommonResponse.res("게시글 상세 조회 성공",
                 articleCommandService.selectArticle(articleId)));
     }
 
@@ -54,7 +54,7 @@ public class ArticleApiController {
         InsertArticleDto insertArticleDto) {
 
         return ResponseEntity.status(HttpStatus.CREATED)
-            .body(CommonResponse.res(HttpStatus.CREATED, "게시글 등록 성공",
+            .body(CommonResponse.res("게시글 등록 성공",
                 articleQueryService.insertArticle(insertArticleDto)));
     }
 
@@ -62,16 +62,16 @@ public class ArticleApiController {
     public ResponseEntity<CommonResponse<?>> updateArticle(
         @PathVariable long articleId, @RequestBody UpdateArticleDto updateArticleDto) {
 
-        return ResponseEntity.status(HttpStatus.OK)
-            .body(CommonResponse.res(HttpStatus.OK, "게시글 수정 성공",
+        return ResponseEntity.status(HttpStatus.NO_CONTENT)
+            .body(CommonResponse.res("게시글 수정 성공",
                 articleQueryService.updateArticle(articleId, updateArticleDto)));
     }
 
     @DeleteMapping("/{articleId}/delete")
     public ResponseEntity<CommonResponse<?>> deleteArticle(@PathVariable long articleId) {
 
-        return ResponseEntity.status(HttpStatus.OK)
-            .body(CommonResponse.res(HttpStatus.OK, "게시글 삭제 성공",
+        return ResponseEntity.status(HttpStatus.NO_CONTENT)
+            .body(CommonResponse.res("게시글 삭제 성공",
                 articleQueryService.deleteArticle(articleId)));
     }
 }

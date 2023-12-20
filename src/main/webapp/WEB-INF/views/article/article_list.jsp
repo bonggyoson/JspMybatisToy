@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://example.com/functions" prefix="f" %>
-<div class="container">
+<div class="container w-50 position-relative text-opacity-25">
     <h1 class="mt-4">TOY</h1>
     <table class="table table-striped caption-top table-hover">
         <caption>총 <em id="totalNum"></em> 건</caption>
