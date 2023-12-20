@@ -6,14 +6,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="container w-25">
+<div class="container w-auto position-absolute top-50 start-50 translate-middle">
     <div class="card bg-dark bg-gradient d-flex justify-content-center"
          style="border-radius: 1rem;">
         <div class="card-body p-5 text-center">
             <button type="button" class="btn btn-lg mb-2 fw-bold text-white"
-                    onclick="location.href='/'">JspMybatis
+                    onclick="location.href='/'">TOY BOARD
             </button>
-            <p class="text-white-100 fw-bold">회원가입</p>
+            <p class="fw-bold">회원가입</p>
             <div class="mb-2">
                 <form onsubmit="return false">
                     <div class="mb-3">

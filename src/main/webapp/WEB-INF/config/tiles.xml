@@ -7,15 +7,16 @@
   <!-- 기본 레이아웃 설정 -->
   <definition name="main_layout" template="/WEB-INF/views/tiles/default.jsp">
     <put-attribute name="header" value="/WEB-INF/views/tiles/layouts/header.jsp"/>
-    <put-attribute name="nav" value="/WEB-INF/views/tiles/layouts/nav.jsp"/>
     <put-attribute name="footer" value="/WEB-INF/views/tiles/layouts/footer.jsp"/>
   </definition>
 
   <definition name="*" extends="main_layout">
+    <put-attribute name="nav" value=""/>
     <put-attribute name="body" value="/WEB-INF/views/{1}.jsp"/>
   </definition>
 
-  <definition name="*/*" extends="main_layout">
-    <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
+  <definition name="article/*" extends="main_layout">
+    <put-attribute name="nav" value="/WEB-INF/views/tiles/layouts/nav.jsp"/>
+    <put-attribute name="body" value="/WEB-INF/views/article/{1}.jsp"/>
   </definition>
 </tiles-definitions>
