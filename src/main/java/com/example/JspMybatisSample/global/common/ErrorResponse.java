@@ -16,19 +16,17 @@ public class ErrorResponse<T> {
     private String message;
     private T data;
 
-    public ErrorResponse(final HttpStatus status, final String message) {
-        this.status = status;
+    public ErrorResponse(final String message) {
         this.message = message;
     }
 
-    public static <T> ErrorResponse<T> res(final HttpStatus status, final String message) {
-        return res(status, message, null);
+    public static <T> ErrorResponse<T> res(final String message) {
+        return res(message, null);
     }
 
-    public static <T> ErrorResponse<T> res(final HttpStatus status, final String message,
+    public static <T> ErrorResponse<T> res(final String message,
         final T t) {
         return ErrorResponse.<T>builder()
-            .status(status)
             .message(message)
             .data(t)
             .build();

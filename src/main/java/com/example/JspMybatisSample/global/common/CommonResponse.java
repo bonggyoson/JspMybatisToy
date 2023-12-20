@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.http.HttpStatus;
 
 @Getter
 @Builder
@@ -12,23 +11,20 @@ import org.springframework.http.HttpStatus;
 @NoArgsConstructor
 public class CommonResponse<T> {
 
-    private HttpStatus status;
     private String message;
     private T data;
 
-    public CommonResponse(final HttpStatus status, final String message) {
-        this.status = status;
+    public CommonResponse(final String message) {
         this.message = message;
     }
 
-    public static <T> CommonResponse<T> res(final HttpStatus status, final String message) {
-        return res(status, message, null);
+    public static <T> CommonResponse<T> res(final String message) {
+        return res(message, null);
     }
 
-    public static <T> CommonResponse<T> res(final HttpStatus status, final String message,
+    public static <T> CommonResponse<T> res(final String message,
         final T t) {
         return CommonResponse.<T>builder()
-            .status(status)
             .message(message)
             .data(t)
             .build();
