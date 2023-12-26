@@ -8,16 +8,7 @@ public class HomeController {
 
     @GetMapping("")
     public String home() {
-        return "home";
+        return "home/home";
     }
 
-    @GetMapping("/join")
-    public String join() {
-        return "member/member_join";
-    }
-
-    @GetMapping("/login")
-    public String login() {
-        return "member/member_login";
-    }
 }

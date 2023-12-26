@@ -15,20 +15,21 @@
             </button>
             <p class="fw-bold">회원가입</p>
             <div class="mb-2">
-                <form onsubmit="return false">
+                <form id="frm">
                     <div class="mb-3">
-                        <input type="text" class="form-control" name="email" id="email"
+                        <input type="text" class="form-control" name="memberEmail" id="memberEmail"
                                placeholder="이메일">
                     </div>
                     <div class="mb-3">
-                        <input type="password" class="form-control" name="password" id="password"
+                        <input type="password" class="form-control" name="memberPassword" id="memberPassword"
                                placeholder="비밀번호">
                     </div>
                     <div class="mb-3">
-                        <input type="text" class="form-control" name="name" id="name"
+                        <input type="text" class="form-control" name="memberName" id="memberName"
                                placeholder="이름">
                     </div>
-                    <button type="submit" class="btn btn-secondary me-2" id="save-member">회원가입
+                    <button type="submit" class="btn btn-secondary me-2" onclick="join_member()">
+                        회원가입
                     </button>
                     <button type="button" class="btn btn-outline-secondary"
                             onclick="location.href='/login'">
@@ -39,3 +40,8 @@
         </div>
     </div>
 </div>
+<script>
+  function join_member() {
+    getAjax('post', '/api/member/join', getFormData($("#frm")), '');
+  }
+</script>

@@ -36,23 +36,25 @@ function getAjax(type, url, data, dataType) {
     url: url,
     data: JSON.stringify(data),
     dataType: dataType,
-    contentType: "application/json",
+    contentType: "application/json; charset=utf-8",
     success: function (data) {
-      if (data.status === "OK") {
-        if (data.data === 1) {
-          alert("요청이 성공하였습니다.");
+      if (data.data === 1) {
+        alert("요청이 성공하였습니다.");
+        if (url.indexOf("member") !== -1) {
+          window.location.href = "/login";
+        } else {
           window.location.href = "/article";
+          // 데이터
+          let list = $("#template").html();
+          let listTemplate = Handlebars.compile(list);
+          let listView = listTemplate(data.data);
+
+          $("#data").html(listView);
         }
-
-        // 데이터
-        let list = $("#template").html();
-        let listTemplate = Handlebars.compile(list);
-        let listView = listTemplate(data.data);
-
-        $("#data").html(listView);
       }
     },
     error: function () {
+      debugger;
       alert("요청이 실패 했습니다.");
     }
   });

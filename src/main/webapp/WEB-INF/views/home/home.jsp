@@ -17,7 +17,7 @@
                         onclick="location.href='/article'">게시판
                 </button>
                 <button type="button" class="btn btn-secondary"
-                        onclick="location.href='/member'">회원
+                        onclick="location.href='/login'">회원
                 </button>
             </div>
         </div>
