@@ -16,6 +16,8 @@ public interface MemberMapper {
 
     MemberDto selectMember(long memberId);
 
+    int checkDuplicateEmail(String memberEmail);
+
     int insertMember(InsertMemberDto insertMemberDto);
 
     int updateMember(UpdateMemberDto updateMemberDto);

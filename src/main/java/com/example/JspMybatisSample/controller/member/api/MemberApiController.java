@@ -6,6 +6,7 @@ import com.example.JspMybatisSample.global.common.CommonResponse;
 import com.example.JspMybatisSample.service.member.MemberCommandService;
 import com.example.JspMybatisSample.service.member.MemberQueryService;
 import com.github.pagehelper.PageInfo;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -31,11 +32,17 @@ public class MemberApiController {
     private final MemberCommandService memberCommandService;
 
     @PostMapping("/join")
-    public ResponseEntity<CommonResponse<?>> join(@RequestBody InsertMemberDto insertMemberDto) {
+    public ResponseEntity<CommonResponse<?>> join(@Valid @RequestBody InsertMemberDto insertMemberDto) {
 
         return ResponseEntity.status(HttpStatus.CREATED)
             .body(CommonResponse.res("회원 가입 성공",
                 memberQueryService.insertMember(insertMemberDto)));
+    }
+
+    @PostMapping("/checkDuplicateEmail")
+    public int checkDuplicateEmail(@RequestParam String memberEmail) {
+
+        return memberCommandService.checkDuplicateEmail(memberEmail);
     }
 
     @PostMapping("")

@@ -24,4 +24,8 @@ public class MemberCommandService {
     public MemberDto selectMember(long memberId) {
         return memberMapper.selectMember(memberId);
     }
+
+    public int checkDuplicateEmail(String memberEmail) {
+        return memberMapper.checkDuplicateEmail(memberEmail);
+    }
 }

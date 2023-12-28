@@ -9,24 +9,55 @@
 <div class="container w-auto position-absolute top-50 start-50 translate-middle">
     <div class="card bg-dark bg-gradient d-flex justify-content-center"
          style="border-radius: 1rem;">
-        <div class="card-body p-5 text-center">
+        <div class="card-body text-center">
             <button type="button" class="btn btn-lg mb-2 fw-bold text-white"
                     onclick="location.href='/'">TOY BOARD
             </button>
             <p class="fw-bold">회원가입</p>
             <div class="mb-2">
-                <form id="frm">
+                <form id="frm" onsubmit="return false;">
                     <div class="mb-3">
-                        <input type="text" class="form-control" name="memberEmail" id="memberEmail"
-                               placeholder="이메일">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                              <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                   height="16" fill="currentColor"
+                                                   class="bi bi-envelope" viewBox="0 0 16 16">
+                              <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"></path>
+                            </svg>
+                                            </span>
+                            <input type="text" class="form-control" name="memberEmail"
+                                   id="memberEmail"
+                                   placeholder="이메일">
+                        </div>
+                        <small class="fw-bold" id="checkDuplicateEmail"></small>
                     </div>
                     <div class="mb-3">
-                        <input type="password" class="form-control" name="memberPassword" id="memberPassword"
-                               placeholder="비밀번호">
+                        <div class="input-group">
+                        <span class="input-group-text">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                               height="16" fill="currentColor"
+                                               class="bi bi-key-fill" viewBox="0 0 16 16">
+                          <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
+                        </svg>
+                                        </span>
+                            <input type="password" class="form-control" name="memberPassword"
+                                   id="memberPassword"
+                                   placeholder="비밀번호">
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <input type="text" class="form-control" name="memberName" id="memberName"
-                               placeholder="이름">
+                        <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                               height="16" fill="currentColor"
+                                               class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                          <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"></path>
+                        </svg>
+                                        </span>
+                            <input type="text" class="form-control" name="memberName"
+                                   id="memberName"
+                                   placeholder="이름">
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-secondary me-2" onclick="join_member()">
                         회원가입
@@ -42,6 +73,36 @@
 </div>
 <script>
   function join_member() {
-    getAjax('post', '/api/member/join', getFormData($("#frm")), '');
+    getAjax('post', '/api/member/join', getFormData($("#frm")), 'json');
   }
+
+  $("#memberEmail").on("blur", function () {
+    let memberEmail = $("#memberEmail");
+    let checkDuplicateEmail = $("#checkDuplicateEmail");
+
+    if ($(this).val().trim().length === 0) {
+      this.style = "initial";
+      checkDuplicateEmail.remove();
+      return;
+    }
+
+    $.ajax({
+      url: '/api/member/checkDuplicateEmail',
+      type: 'post',
+      data: {
+        memberEmail: memberEmail.val()
+      },
+      success: function (data) {
+        if (data === 0) {
+          checkDuplicateEmail.html("사용 가능한 이메일입니다.");
+          checkDuplicateEmail.focus();
+        } else {
+          checkDuplicateEmail.html("이미 사용중인 이메일입니다.");
+          memberEmail.css({'border-color': 'red'})
+          checkDuplicateEmail.css({'color': 'red'})
+          checkDuplicateEmail.focus();
+        }
+      }
+    });
+  });
 </script>
