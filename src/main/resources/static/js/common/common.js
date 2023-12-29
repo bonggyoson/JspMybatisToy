@@ -54,7 +54,6 @@ function getAjax(type, url, data, dataType) {
       }
     },
     error: function () {
-      debugger;
       alert("요청이 실패 했습니다.");
     }
   });
