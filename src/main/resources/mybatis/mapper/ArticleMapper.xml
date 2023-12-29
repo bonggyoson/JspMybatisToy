@@ -35,7 +35,7 @@
   <insert id="insertArticle"
     parameterType="com.example.JspMybatisSample.domain.article.dto.InsertArticleDto">
     <selectKey keyProperty="seq_article" resultType="java.lang.Long" order="BEFORE">
-      SELECT seq_article.NEXTVAL FROM DUAL
+      SELECT NEXTVAL('board.seq_article')
     </selectKey>
     <![CDATA[
         INSERT INTO board.article

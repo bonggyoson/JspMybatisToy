@@ -86,23 +86,34 @@
       return;
     }
 
-    $.ajax({
-      url: '/api/member/checkDuplicateEmail',
-      type: 'post',
-      data: {
-        memberEmail: memberEmail.val()
-      },
-      success: function (data) {
-        if (data === 0) {
-          checkDuplicateEmail.html("사용 가능한 이메일입니다.");
-          checkDuplicateEmail.focus();
-        } else {
-          checkDuplicateEmail.html("이미 사용중인 이메일입니다.");
-          memberEmail.css({'border-color': 'red'})
-          checkDuplicateEmail.css({'color': 'red'})
-          checkDuplicateEmail.focus();
+    let regExpEmail = RegExp(
+        /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([\-.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i);
+
+    if (!regExpEmail.test(memberEmail.val())) {
+      checkDuplicateEmail.html("이메일 형식에 맞게 작성해주세요.");
+      memberEmail.css({'border-color': 'red'})
+      checkDuplicateEmail.css({'color': 'red'})
+      checkDuplicateEmail.focus();
+      return false;
+    } else {
+      $.ajax({
+        url: '/api/member/checkDuplicateEmail',
+        type: 'post',
+        data: {
+          memberEmail: memberEmail.val()
+        },
+        success: function (data) {
+          if (data === 0) {
+            checkDuplicateEmail.html("사용 가능한 이메일입니다.");
+            checkDuplicateEmail.focus();
+          } else {
+            checkDuplicateEmail.html("이미 사용중인 이메일입니다.");
+            memberEmail.css({'border-color': 'red'})
+            checkDuplicateEmail.css({'color': 'red'})
+            checkDuplicateEmail.focus();
+          }
         }
-      }
-    });
+      });
+    }
   });
 </script>
