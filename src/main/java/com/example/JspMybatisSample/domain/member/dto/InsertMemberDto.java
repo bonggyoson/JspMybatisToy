@@ -3,6 +3,7 @@ package com.example.JspMybatisSample.domain.member.dto;
 import com.example.JspMybatisSample.domain.member.Role;
 import javax.validation.constraints.NotNull;
 import lombok.Getter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Getter
 public class InsertMemberDto {
@@ -20,7 +21,7 @@ public class InsertMemberDto {
 
     public InsertMemberDto(String memberEmail, String memberPassword, String memberName) {
         this.memberEmail = memberEmail;
-        this.memberPassword = memberPassword;
+        this.memberPassword = new BCryptPasswordEncoder().encode(memberPassword);
         this.memberName = memberName;
         this.memberRole = Role.ROLE_MEMBER;
     }

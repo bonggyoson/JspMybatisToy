@@ -15,7 +15,7 @@
             </button>
             <p class="fw-bold">로그인</p>
             <div class="mb-2">
-                <form>
+                <form id="frm" onsubmit="return false;">
                     <div class="mb-3">
                         <div class="input-group">
                             <span class="input-group-text">
@@ -28,9 +28,10 @@
                                                           <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"></path>
                                                         </svg>
                                                                         </span>
-                            <input type="email" class="form-control" id="username" name="username"
+                            <input type="email" class="form-control" id="memberEmail"
                                    placeholder="이메일">
                         </div>
+                        <small class="fw-bold" id="emailValid"></small>
                     </div>
                     <div class="mb-3">
                         <div class="input-group">
@@ -44,13 +45,16 @@
                                                   <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
                                                 </svg>
                                                                 </span>
-                            <input type="password" class="form-control" id="password"
+                            <input type="password" class="form-control" id="memberPassword"
                                    name="password"
                                    placeholder="비밀번호"/>
                         </div>
+                        <small class="fw-bold" id="passwordValid"></small>
                     </div>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                        <button type="submit" class="btn btn-secondary" id="login">로그인</button>
+                        <button type="submit" class="btn btn-secondary" id="login"
+                                onclick="login_member()">로그인
+                        </button>
                         <button type="button" class="btn btn-outline-secondary"
                                 onclick="location.href='/join'">
                             회원가입
@@ -61,3 +65,34 @@
         </div>
     </div>
 </div>
+<script>
+  function login_member() {
+    let memberEmail = $("#memberEmail").val() === "" || $("#memberEmail").val() === null ? true
+        : false;
+    let memberPassword = $("#memberPassword").val() === "" || $("#memberPassword").val() === null
+        ? true : false;
+    let validCount = 0;
+
+    // 이메일 공백 검증
+    if (memberEmail) {
+      $("#emailValid").html("이메일을 입력해주세요.");
+      $("#emailValid").css({'color': 'red'});
+      $("#memberEmail").css({'border-color': 'red'});
+      validCount++;
+    }
+
+    // 비밀번호 공백 검증
+    if (memberPassword) {
+      $("#passwordValid").html("비밀번호를 입력해주세요.");
+      $("#passwordValid").css({'color': 'red'});
+      $("#memberPassword").css({'border-color': 'red'});
+      validCount++;
+    }
+
+    if (validCount > 0) {
+      return false;
+    }
+
+    getAjax('post', '/api/member/login', getFormData($("#frm")), 'json');
+  }
+</script>

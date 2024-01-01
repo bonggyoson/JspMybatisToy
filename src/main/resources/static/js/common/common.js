@@ -38,6 +38,7 @@ function getAjax(type, url, data, dataType) {
     dataType: dataType,
     contentType: "application/json; charset=utf-8",
     success: function (data) {
+      console.log(data);
       if (data.data === 1) {
         alert("요청이 성공하였습니다.");
         if (url.indexOf("member") !== -1) {
@@ -54,6 +55,7 @@ function getAjax(type, url, data, dataType) {
       }
     },
     error: function () {
+      console.log(data);
       alert("요청이 실패 했습니다.");
     }
   });

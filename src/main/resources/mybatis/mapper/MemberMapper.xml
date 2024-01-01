@@ -39,11 +39,13 @@
     INSERT INTO board.member
     (member_email,
      member_password,
+     member_name,
      member_role,
      created_at,
      updated_at)
     VALUES (#{memberEmail},
             #{memberPassword},
+            #{memberName},
             #{memberRole},
             now(),
             now())

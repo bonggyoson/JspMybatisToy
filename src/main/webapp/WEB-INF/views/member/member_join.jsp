@@ -29,7 +29,7 @@
                                    id="memberEmail"
                                    placeholder="이메일">
                         </div>
-                        <small class="fw-bold" id="checkDuplicateEmail"></small>
+                        <small class="fw-bold" id="emailValid"></small>
                     </div>
                     <div class="mb-3">
                         <div class="input-group">
@@ -44,6 +44,7 @@
                                    id="memberPassword"
                                    placeholder="비밀번호">
                         </div>
+                        <small class="fw-bold" id="passwordValid"></small>
                     </div>
                     <div class="mb-3">
                         <div class="input-group">
@@ -58,6 +59,7 @@
                                    id="memberName"
                                    placeholder="이름">
                         </div>
+                        <small class="fw-bold" id="nameValid"></small>
                     </div>
                     <button type="submit" class="btn btn-secondary me-2" onclick="join_member()">
                         회원가입
@@ -73,27 +75,65 @@
 </div>
 <script>
   function join_member() {
+    let memberEmail = $("#memberEmail").val() === "" || $("#memberEmail").val() === null ? true
+        : false;
+    let memberPassword = $("#memberPassword").val() === "" || $("#memberPassword").val() === null
+        ? true : false;
+    let memberName = $("#memberName").val() === "" || $("#memberName").val() === null ? true
+        : false;
+    let validCount = 0;
+
+    // 이메일 공백 검증
+    if (memberEmail) {
+      $("#emailValid").html("이메일을 입력해주세요.");
+      $("#emailValid").css({'color': 'red'});
+      $("#memberEmail").css({'border-color': 'red'});
+      validCount++;
+    }
+
+    // 비밀번호 공백 검증
+    if (memberPassword) {
+      $("#passwordValid").html("비밀번호를 입력해주세요.");
+      $("#passwordValid").css({'color': 'red'});
+      $("#memberPassword").css({'border-color': 'red'});
+      validCount++;
+    }
+
+    // 이름 공백 검증
+    if (memberName) {
+      $("#nameValid").html("이름을 입력해주세요.");
+      $("#nameValid").css({'color': 'red'});
+      $("#memberName").css({'border-color': 'red'});
+      validCount++;
+    }
+
+    if (validCount > 0) {
+      return false;
+    }
+
     getAjax('post', '/api/member/join', getFormData($("#frm")), 'json');
   }
 
+  // ajax 이메일 중복 체크
   $("#memberEmail").on("blur", function () {
     let memberEmail = $("#memberEmail");
-    let checkDuplicateEmail = $("#checkDuplicateEmail");
+    let emailValid = $("#emailValid");
 
     if ($(this).val().trim().length === 0) {
       this.style = "initial";
-      checkDuplicateEmail.remove();
-      return;
+      emailValid.html("");
+      return false;
     }
 
+    // 이메일 유효성 검사
     let regExpEmail = RegExp(
         /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([\-.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i);
 
     if (!regExpEmail.test(memberEmail.val())) {
-      checkDuplicateEmail.html("이메일 형식에 맞게 작성해주세요.");
-      memberEmail.css({'border-color': 'red'})
-      checkDuplicateEmail.css({'color': 'red'})
-      checkDuplicateEmail.focus();
+      emailValid.html("이메일 형식에 맞게 작성해주세요.");
+      memberEmail.css({'border-color': 'red'});
+      emailValid.css({'color': 'red'});
+      emailValid.focus();
       return false;
     } else {
       $.ajax({
@@ -104,13 +144,15 @@
         },
         success: function (data) {
           if (data === 0) {
-            checkDuplicateEmail.html("사용 가능한 이메일입니다.");
-            checkDuplicateEmail.focus();
+            emailValid.html("사용 가능한 이메일입니다.");
+            memberEmail.css({'border-color': ''});
+            emailValid.css({'color': 'skyblue'});
+            emailValid.focus();
           } else {
-            checkDuplicateEmail.html("이미 사용중인 이메일입니다.");
-            memberEmail.css({'border-color': 'red'})
-            checkDuplicateEmail.css({'color': 'red'})
-            checkDuplicateEmail.focus();
+            emailValid.html("이미 사용중인 이메일입니다.");
+            memberEmail.css({'border-color': 'red'});
+            emailValid.css({'color': 'red'});
+            emailValid.focus();
           }
         }
       });
