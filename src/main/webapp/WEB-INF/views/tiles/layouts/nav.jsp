@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark container w-50 pt-3">
     <!-- Navbar Brand-->
     <a class="navbar-brand ps-2" href="${pageContext.request.contextPath}/article">Mybatis & Jsp</a>
@@ -37,15 +38,23 @@
                           d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"></path>
                 </svg><!-- <i class="fas fa-user fa-fw"></i> Font Awesome fontawesome.com --></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/login">로그인</a>
-                </li>
-                <li><a class="dropdown-item"
-                       href="${pageContext.request.contextPath}/signup">회원가입</a></li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item"
-                       href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
+                <c:choose>
+                    <!-- Session에 principal 항목이 미할당 되어있다면 (로그인X) -->
+                    <c:when test="${empty principal}">
+                        <li><a class="dropdown-item"
+                               href="${pageContext.request.contextPath}/login">로그인</a>
+                        </li>
+                        <li><a class="dropdown-item"
+                               href="${pageContext.request.contextPath}/signup">회원가입</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a class="dropdown-item"
+                               href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
+                    </c:otherwise>
+                </c:choose>
             </ul>
         </li>
     </ul>

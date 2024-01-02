@@ -5,24 +5,22 @@ function getListAjax(type, url, param, dataType) {
     param: param,
     dataType: dataType,
     success: function (data) {
-      if (data.status === "OK") {
-        // 총 개수
-        $("#totalNum").html(data.data.total);
+      // 총 개수
+      $("#totalNum").html(data.data.total);
 
-        // 데이터
-        let list = $("#list-template").html();
-        let listTemplate = Handlebars.compile(list);
-        let listView = listTemplate(data.data);
+      // 데이터
+      let list = $("#list-template").html();
+      let listTemplate = Handlebars.compile(list);
+      let listView = listTemplate(data.data);
 
-        $("#listData").html(listView);
+      $("#listData").html(listView);
 
-        // 페이지네이션
-        let pagination = $("#page-template").html();
-        let pageTemplate = Handlebars.compile(pagination);
-        let pageView = pageTemplate(data.data);
+      // 페이지네이션
+      let pagination = $("#page-template").html();
+      let pageTemplate = Handlebars.compile(pagination);
+      let pageView = pageTemplate(data.data);
 
-        $("#pageData").html(pageView);
-      }
+      $("#pageData").html(pageView);
     },
     error: function () {
       alert("요청이 실패 했습니다.");
@@ -30,15 +28,14 @@ function getListAjax(type, url, param, dataType) {
   });
 }
 
-function getAjax(type, url, data, dataType) {
+function getAjax(type, url, data, dataType, contentType) {
   $.ajax({
     type: type,
     url: url,
     data: JSON.stringify(data),
     dataType: dataType,
-    contentType: "application/json; charset=utf-8",
+    contentType: contentType,
     success: function (data) {
-      console.log(data);
       if (data.data === 1) {
         alert("요청이 성공하였습니다.");
         if (url.indexOf("member") !== -1) {
@@ -55,7 +52,6 @@ function getAjax(type, url, data, dataType) {
       }
     },
     error: function () {
-      console.log(data);
       alert("요청이 실패 했습니다.");
     }
   });

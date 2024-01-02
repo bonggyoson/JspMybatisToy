@@ -15,7 +15,9 @@
             </button>
             <p class="fw-bold">로그인</p>
             <div class="mb-2">
-                <form id="frm" onsubmit="return false;">
+                <form id="frm" method="post"
+                      action="${pageContext.request.contextPath}/api/member/login"
+                      onsubmit="return login_member();">
                     <div class="mb-3">
                         <div class="input-group">
                             <span class="input-group-text">
@@ -29,6 +31,7 @@
                                                         </svg>
                                                                         </span>
                             <input type="email" class="form-control" id="memberEmail"
+                                   name="memberEmail"
                                    placeholder="이메일">
                         </div>
                         <small class="fw-bold" id="emailValid"></small>
@@ -46,7 +49,7 @@
                                                 </svg>
                                                                 </span>
                             <input type="password" class="form-control" id="memberPassword"
-                                   name="password"
+                                   name="memberPassword"
                                    placeholder="비밀번호"/>
                         </div>
                         <small class="fw-bold" id="passwordValid"></small>
@@ -67,10 +70,8 @@
 </div>
 <script>
   function login_member() {
-    let memberEmail = $("#memberEmail").val() === "" || $("#memberEmail").val() === null ? true
-        : false;
-    let memberPassword = $("#memberPassword").val() === "" || $("#memberPassword").val() === null
-        ? true : false;
+    let memberEmail = $("#memberEmail").val() === "" || $("#memberEmail").val() === null;
+    let memberPassword = $("#memberPassword").val() === "" || $("#memberPassword").val() === null;
     let validCount = 0;
 
     // 이메일 공백 검증
@@ -90,9 +91,9 @@
     }
 
     if (validCount > 0) {
+      console.log("test");
       return false;
     }
-
-    getAjax('post', '/api/member/login', getFormData($("#frm")), 'json');
+    return true;
   }
 </script>
