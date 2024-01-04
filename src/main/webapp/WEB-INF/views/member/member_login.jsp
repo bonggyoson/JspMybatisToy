@@ -18,6 +18,7 @@
                 <form id="frm" method="post"
                       action="${pageContext.request.contextPath}/api/member/login"
                       onsubmit="return login_member();">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <div class="mb-3">
                         <div class="input-group">
                             <span class="input-group-text">
@@ -91,7 +92,6 @@
     }
 
     if (validCount > 0) {
-      console.log("test");
       return false;
     }
     return true;

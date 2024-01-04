@@ -1,3 +1,4 @@
+<%--<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>--%>
 <%--
   Created by IntelliJ IDEA.
   User: bongg
@@ -11,7 +12,7 @@
          style="border-radius: 1rem;">
         <div class="card-body p-7 text-center">
             <h3 class="fw-bold">TOY BOARD</h3>
-            <h4></h4>
+            <h4>${principal.memberName}</h4>
             <div class="mb-auto">
                 <button type="button" class="btn btn-secondary"
                         onclick="location.href='/article'">게시판

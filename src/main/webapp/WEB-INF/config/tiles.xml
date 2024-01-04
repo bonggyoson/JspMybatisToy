@@ -7,20 +7,24 @@
   <!-- 기본 레이아웃 설정 -->
   <definition name="main_layouts" template="/WEB-INF/views/tiles/default.jsp">
     <put-attribute name="header" value="/WEB-INF/views/tiles/layouts/header.jsp"/>
-    <put-attribute name="nav" value=""/>
+    <!--    <put-attribute name="nav" value=""/>-->
     <put-attribute name="footer" value="/WEB-INF/views/tiles/layouts/footer.jsp"/>
   </definition>
 
   <definition name="home/*" extends="main_layouts">
+    <put-attribute name="header" value=""/>
     <put-attribute name="body" value="/WEB-INF/views/home/{1}.jsp"/>
+    <put-attribute name="footer" value=""/>
   </definition>
 
   <definition name="member/*" extends="main_layouts">
+    <put-attribute name="header" value=""/>
     <put-attribute name="body" value="/WEB-INF/views/member/{1}.jsp"/>
+    <put-attribute name="footer" value=""/>
   </definition>
 
   <definition name="article/*" extends="main_layouts">
-    <put-attribute name="nav" value="/WEB-INF/views/tiles/layouts/nav.jsp"/>
+    <!--    <put-attribute name="nav" value="/WEB-INF/views/tiles/layouts/nav.jsp"/>-->
     <put-attribute name="body" value="/WEB-INF/views/article/{1}.jsp"/>
   </definition>
 </tiles-definitions>

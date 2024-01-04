@@ -41,6 +41,13 @@ public class WebSecurityConfig {
             // default 로그인 성공 url
             .defaultSuccessUrl("/")
             .and()
+            // 로그아웃
+            .logout()
+            // 로그아웃 url
+            .logoutUrl("/api/member/logout")
+            .logoutSuccessUrl("/login")
+            .deleteCookies("JSESSIONID")
+            .and()
             .build();
     }
 
