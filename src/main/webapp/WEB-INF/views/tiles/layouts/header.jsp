@@ -8,7 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <header>
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark container w-50 pt-3">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark container w-50 pt-3 border-bottom border-secondary">
         <!-- Navbar Brand-->
         <a class="navbar-brand ps-2" href="${pageContext.request.contextPath}/article">Mybatis &
             Jsp</a>
