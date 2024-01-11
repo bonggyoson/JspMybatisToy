@@ -55,6 +55,9 @@
                         </div>
                         <small class="fw-bold" id="passwordValid"></small>
                     </div>
+                    <div class="mb-3">
+                        <small class="fw-bold" style="color: red">${exception}</small>
+                    </div>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                         <button type="submit" class="btn btn-secondary" id="login"
                                 onclick="login_member()">로그인
@@ -71,29 +74,50 @@
 </div>
 <script>
   function login_member() {
-    let memberEmail = $("#memberEmail").val() === "" || $("#memberEmail").val() === null;
-    let memberPassword = $("#memberPassword").val() === "" || $("#memberPassword").val() === null;
+
+    let memberEmail = $("#memberEmail");
+    let memberPassword = $("#memberPassword");
+    let emailValid = $("#emailValid");
+    let passwordValid = $("#passwordValid");
     let validCount = 0;
 
+    memberEmail.css({'border-color': ''});
+    emailValid.html("");
+    memberPassword.css({'border-color': ''});
+    passwordValid.html("");
+
     // 이메일 공백 검증
-    if (memberEmail) {
-      $("#emailValid").html("이메일을 입력해주세요.");
-      $("#emailValid").css({'color': 'red'});
-      $("#memberEmail").css({'border-color': 'red'});
+    if (memberEmail.val() === "" || memberEmail.val() === null) {
+      emailValid.html("이메일을 입력해주세요.");
+      emailValid.css({'color': 'red'});
+      memberEmail.css({'border-color': 'red'});
       validCount++;
     }
 
     // 비밀번호 공백 검증
-    if (memberPassword) {
-      $("#passwordValid").html("비밀번호를 입력해주세요.");
-      $("#passwordValid").css({'color': 'red'});
-      $("#memberPassword").css({'border-color': 'red'});
+    if (memberPassword.val() === "" || memberPassword.val() === null) {
+      passwordValid.html("비밀번호를 입력해주세요.");
+      passwordValid.css({'color': 'red'});
+      memberPassword.css({'border-color': 'red'});
       validCount++;
     }
 
     if (validCount > 0) {
       return false;
     }
+
+    // 이메일 유효성 검사
+    let regExpEmail = RegExp(
+        /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([\-.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i);
+
+    if (!regExpEmail.test(memberEmail.val())) {
+      emailValid.html("이메일 형식에 맞게 작성해주세요.");
+      emailValid.css({'color': 'red'});
+      memberEmail.css({'border-color': 'red'});
+      memberEmail.focus();
+      validCount++;
+    }
+
     return true;
   }
 </script>

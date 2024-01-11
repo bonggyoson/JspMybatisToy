@@ -75,12 +75,9 @@
 </div>
 <script>
   function join_member() {
-    let memberEmail = $("#memberEmail").val() === "" || $("#memberEmail").val() === null ? true
-        : false;
-    let memberPassword = $("#memberPassword").val() === "" || $("#memberPassword").val() === null
-        ? true : false;
-    let memberName = $("#memberName").val() === "" || $("#memberName").val() === null ? true
-        : false;
+    let memberEmail = $("#memberEmail").val() === "" || $("#memberEmail").val() === null;
+    let memberPassword = $("#memberPassword").val() === "" || $("#memberPassword").val() === null;
+    let memberName = $("#memberName").val() === "" || $("#memberName").val() === null;
     let validCount = 0;
 
     // 이메일 공백 검증
@@ -110,8 +107,7 @@
     if (validCount > 0) {
       return false;
     }
-
-    getAjax('post', '/api/member/join', getFormData($("#frm")), 'json');
+    getAjax('post', '/api/member/join', getFormData($("#frm")), 'json', 'application/json');
   }
 
   // ajax 이메일 중복 체크
