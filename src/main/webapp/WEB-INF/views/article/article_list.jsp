@@ -10,7 +10,16 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://example.com/functions" prefix="f" %>
 <div class="container w-50 position-relative text-opacity-25">
-    <h1 class="mt-4">TOY</h1>
+    <div class="row">
+        <div class="col">
+            <h1>TOY</h1>
+        </div>
+        <div class="col-auto align-self-center">
+            <button type="button" class="btn btn-secondary"
+                    onclick="location.href='/article/insertArticle'">글쓰기
+            </button>
+        </div>
+    </div>
     <table class="table table-striped caption-top table-hover">
         <caption>총 <em id="totalNum"></em> 건</caption>
         <thead>
@@ -30,14 +39,15 @@
 </div>
 <script>
   $(function () {
-    getListAjax('post', '/api/article', 'json');
+    getListAjax('post', '/api/article', '', 'json');
   });
 </script>
 <script id="list-template" type="text/x-handlebars-template">
     {{#each list}}
     <tr>
         <td>{{articleId}}</td>
-        <td><a href="${pageContext.request.contextPath}/article/{{articleId}}">{{articleTitle}}</a>
+        <td>
+            <a href="${pageContext.request.contextPath}/article/{{articleId}}">{{articleTitle}}</a>
         </td>
         <td>{{articleWriter}}</td>
         <td>{{formatDate createdAt "YYYY-MM-DD hh:ss:mm"}}</td>
