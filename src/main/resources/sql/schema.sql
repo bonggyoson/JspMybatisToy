@@ -2,7 +2,9 @@
 
 -- Drop table
 
-DROP TABLE board.article;
+DROP TABLE IF EXISTS board.article;
+
+DROP SEQUENCE IF EXISTS board.seq_article;
 
 CREATE SEQUENCE board.seq_article START 1;
 
@@ -12,7 +14,6 @@ CREATE TABLE board.article
     member_id          int8         NOT NULL,
     article_title      varchar(255) NOT NULL,
     article_content    text         NOT NULL,
-    article_writer     varchar(255) NOT NULL,
     article_view_count int          NOT NULL default 0,
     created_at         timestamp    NOT NULL,
     updated_at         timestamp
@@ -22,7 +23,9 @@ CREATE TABLE board.article
 
 -- Drop table
 
-DROP TABLE board.member;
+DROP TABLE IF EXISTS board.member;
+
+DROP SEQUENCE IF EXISTS board.seq_member;
 
 CREATE SEQUENCE board.seq_member START 1;
 
@@ -41,7 +44,9 @@ CREATE TABLE board.member
 
 -- Drop table
 
-DROP TABLE board.comment;
+DROP TABLE IF EXISTS board.comment;
+
+DROP SEQUENCE IF EXISTS board.seq_comment;
 
 CREATE SEQUENCE board.seq_comment START 1;
 
