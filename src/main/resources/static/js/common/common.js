@@ -1,3 +1,4 @@
+// 데이터 리스트 조회
 function getListAjax(type, url, param, dataType) {
   $.ajax({
     type: type,
@@ -36,19 +37,17 @@ function getAjax(type, url, data, dataType, contentType) {
     dataType: dataType,
     contentType: contentType,
     success: function (data) {
-      if (data.data === 1) {
-        alert("요청이 성공하였습니다.");
-        if (url.indexOf("member") !== -1) {
-          window.location.href = "/login";
-        } else {
-          window.location.href = "/article";
-          // 데이터
-          let list = $("#template").html();
-          let listTemplate = Handlebars.compile(list);
-          let listView = listTemplate(data.data);
+      // alert("요청이 성공하였습니다.");
+      if (url.indexOf("member") !== -1) {
+        window.location.href = "/login";
+      } else {
+        // window.location.href = "/article";
+        // 데이터
+        let list = $("#template").html();
+        let listTemplate = Handlebars.compile(list);
+        let listView = listTemplate(data.data);
 
-          $("#data").html(listView);
-        }
+        $("#data").html(listView);
       }
     },
     error: function () {

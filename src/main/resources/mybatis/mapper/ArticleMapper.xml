@@ -4,23 +4,36 @@
 
 <mapper namespace="com.example.JspMybatisSample.mapper.article.ArticleMapper">
 
-  <resultMap id="articleDto" type="com.example.JspMybatisSample.domain.article.dto.ArticleDto">
-    <id column="article_id" property="articleId"/>
+  <resultMap id="articleResultMap"
+    type="com.example.JspMybatisSample.domain.article.dto.ArticleDto">
+    <id column="article_id" property="articleId" javaType="long"/>
     <result column="article_title" property="articleTitle"/>
     <result column="article_content" property="articleContent"/>
-    <result column="article_writer" property="articleWriter"/>
     <result column="article_view_count" property="articleViewCount"/>
+    <result column="created_at" property="createdAt"/>
+    <result column="updated_at" property="updatedAt"/>
+    <association property="member" column="member_id"
+      javaType="com.example.JspMybatisSample.domain.member.dto.MemberDto"
+      resultMap="memberResultMap"/>
+  </resultMap>
+
+  <resultMap id="memberResultMap" type="com.example.JspMybatisSample.domain.member.dto.MemberDto">
+    <id column="member_id" property="memberId" javaType="long"/>
+    <result column="member_email" property="memberEmail"/>
+    <result column="member_name" property="memberName"/>
+    <result column="member_role" property="memberRole"/>
     <result column="created_at" property="createdAt"/>
     <result column="updated_at" property="updatedAt"/>
   </resultMap>
 
-  <select id="selectArticles" resultMap="articleDto">
+  <select id="selectArticles" resultMap="articleResultMap">
     SELECT *
-    FROM board.article
+    FROM board.article b
+    INNER JOIN board.member m ON b.member_id = m.member_id
     ORDER BY article_id
   </select>
 
-  <select id="selectArticle" parameterType="java.lang.Long" resultMap="articleDto">
+  <select id="selectArticle" parameterType="java.lang.Long" resultMap="articleResultMap">
     SELECT *
     FROM board.article
     WHERE article_id = #{articleId}

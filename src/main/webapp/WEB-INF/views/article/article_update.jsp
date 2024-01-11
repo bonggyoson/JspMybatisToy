@@ -9,12 +9,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://example.com/functions" prefix="f" %>
-<div class="container">
-    <div class="container-fluid px-4">
-        <h1 class="mt-4">Article</h1>
-        <div class="card mb-4">
-            <div class="card-body" id="data">
-            </div>
+ <div class="container w-50 position-relative text-opacity-25">
+    <h1 class="mt-4">TOY</h1>
+    <div class="card mb-4">
+        <div class="card-body" id="data">
         </div>
     </div>
 </div>
