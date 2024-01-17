@@ -29,8 +29,8 @@
   <select id="selectArticles" resultMap="articleResultMap">
     SELECT *
     FROM board.article b
-    INNER JOIN board.member m ON b.member_id = m.member_id
-    ORDER BY article_id
+           INNER JOIN board.member m ON b.member_id = m.member_id
+    ORDER BY article_id DESC
   </select>
 
   <select id="selectArticle" parameterType="java.lang.Long" resultMap="articleResultMap">
@@ -47,29 +47,17 @@
 
   <insert id="insertArticle"
     parameterType="com.example.JspMybatisSample.domain.article.dto.InsertArticleDto">
-    <selectKey keyProperty="seq_article" resultType="java.lang.Long" order="BEFORE">
-      SELECT NEXTVAL('board.seq_article')
-    </selectKey>
-    <![CDATA[
-        INSERT INTO board.article
-        (
-            article_id,
-            article_title,
-            article_content,
-            article_writer,
-            created_at,
-            updated_at
-        )
-            VALUES
-        (
-            #{seq_article},
-            #{articleTitle},
+    INSERT INTO board.article
+    (article_title,
+     article_content,
+     member_id,
+     created_at,
+     updated_at)
+    VALUES (#{articleTitle},
             #{articleContent},
-            #{articleWriter},
+            #{memberId},
             now(),
-            now()
-        )
-    ]]>
+            now())
   </insert>
 
   <update id="updateArticle"

@@ -31,6 +31,7 @@ public class Member extends BaseEntity implements UserDetails {
 
     @Builder
     public Member(MemberDto memberDto) {
+        this.memberId = memberDto.getMemberId();
         this.memberEmail = memberDto.getMemberEmail();
         this.memberPassword = memberDto.getMemberPassword();
         this.memberName = memberDto.getMemberName();

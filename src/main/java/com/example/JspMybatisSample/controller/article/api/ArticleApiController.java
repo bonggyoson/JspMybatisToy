@@ -7,10 +7,14 @@ import com.example.JspMybatisSample.global.common.CommonResponse;
 import com.example.JspMybatisSample.service.article.ArticleCommandService;
 import com.example.JspMybatisSample.service.article.ArticleQueryService;
 import com.github.pagehelper.PageInfo;
+import java.security.Principal;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,8 +55,7 @@ public class ArticleApiController {
 
     @PostMapping("/insert")
     public ResponseEntity<CommonResponse<?>> insertArticle(
-        InsertArticleDto insertArticleDto) {
-
+        @RequestBody final InsertArticleDto insertArticleDto) {
         return ResponseEntity.status(HttpStatus.CREATED)
             .body(CommonResponse.res("게시글 등록 성공",
                 articleQueryService.insertArticle(insertArticleDto)));

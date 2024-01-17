@@ -18,6 +18,6 @@ public class InsertArticleDto {
 
     /*작성자 */
     @NotNull
-    private String articleWriter;
+    private long memberId;
 
 }

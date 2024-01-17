@@ -63,6 +63,9 @@
                     </sec:authorize>
                     <sec:authorize access="isAuthenticated()">
                         <li><a class="dropdown-item"
+                               href="${pageContext.request.contextPath}/myPage">마이페이지</a>
+                        </li>
+                        <li><a class="dropdown-item"
                                href="${pageContext.request.contextPath}/api/member/logout">로그아웃</a>
                         </li>
                     </sec:authorize>

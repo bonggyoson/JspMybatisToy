@@ -29,9 +29,6 @@
     <script src="${pageContext.request.contextPath}/static/js/common/helper.js"></script>
 </head>
 <body>
-<sec:authorize access="isAuthenticated()">
-   <sec:authentication property="principal" var="principal"/>
-</sec:authorize>
 <!-- Pagination Header -->
 <tiles:insertAttribute name="header"/>
 <%--<tiles:insertAttribute name="nav"/>--%>
