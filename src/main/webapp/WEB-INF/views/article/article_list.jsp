@@ -39,7 +39,7 @@
 </div>
 <script>
   $(function () {
-    getListAjax('post', '/api/article', '', 'json');
+    getAjax('post', '/api/article', '', 'json', true);
   });
 </script>
 <script id="list-template" type="text/x-handlebars-template">
@@ -60,7 +60,7 @@
         {{#ifCond hasPreviousPage '==' true}}
         <li class="page-item">
             <a class="page-link" aria-label="Previous"
-               onclick="getListAjax('post', '/api/article?page={{math pageNum '-' 1}}', 'json')">
+               onclick="getAjax('post', '/api/article?page={{math pageNum '-' 1}}', 'json')">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
@@ -68,7 +68,7 @@
         {{#each navigatepageNums}}
         <li class="page-item">
             <button class="page-link ${'{{math @index "+" 1}}' eq '{{../pageNum}}' ? 'active' : 'none'}"
-                    onclick="getListAjax('post', '/api/article?page={{math @index '+' 1}}', 'json')">
+                    onclick="getAjax('post', '/api/article?page={{math @index '+' 1}}', 'json')">
                 {{math @index "+" 1}}
             </button>
             <%--            {{/ifCond}}--%>

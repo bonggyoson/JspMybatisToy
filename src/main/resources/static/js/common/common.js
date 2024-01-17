@@ -1,5 +1,5 @@
-// 데이터 리스트 조회
-function getListAjax(type, url, param, dataType) {
+// 데이터 조회 Ajax
+function getAjax(type, url, param, dataType, paging) {
   $.ajax({
     type: type,
     url: url,
@@ -13,15 +13,17 @@ function getListAjax(type, url, param, dataType) {
       let list = $("#list-template").html();
       let listTemplate = Handlebars.compile(list);
       let listView = listTemplate(data.data);
+      console.log(data);
 
       $("#listData").html(listView);
+      if (paging) {
+        // 페이지네이션
+        let pagination = $("#page-template").html();
+        let pageTemplate = Handlebars.compile(pagination);
+        let pageView = pageTemplate(data.data);
 
-      // 페이지네이션
-      let pagination = $("#page-template").html();
-      let pageTemplate = Handlebars.compile(pagination);
-      let pageView = pageTemplate(data.data);
-
-      $("#pageData").html(pageView);
+        $("#pageData").html(pageView);
+      }
     },
     error: function () {
       alert("요청이 실패 했습니다.");
@@ -29,7 +31,8 @@ function getListAjax(type, url, param, dataType) {
   });
 }
 
-function getAjax(type, url, data, dataType, contentType) {
+// 데이터 입력, 수정, 삭제 Ajax
+function submitAjax(type, url, data, dataType, contentType) {
   $.ajax({
     type: type,
     url: url,
@@ -37,17 +40,16 @@ function getAjax(type, url, data, dataType, contentType) {
     dataType: dataType,
     contentType: contentType,
     success: function (data) {
-      // alert("요청이 성공하였습니다.");
       if (url.indexOf("member") !== -1) {
         window.location.href = "/login";
       } else {
-        // window.location.href = "/article";
-        // 데이터
-        let list = $("#template").html();
-        let listTemplate = Handlebars.compile(list);
-        let listView = listTemplate(data.data);
-
-        $("#data").html(listView);
+        window.location.href = "/article";
+        // // 데이터
+        // let list = $("#template").html();
+        // let listTemplate = Handlebars.compile(list);
+        // let listView = listTemplate(data.data);
+        //
+        // $("#data").html(listView);
       }
     },
     error: function () {

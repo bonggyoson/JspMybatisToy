@@ -8,17 +8,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@taglib uri="http://example.com/functions" prefix="f" %>
+<%@ taglib uri="http://example.com/functions" prefix="f" %>
 <div class="container w-50 position-relative text-opacity-25 mt-4">
     <div class="card mb-4">
-        <div class="card-body" id="data">
+        <div class="card-body" id="listData">
         </div>
     </div>
 </div>
 <script>
-  $(function () {
-    getAjax('post', '/api/article/${articleId}', '', 'json');
-  });
+  getAjax('post', '/api/article/${articleId}', '', 'json', false);
 </script>
 <script id="template" type="text/x-handlebars-template">
     <div class="card">

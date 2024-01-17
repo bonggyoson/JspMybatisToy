@@ -107,7 +107,7 @@
     if (validCount > 0) {
       return false;
     }
-    getAjax('post', '/api/member/join', getFormData($("#frm")), 'json', 'application/json');
+    submitAjax('post', '/api/member/join', getFormData($("#frm")), 'json', 'application/json');
   }
 
   // ajax 이메일 중복 체크

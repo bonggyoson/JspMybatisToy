@@ -74,7 +74,6 @@
 </div>
 <script>
   function login_member() {
-
     let memberEmail = $("#memberEmail");
     let memberPassword = $("#memberPassword");
     let emailValid = $("#emailValid");
