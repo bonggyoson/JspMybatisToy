@@ -21,7 +21,7 @@
         </div>
     </div>
     <table class="table table-striped caption-top table-hover">
-        <caption>총 <em id="totalNum"></em> 건</caption>
+        <caption>총 <em id="totalNum"></em> 건 / <em id="pageNum"></em> 페이지</caption>
         <thead>
         <tr>
             <th>#</th>
@@ -59,30 +59,36 @@
     <ul class="pagination justify-content-center">
         {{#ifCond hasPreviousPage '==' true}}
         <li class="page-item">
-            <a class="page-link" aria-label="Previous"
-               onclick="getAjax('post', '/api/article?page={{math pageNum '-' 1}}', 'json')">
+            <a class="page-link" aria-label="first"
+               onclick="getAjax('post', '/api/article?page={{navigateFirstPage}}', '', 'json', true)">
                 <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" aria-label="previous"
+               onclick="getAjax('post', '/api/article?page={{math pageNum '-' 1}}', '', 'json', true)">
+                <span aria-hidden="true">&lsaquo;</span>
             </a>
         </li>
         {{/ifCond}}
         {{#each navigatepageNums}}
         <li class="page-item">
-            <button class="page-link ${'{{math @index "+" 1}}' eq '{{../pageNum}}' ? 'active' : 'none'}"
-                    onclick="getAjax('post', '/api/article?page={{math @index '+' 1}}', 'json')">
+            <button class="page-link" id="{{math @index '+' 1}}page"
+                    onclick="getAjax('post', '/api/article?page={{math @index '+' 1}}', '', 'json', true)">
                 {{math @index "+" 1}}
             </button>
-            <%--            {{/ifCond}}--%>
-            <%--            {{#ifCond {{../pageNum}} '!=' {{math @index '+' 1}}}}--%>
-            <%--            <a class="page-link"--%>
-            <%--               onclick="getListAjax('post', '/api/article?page={{math @index '+' 1}}', 'json')">--%>
-            <%--                {{math @index "+" 1}}--%>
-            <%--            </a>--%>
-            <%--            {{/ifCond}}--%>
         </li>
         {{/each}}
         {{#ifCond hasNextPage '==' true}}
         <li class="page-item" id="next">
-            <a class="page-link" href="#" aria-label="Next">
+            <a class="page-link" aria-label="Last"
+               onclick="getAjax('post', '/api/article?page={{math pageNum '+' 1}}', '', 'json', true)">
+                <span aria-hidden="true">&rsaquo;</span>
+            </a>
+        </li>
+        <li class="page-item" id="last">
+            <a class="page-link" aria-label="Last"
+               onclick="getAjax('post', '/api/article?page={{navigateLastPage}}', '', 'json', true)">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>

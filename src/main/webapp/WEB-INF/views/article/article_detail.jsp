@@ -18,8 +18,8 @@
 <script>
   getAjax('post', '/api/article/${articleId}', '', 'json', false);
 </script>
-<script id="template" type="text/x-handlebars-template">
-    <div class="card">
+<script id="data-template" type="text/x-handlebars-template">
+    <div class="card mb-3">
         <div class="card-header border-0 pb-0">
             <div class="d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
@@ -35,11 +35,17 @@
                     <!-- Info -->
                     <div>
                         <div class="nav nav-divider">
-                            <h6 class="nav-item card-title mb-0"><a href="#!"> Lori Ferguson </a>
+                            <h6 class="nav-item card-title mb-0"><a href="#!">
+                                {{member.memberName}} </a>
                             </h6>
-                            <span class="nav-item small"> 2hr</span>
                         </div>
-                        <p class="mb-0 small">Web Developer at Webestica</p>
+                        <p class="small">{{formatDate createdAt "YYYY-MM-DD hh:ss:mm"}} |
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                              <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                              <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                            </svg>
+                            {{articleViewCount}}
+                        </p>
                     </div>
                 </div>
                 <!-- Card feed action dropdown START -->
@@ -69,23 +75,33 @@
                 <!-- Card feed action dropdown END -->
             </div>
         </div>
-
     </div>
-    <h5 class="card-title">{{articleTitle}}</h5>
+    <h1 class="card-title mb-3">{{articleTitle}}</h1>
     <p class="card-text">{{articleContent}}</p>
-    <a href="${pageContext.request.contextPath}/article"
-       class="btn btn-outline-secondary">돌아가기</a>
-    <a href="${pageContext.request.contextPath}/article/updateArticle/${articleId}"
-       class="btn btn-outline-warning">수정</a>
-    <hr>
-    <div class="card-body">
-        <div class="row">
-            <div class="col">
-                <label for="exampleFormControlInput1" class="form-label"></label>
-                <input type="text" class="form-control" id="exampleFormControlInput1">
-            </div>
-            <div class="col-auto">
-                <button type="button" class="btn btn-secondary">등록</button>
+    <hr/>
+    <div>
+        <small>0 개의 댓글</small>
+    </div>
+    <div class="card mt-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-auto">
+                    <div class="fs-4 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                             fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path>
+                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"></path>
+                        </svg>
+                        <small>Default</small>
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="inputPassword2" class="visually-hidden">Password</label>
+                    <input type="password" class="form-control" id="inputPassword2">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-secondary mb-3">작성</button>
+                </div>
             </div>
         </div>
     </div>

@@ -1,34 +1,60 @@
 // 데이터 조회 Ajax
 function getAjax(type, url, param, dataType, paging) {
-  $.ajax({
-    type: type,
-    url: url,
-    param: param,
-    dataType: dataType,
-    success: function (data) {
-      // 총 개수
-      $("#totalNum").html(data.data.total);
+  if (paging) {
+    // Return -> List
+    $.ajax({
+      type: type,
+      url: url,
+      param: param,
+      dataType: dataType,
+      success: function (data) {
+        // 총 개수
+        $("#totalNum").html(data.data.total);
 
-      // 데이터
-      let list = $("#list-template").html();
-      let listTemplate = Handlebars.compile(list);
-      let listView = listTemplate(data.data);
-      console.log(data);
+        // 페이지
+        $("#pageNum").html(data.data.pageNum);
 
-      $("#listData").html(listView);
-      if (paging) {
+        // 데이터
+        let list = $("#list-template").html();
+        let listTemplate = Handlebars.compile(list);
+        let listView = listTemplate(data.data);
+        console.log(data);
+
+        $("#listData").html(listView);
+
         // 페이지네이션
         let pagination = $("#page-template").html();
         let pageTemplate = Handlebars.compile(pagination);
         let pageView = pageTemplate(data.data);
 
         $("#pageData").html(pageView);
+        $("#" + data.data.pageNum + "page").addClass('active');
+      },
+      error: function () {
+        alert("요청이 실패 했습니다.");
       }
-    },
-    error: function () {
-      alert("요청이 실패 했습니다.");
-    }
-  });
+    });
+  } else {
+    // Return -> Not List
+    $.ajax({
+      type: type,
+      url: url,
+      param: param,
+      dataType: dataType,
+      success: function (data) {
+        console.log(data);
+        // 데이터
+        let list = $("#data-template").html();
+        let listTemplate = Handlebars.compile(list);
+        let listView = listTemplate(data.data);
+
+        $("#listData").html(listView);
+      },
+      error: function () {
+        alert("요청이 실패 했습니다.");
+      }
+    });
+  }
 }
 
 // 데이터 입력, 수정, 삭제 Ajax

@@ -35,7 +35,8 @@
 
   <select id="selectArticle" parameterType="java.lang.Long" resultMap="articleResultMap">
     SELECT *
-    FROM board.article
+    FROM board.article b
+        INNER JOIN board.member m ON b.member_id = m.member_id
     WHERE article_id = #{articleId}
   </select>
 
