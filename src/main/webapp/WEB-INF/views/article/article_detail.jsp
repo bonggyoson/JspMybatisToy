@@ -9,6 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://example.com/functions" prefix="f" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <div class="container w-50 position-relative text-opacity-25 mt-4">
     <div class="card mb-4">
         <div class="card-body" id="listData">
@@ -16,7 +17,30 @@
     </div>
 </div>
 <script>
-  getAjax('post', '/api/article/${articleId}', '', 'json', false);
+  $(function () {
+    getAjax('post', '/api/article/${articleId}', '', 'json', false);
+    getAjax('post', '/api/comment/${articleId}', '', 'json', false);
+  });
+
+  function insert_comment() {
+    let commentContent = $("#commentContent");
+    let contentValid = $("#contentValid");
+    let validCount = 0;
+
+    // 댓글 검증
+    if (commentContent.val() === "" || commentContent.val() === null) {
+      contentValid.html("내용을 최소 1자 이상 입력해주세요");
+      contentValid.css({'color': 'red'});
+      commentContent.css({'border-color': 'red'});
+      validCount++;
+    }
+
+    if (validCount > 0) {
+      return false;
+    }
+
+    submitAjax('post', '/api/comment/insert', getFormData($("#frm")), 'json', 'application/json');
+  }
 </script>
 <script id="data-template" type="text/x-handlebars-template">
     <div class="card mb-2">
@@ -111,7 +135,7 @@
     </ul>
 
     <!-- Add comment -->
-    <div class="d-flex mb-3">
+    <div class="d-flex mb-1">
         <!-- Avatar -->
         <div class="avatar avatar-xs me-2">
             <a href="#!">
@@ -125,87 +149,102 @@
         </div>
 
         <!-- Comment box  -->
-        <form class="input-group">
+        <form id="frm" onsubmit="return false;" class="input-group">
                 <textarea data-autoresize="" class="form-control me-2 rounded" rows="1"
+                          id="commentContent" name="commentContent"
                           placeholder="댓글을 입력해주세요."></textarea>
-            <button class="btn btn-primary mb-0 rounded" type="submit">댓글</button>
+            <input type="hidden" id="articleId" name="articleId" value="${articleId}">
+            <input type="hidden" id="memberId" name="memberId"
+                   value="<sec:authentication property="principal.memberId"/>">
+            <button class="btn btn-primary mb-0 rounded" type="button" onclick="insert_comment()">
+                댓글
+            </button>
         </form>
     </div>
+    <div><small class="fw-bold" id="contentValid"></small></div>
+
+    <hr/>
+    <div class="card">
+        <div class="card-body">
+            <p>{{commentId}}</p>
+
+        </div>
+    </div>
     <!-- Comment wrap START -->
-    <ul class="comment-wrap list-unstyled mb-0">
-        <!-- Comment item START -->
-        <li class="comment-item">
-            <div class="d-flex">
-                <!-- Avatar -->
-                <div class="avatar avatar-xs">
-                    <a href="#!"><img class="avatar-img rounded-circle"
-                                      src="assets/images/avatar/05.jpg" alt=""></a>
-                </div>
-                <div class="ms-2">
-                    <!-- Comment by -->
-                    <div class="bg-light rounded-start-top-0 p-3 rounded">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="mb-1"><a href="#!"> Frances Guerrero </a></h6>
-                            <small class="ms-2">5hr</small>
-                        </div>
-                        <p class="small mb-0">Preference any astonished unreserved Mrs.</p>
-                    </div>
-                    <!-- Comment react -->
-                    <ul class="nav nav-divider py-2 small">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#!">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                     fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
-                                    <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/>
-                                </svg>
-                                Like (3)</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#!"> Reply</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#!"> View 5 replies</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Comment item nested START -->
-            <ul class="comment-item-nested list-unstyled">
-                <!-- Comment item START -->
-                <li class="comment-item">
-                    <div class="d-flex">
-                        <!-- Avatar -->
-                        <div class="avatar avatar-xs">
-                            <a href="#!"><img class="avatar-img rounded-circle"
-                                              src="assets/images/avatar/06.jpg" alt=""></a>
-                        </div>
-                        <!-- Comment by -->
-                        <div class="ms-2">
-                            <div class="bg-light p-3 rounded">
-                                <div class="d-flex justify-content-between">
-                                    <h6 class="mb-1"><a href="#!"> Lori Stevens </a></h6>
-                                    <small class="ms-2">2hr</small>
-                                </div>
-                                <p class="small mb-0">Dependent on so extremely delivered by.
-                                    Yet ﻿no jokes worse her why.</p>
-                            </div>
-                            <!-- Comment react -->
-                            <ul class="nav nav-divider py-2 small">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#!"> Like (5)</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#!"> Reply</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <!-- Comment item END -->
-            </ul>
-            <!-- Comment item nested END -->
-        </li>
-        <!-- Comment item END -->
-    </ul>
+    <%--    <ul class="comment-wrap list-unstyled mb-0">--%>
+    <%--        <!-- Comment item START -->--%>
+    <%--        <li class="comment-item">--%>
+    <%--            <div class="d-flex">--%>
+    <%--                <!-- Avatar -->--%>
+    <%--                <div class="avatar avatar-xs">--%>
+    <%--                    <a href="#!"><img class="avatar-img rounded-circle"--%>
+    <%--                                      src="assets/images/avatar/05.jpg" alt=""></a>--%>
+    <%--                </div>--%>
+    <%--                <div class="ms-2">--%>
+    <%--                    <!-- Comment by -->--%>
+    <%--                    <div class="bg-light rounded-start-top-0 p-3 rounded">--%>
+    <%--                        <div class="d-flex justify-content-between">--%>
+    <%--                            <h6 class="mb-1"><a href="#!"> Frances Guerrero </a></h6>--%>
+    <%--                            <small class="ms-2">5hr</small>--%>
+    <%--                        </div>--%>
+    <%--                        <p class="small mb-0">Preference any astonished unreserved Mrs.</p>--%>
+    <%--                    </div>--%>
+    <%--                    <!-- Comment react -->--%>
+    <%--                    <ul class="nav nav-divider py-2 small">--%>
+    <%--                        <li class="nav-item">--%>
+    <%--                            <a class="nav-link" href="#!">--%>
+    <%--                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"--%>
+    <%--                                     fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">--%>
+    <%--                                    <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/>--%>
+    <%--                                </svg>--%>
+    <%--                                Like (3)</a>--%>
+    <%--                        </li>--%>
+    <%--                        <li class="nav-item">--%>
+    <%--                            <a class="nav-link" href="#!"> Reply</a>--%>
+    <%--                        </li>--%>
+    <%--                        <li class="nav-item">--%>
+    <%--                            <a class="nav-link" href="#!"> View 5 replies</a>--%>
+    <%--                        </li>--%>
+    <%--                    </ul>--%>
+    <%--                </div>--%>
+    <%--            </div>--%>
+    <%--            <!-- Comment item nested START -->--%>
+    <%--            <ul class="comment-item-nested list-unstyled">--%>
+    <%--                <!-- Comment item START -->--%>
+    <%--                <li class="comment-item">--%>
+    <%--                    <div class="d-flex">--%>
+    <%--                        <!-- Avatar -->--%>
+    <%--                        <div class="avatar avatar-xs">--%>
+    <%--                            <a href="#!"><img class="avatar-img rounded-circle"--%>
+    <%--                                              src="assets/images/avatar/06.jpg" alt=""></a>--%>
+    <%--                        </div>--%>
+    <%--                        <!-- Comment by -->--%>
+    <%--                        <div class="ms-2">--%>
+    <%--                            <div class="bg-light p-3 rounded">--%>
+    <%--                                <div class="d-flex justify-content-between">--%>
+    <%--                                    <h6 class="mb-1"><a href="#!"> Lori Stevens </a></h6>--%>
+    <%--                                    <small class="ms-2">2hr</small>--%>
+    <%--                                </div>--%>
+    <%--                                <p class="small mb-0">Dependent on so extremely delivered by.--%>
+    <%--                                    Yet ﻿no jokes worse her why.</p>--%>
+    <%--                            </div>--%>
+    <%--                            <!-- Comment react -->--%>
+    <%--                            <ul class="nav nav-divider py-2 small">--%>
+    <%--                                <li class="nav-item">--%>
+    <%--                                    <a class="nav-link" href="#!"> Like (5)</a>--%>
+    <%--                                </li>--%>
+    <%--                                <li class="nav-item">--%>
+    <%--                                    <a class="nav-link" href="#!"> Reply</a>--%>
+    <%--                                </li>--%>
+    <%--                            </ul>--%>
+    <%--                        </div>--%>
+    <%--                    </div>--%>
+    <%--                </li>--%>
+    <%--                <!-- Comment item END -->--%>
+    <%--            </ul>--%>
+    <%--            <!-- Comment item nested END -->--%>
+    <%--        </li>--%>
+    <%--        <!-- Comment item END -->--%>
+    <%--    </ul>--%>
     <!-- Comment wrap END -->
 </script>

@@ -41,6 +41,7 @@ function getAjax(type, url, param, dataType, paging) {
       url: url,
       param: param,
       dataType: dataType,
+      // async: false,
       success: function (data) {
         console.log(data);
         // 데이터
@@ -57,7 +58,7 @@ function getAjax(type, url, param, dataType, paging) {
   }
 }
 
-// 데이터 입력, 수정, 삭제 Ajax
+// Data INSERT, UPDATE, DELETE Ajax
 function submitAjax(type, url, data, dataType, contentType) {
   $.ajax({
     type: type,
@@ -68,6 +69,8 @@ function submitAjax(type, url, data, dataType, contentType) {
     success: function (data) {
       if (url.indexOf("member") !== -1) {
         window.location.href = "/login";
+      } else if (url.indexOf("comment") !== -1) {
+        location.reload();
       } else {
         window.location.href = "/article";
         // // 데이터

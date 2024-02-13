@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.JspMybatisSample.mapper.comment.CommentMapper">
+
+  <resultMap id="commentDto" type="com.example.JspMybatisSample.domain.comment.dto.CommentDto">
+    <id column="comment_id" property="commentId"/>
+    <result column="created_at" property="createdAt"/>
+    <result column="updated_at" property="updatedAt"/>
+    <association property="member" column="member_id"
+      javaType="com.example.JspMybatisSample.domain.member.dto.MemberDto"
+      resultMap="memberResultMap"/>
+  </resultMap>
+
+  <resultMap id="memberResultMap" type="com.example.JspMybatisSample.domain.member.dto.MemberDto">
+    <id column="member_id" property="memberId" javaType="long"/>
+    <result column="member_email" property="memberEmail"/>
+    <result column="member_name" property="memberName"/>
+    <result column="member_role" property="memberRole"/>
+    <result column="created_at" property="createdAt"/>
+    <result column="updated_at" property="updatedAt"/>
+  </resultMap>
+
+  <select id="selectComments" resultMap="commentDto">
+    SELECT *
+    FROM board.comment c
+           INNER JOIN board.member m ON c.member_id = m.member_id
+    WHERE article_id = #{articleId}
+  </select>
+
+  <select id="selectComment" resultMap="commentDto">
+    SELECT *
+    FROM board.comment c
+    WHERE member_id = #{memberId}
+  </select>
+
+  <insert id="insertComment"
+    parameterType="com.example.JspMybatisSample.domain.comment.dto.InsertCommentDto">
+    INSERT INTO board.comment
+    (article_id,
+     member_id,
+     comment_content,
+     created_at,
+     updated_at)
+    VALUES (#{articleId},
+            #{memberId},
+            #{commentContent},
+            now(),
+            now())
+  </insert>
+
+</mapper>
