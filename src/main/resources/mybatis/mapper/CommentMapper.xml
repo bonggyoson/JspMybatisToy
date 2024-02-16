@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.JspMybatisSample.mapper.comment.CommentMapper">
+
+<!--  <resultMap id="CommentResultMap"-->
+<!--    type="com.example.JspMybatisSample.domain.article.dto.ArticleDto">-->
+<!--    <id column="article_id" property="articleId" javaType="long"/>-->
+<!--    <result column="article_title" property="articleTitle"/>-->
+<!--    <result column="article_content" property="articleContent"/>-->
+<!--    <result column="article_view_count" property="articleViewCount"/>-->
+<!--    <result column="created_at" property="createdAt"/>-->
+<!--    <result column="updated_at" property="updatedAt"/>-->
+<!--    <association property="member" column="member_id"-->
+<!--      javaType="com.example.JspMybatisSample.domain.member.dto.MemberDto"-->
+<!--      resultMap="memberResultMap"/>-->
+<!--  </resultMap>-->
+
+<!--  <resultMap id="memberResultMap" type="com.example.JspMybatisSample.domain.member.dto.MemberDto">-->
+<!--    <id column="member_id" property="memberId" javaType="long"/>-->
+<!--    <result column="member_email" property="memberEmail"/>-->
+<!--    <result column="member_name" property="memberName"/>-->
+<!--    <result column="member_role" property="memberRole"/>-->
+<!--    <result column="created_at" property="createdAt"/>-->
+<!--    <result column="updated_at" property="updatedAt"/>-->
+<!--  </resultMap>-->
+
+<!--  <select id="selectComments" resultMap="CommentResultMap">-->
+<!--    SELECT *-->
+<!--    FROM board.comment c-->
+<!--           INNER JOIN board.member m ON b.member_id = m.member_id-->
+<!--    ORDER BY article_id DESC-->
+<!--  </select>-->
+
+<!--  <select id="selectArticle" parameterType="java.lang.Long" resultMap="articleResultMap">-->
+<!--    SELECT *-->
+<!--    FROM board.article b-->
+<!--        INNER JOIN board.member m ON b.member_id = m.member_id-->
+<!--    WHERE article_id = #{articleId}-->
+<!--  </select>-->
+
+<!--  <update id="selectArticlePlusViewCount" parameterType="java.lang.Long">-->
+<!--    UPDATE board.article-->
+<!--    SET article_view_count = article_view_count + 1-->
+<!--    WHERE article_id = #{articleId}-->
+<!--  </update>-->
+
+<!--  <insert id="insertArticle"-->
+<!--    parameterType="com.example.JspMybatisSample.domain.article.dto.InsertArticleDto">-->
+<!--    INSERT INTO board.article-->
+<!--    (article_title,-->
+<!--     article_content,-->
+<!--     member_id,-->
+<!--     created_at,-->
+<!--     updated_at)-->
+<!--    VALUES (#{articleTitle},-->
+<!--            #{articleContent},-->
+<!--            #{memberId},-->
+<!--            now(),-->
+<!--            now())-->
+<!--  </insert>-->
+
+<!--  <update id="updateArticle"-->
+<!--    parameterType="com.example.JspMybatisSample.domain.article.dto.UpdateArticleDto">-->
+<!--    UPDATE board.article-->
+<!--    SET article_title   = #{updateArticle.articleTitle},-->
+<!--        article_content = #{updateArticle.articleContent},-->
+<!--        updated_at      = now()-->
+<!--    WHERE article_id = #{articleId}-->
+<!--  </update>-->
+
+<!--  <delete id="deleteArticle" parameterType="java.lang.Long">-->
+<!--    DELETE-->
+<!--    FROM board.article-->
+<!--    WHERE article_id = #{articleId}-->
+<!--  </delete>-->
+
+</mapper>

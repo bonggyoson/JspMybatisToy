@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
-public class MemberController {
+public class MemberViewController {
 
     @GetMapping("/join")
     public String join() {

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 @RequestMapping("/article")
 @Slf4j
-public class ArticleController {
+public class ArticleViewController {
 
     @GetMapping("")
     public String selectArticles() {
