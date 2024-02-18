@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.JspMybatisSample.mapper.mypage.MyPageMapper">
+
+  <resultMap id="memberDto" type="com.example.JspMybatisSample.domain.member.dto.MemberDto">
+    <id column="member_id" property="memberId"/>
+    <result column="member_email" property="memberEmail"/>
+    <result column="member_password" property="memberPassword"/>
+    <result column="member_name" property="memberName"/>
+    <result column="created_at" property="createdAt"/>
+    <result column="updated_at" property="updatedAt"/>
+  </resultMap>
+
+  <select id="selectMyPageMember" resultMap="memberDto">
+    SELECT *
+    FROM board.member
+    WHERE member_id = #{memberId}
+  </select>
+
+  <update id="updateMyPageMember"
+    parameterType="com.example.JspMybatisSample.domain.member.dto.UpdateMemberDto">
+    UPDATE board.member
+    SET member_email = #{memberEmail},
+        member_name  = #{memberName}
+    WHERE member_id = #{memberId}
+  </update>
+
+</mapper>
