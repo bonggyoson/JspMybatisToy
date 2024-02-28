@@ -27,6 +27,11 @@
 
     <script src="${pageContext.request.contextPath}/static/js/common/common.js"></script>
     <script src="${pageContext.request.contextPath}/static/js/common/helper.js"></script>
+
+    <%-- sweetalert2 --%>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 </head>
 <body>
 <!-- Pagination Header -->
