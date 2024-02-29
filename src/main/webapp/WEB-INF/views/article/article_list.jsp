@@ -49,7 +49,7 @@
         <td>
             <a href="${pageContext.request.contextPath}/article/{{articleId}}">{{articleTitle}}</a>
         </td>
-        <td>{{articleWriter}}</td>
+        <td>{{member.memberName}}</td>
         <td>{{formatDate createdAt "YYYY-MM-DD hh:ss:mm"}}</td>
         <td>{{articleViewCount}}</td>
     </tr>
