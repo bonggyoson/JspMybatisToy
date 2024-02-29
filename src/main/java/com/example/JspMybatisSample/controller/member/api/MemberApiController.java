@@ -78,4 +78,10 @@ public class MemberApiController {
             .body(CommonResponse.res("회원 삭제 성공",
                 memberQueryService.deleteMember(memberId)));
     }
+
+    // TODO: 2024-02-28 - 이메일 인증 방식 구현
+    @PostMapping("/resetPassword")
+    public ResponseEntity<CommonResponse<?>> resetPassword() {
+        return null;
+    }
 }

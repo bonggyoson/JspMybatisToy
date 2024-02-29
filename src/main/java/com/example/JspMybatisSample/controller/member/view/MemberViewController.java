@@ -26,4 +26,9 @@ public class MemberViewController {
 
         return "member/member_login";
     }
+
+    @GetMapping("/resetPassword")
+    public String resetPassword() {
+        return "member/member_resetPassword";
+    }
 }

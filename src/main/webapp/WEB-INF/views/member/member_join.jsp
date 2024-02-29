@@ -42,7 +42,8 @@
                                         </span>
                             <input type="password" class="form-control" name="memberPassword"
                                    id="memberPassword"
-                                   placeholder="비밀번호">
+                                   placeholder="비밀번호"
+                                   onclick="confirm_password()">
                         </div>
                         <small class="fw-bold" id="passwordValid"></small>
                     </div>
@@ -154,4 +155,13 @@
       });
     }
   });
+
+  // 패스워드 보이기 / 숨기기
+  function confirm_password() {
+    if (document.getElementById("memberPassword").type == 'password') {
+      document.getElementById("memberPassword").type = 'text';
+    } else {
+      document.getElementById("memberPassword").type = 'password';
+    }
+  }
 </script>

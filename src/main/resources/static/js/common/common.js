@@ -66,16 +66,17 @@ function submitAjax(type, url, data, dataType, contentType) {
     dataType: dataType,
     contentType: contentType,
     success: function (data) {
-      if (url.indexOf("member") !== -1) {
+      console.log(data);
+      if (url.indexOf("join") !== -1) {
         window.location.href = "/login";
-      } else {
-        window.location.href = "/article";
-        // // 데이터
-        // let list = $("#template").html();
-        // let listTemplate = Handlebars.compile(list);
-        // let listView = listTemplate(data.data);
-        //
-        // $("#data").html(listView);
+      } else if (url.indexOf("insert") !== -1) {
+        window.location.href = "/article/" + data.data;
+        // 데이터
+        let list = $("#template").html();
+        let listTemplate = Handlebars.compile(list);
+        let listView = listTemplate(data.data);
+
+        $("#data").html(listView);
       }
     },
     error: function () {
@@ -93,4 +94,25 @@ function getFormData($form) {
   });
 
   return indexed_array;
+}
+
+// Sweet Toast
+function swalToast() {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-center',
+    showConfirmButton: false,
+    timer: 1500,
+    timerProgressBar: true,
+    textDecorationColor: 'black',
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+
+  Toast.fire({
+    icon: 'success',
+    title: '회원정보가 수정 되었습니다.'
+  })
 }

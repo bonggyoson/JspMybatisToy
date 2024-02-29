@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class InsertArticleDto {
 
+    private long articleId;
+
     /* 제목 */
     @NotNull
     private String articleTitle;

@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: bongg
-  Date: 2023-11-14
-  Time: 오전 10:58
+  User: 20231102
+  Date: 2024-02-28
+  Time: 오후 4:48
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -13,11 +13,9 @@
             <button type="button" class="btn btn-lg mb-2 fw-bold text-white"
                     onclick="location.href='/article'">TOY BOARD
             </button>
-            <p class="fw-bold">로그인</p>
+            <p class="fw-bold">비밀번호 재설정</p>
             <div class="mb-2">
-                <form id="frm" method="post"
-                      action="${pageContext.request.contextPath}/api/member/login"
-                      onsubmit="return login_member();">
+                <form onsubmit="return false;">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <div class="mb-3">
                         <div class="input-group">
@@ -37,79 +35,30 @@
                         </div>
                         <small class="fw-bold" id="emailValid"></small>
                     </div>
-                    <div class="mb-3">
-                        <div class="input-group">
-                                                <span class="input-group-text">
-                                                                  <svg xmlns="http://www.w3.org/2000/svg"
-                                                                       width="16"
-                                                                       height="16"
-                                                                       fill="currentColor"
-                                                                       class="bi bi-key-fill"
-                                                                       viewBox="0 0 16 16">
-                                                  <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
-                                                </svg>
-                                                                </span>
-                            <input type="password" class="form-control" id="memberPassword"
-                                   name="memberPassword"
-                                   placeholder="비밀번호"
-                                   onclick="confirm_password()"/>
-                        </div>
-                        <small class="fw-bold" id="passwordValid"></small>
-                    </div>
-                    <div class="mb-3">
-                        <small class="fw-bold" style="color: red">${exception}</small>
-                    </div>
                     <div class="d-grid gap-2">
                         <button type="submit" class="btn btn-secondary" id="login"
-                                onclick="login_member()">로그인
+                                onclick="reset_password()">비밀번호 재설정하기
                         </button>
                     </div>
                 </form>
-                <hr/>
-                <div class="row">
-                    <div class="col-7">
-                        <a class="link-secondary"
-                           href="/resetPassword">
-                            비밀번호 재설정
-                        </a>
-                    </div>
-                    <div class="col-5">
-                        <a class="link-secondary"
-                           href="/join">
-                            회원가입
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 </div>
 <script>
-  function login_member() {
+  function reset_password() {
     let memberEmail = $("#memberEmail");
-    let memberPassword = $("#memberPassword");
     let emailValid = $("#emailValid");
-    let passwordValid = $("#passwordValid");
     let validCount = 0;
 
     memberEmail.css({'border-color': ''});
     emailValid.html("");
-    memberPassword.css({'border-color': ''});
-    passwordValid.html("");
 
     // 이메일 공백 검증
     if (memberEmail.val() === "" || memberEmail.val() === null) {
       emailValid.html("이메일을 입력해주세요.");
       emailValid.css({'color': 'red'});
       memberEmail.css({'border-color': 'red'});
-      validCount++;
-    }
-
-    // 비밀번호 공백 검증
-    if (memberPassword.val() === "" || memberPassword.val() === null) {
-      passwordValid.html("비밀번호를 입력해주세요.");
-      passwordValid.css({'color': 'red'});
-      memberPassword.css({'border-color': 'red'});
       validCount++;
     }
 
@@ -130,15 +79,6 @@
     }
 
     return true;
-  }
-
-  // 패스워드 보이기 / 숨기기
-  function confirm_password() {
-    if (document.getElementById("memberPassword").type == 'password') {
-      document.getElementById("memberPassword").type = 'text';
-    } else {
-      document.getElementById("memberPassword").type = 'password';
-    }
   }
 
 </script>
