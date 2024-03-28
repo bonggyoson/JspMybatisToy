@@ -48,7 +48,7 @@
 
   <insert id="insertArticle"
     parameterType="com.example.JspMybatisSample.domain.article.dto.InsertArticleDto"
-    useGeneratedKeys="true" keyProperty="articleId">
+    useGeneratedKeys="true" keyColumn="article_id" keyProperty="articleId">
     INSERT INTO board.article
     (article_title,
      article_content,

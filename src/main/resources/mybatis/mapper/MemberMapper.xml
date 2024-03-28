@@ -49,4 +49,25 @@
             now())
   </insert>
 
+  <update id="updateMember">
+    UPDATE board.member
+    SET member_email = #{member.memberEmail},
+        member_name  = #{member.memberName},
+        updated_at   = now()
+    WHERE member_id = #{memberId}
+  </update>
+
+  <update id="updateMemberPassword">
+    UPDATE board.member
+    SET member_password = #{memberPassword},
+        updated_at      = now()
+    WHERE member_id = #{memberId}
+  </update>
+
+  <delete id="deleteMember">
+    DELETE
+    FROM board.member
+    WHERE member_id = #{memberId}
+  </delete>
+
 </mapper>

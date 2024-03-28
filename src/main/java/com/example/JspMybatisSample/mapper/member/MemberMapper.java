@@ -6,6 +6,7 @@ import com.example.JspMybatisSample.domain.member.dto.UpdateMemberDto;
 import com.github.pagehelper.Page;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface MemberMapper {
@@ -20,7 +21,10 @@ public interface MemberMapper {
 
     int insertMember(InsertMemberDto insertMemberDto);
 
-    int updateMember(UpdateMemberDto updateMemberDto);
+    int updateMember(@Param("memberId") long memberId,
+        @Param("member") UpdateMemberDto updateMemberDto);
 
     int deleteMember(long memberId);
+
+    int updateMemberPassword(long memberId, String memberPassword);
 }

@@ -15,7 +15,9 @@ public class ArticleQueryService {
     private final ArticleMapper articleMapper;
 
     public int insertArticle(InsertArticleDto insertArticleDto) {
-        return articleMapper.insertArticle(insertArticleDto);
+        articleMapper.insertArticle(insertArticleDto);
+
+        return (int) insertArticleDto.getArticleId();
     }
 
     public int updateArticle(long articleId, UpdateArticleDto updateArticleDto) {

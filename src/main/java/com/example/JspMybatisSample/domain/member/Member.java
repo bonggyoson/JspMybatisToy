@@ -38,12 +38,6 @@ public class Member extends BaseEntity implements UserDetails {
         this.memberRole = memberDto.getMemberRole();
     }
 
-    public void updateMember(UpdateMemberDto updateMemberDto) {
-        this.memberEmail = updateMemberDto.getMemberEmail();
-        this.memberPassword = updateMemberDto.getMemberPassword();
-        this.memberName = updateMemberDto.getMemberName();
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;

@@ -10,9 +10,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://example.com/functions" prefix="f" %>
 <div class="container w-50 position-relative text-opacity-25">
-    <div class="row">
+    <div class="row mt-2 border border-1 rounded">
         <div class="col">
-            <h1>TOY</h1>
+            <h1>ARTICLE</h1>
         </div>
         <div class="col-auto align-self-center">
             <button type="button" class="btn btn-secondary"

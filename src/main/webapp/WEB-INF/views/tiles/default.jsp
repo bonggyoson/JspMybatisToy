@@ -13,6 +13,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Toy Article</title>
+    <link rel="icon" type="image/ico" href="${pageContext.request.contextPath}/static/images/box2-heart-fill.svg">
+
     <%-- css --%>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/main.css">

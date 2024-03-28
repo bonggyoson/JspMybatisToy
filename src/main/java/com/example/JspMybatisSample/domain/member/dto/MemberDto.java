@@ -6,10 +6,8 @@ import com.example.JspMybatisSample.global.common.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MemberDto extends BaseEntity {
 
@@ -22,5 +20,13 @@ public class MemberDto extends BaseEntity {
     private String memberName;
 
     private Role memberRole;
+
+    public MemberDto(Long memberId, String memberEmail, String memberPassword, String memberName,
+        Role memberRole) {
+        this.memberId = memberId;
+        this.memberEmail = memberEmail;
+        this.memberPassword = memberPassword;
+        this.memberRole = memberRole;
+    }
 
 }
