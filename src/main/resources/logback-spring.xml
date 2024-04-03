@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration debug="true">
+<!-- 60초 설정 파일 스캔 -->
+<configuration scan="TRUE" scanPeriod="60 SECONDS">
 
-  <property name="LOG_LEVEL" value="DEBUG"/>
-
-  <!-- Appenders -->
-  <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+  <!-- Console Appender -->
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <withJansi>true</withJansi>
     <encoder>
       <charset>UTF-8</charset>
-      <Pattern>%d %5p [%c] %m%n</Pattern>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level [%logger{0}:%line] - %msg%n</pattern>
     </encoder>
   </appender>
 
-  <appender name="console-infolog" class="ch.qos.logback.core.ConsoleAppender">
-    <encoder>
-      <charset>UTF-8</charset>
-      <Pattern>%d %5p %m%n</Pattern>
-    </encoder>
-  </appender>
+  <!-- LOG4JDBC OPTION -->
+  <logger name="jdbc" level="OFF"/>
+  <!-- JDBC CONNECTION OPEN CLOSE EVENT LOGGING -->
+  <logger name="jdbc.connection" level="OFF"/>
+  <!-- ALL JDBC CALL LOGGING -->
+  <logger name="jdbc.resultset" level="OFF"/>
+  <!-- SQL Logging -->
+  <logger name="jdbc.sqlonly" level="DEBUG" appender-ref="STDOUT"/>
+  <!-- SQL RUN MILLISECONDS -->
+  <logger name="jdbc.sqltiming" level="DEBUG" appender-ref="STDOUT"/>
+  <!-- SQL RESULT TABLE -->
+  <logger name="jdbc.resultsettable" level="OFF" appender-ref="STDOUT"/>
 
-  <!-- Logger -->
-  <logger name="com.example" level="DEBUG" appender-ref="console"/>
-  <!--  sql 문을 보여준다.  -->
-  <logger name="jdbc.sqlonly" level="DEBUG" appender-ref="console-infolog"/>
-  <logger name="jdbc.resultsettable" level="INFO" appender-ref="console-infolog"/>
-
-  <!-- Root Logger -->
-  <root level="${LOG_LEVEL}">
-    <appender-ref ref="console"/>
+  <!-- TRACE < DEBUG < INFO < WARN < ERROR -->
+  <root level="DEBUG">
+    <appender-ref ref="STDOUT"/>
   </root>
 </configuration>
