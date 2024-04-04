@@ -27,7 +27,7 @@
                     <ul class="nav nav-pills flex-column mb-auto">
                         <li class="nav-item">
                             <a href="/myPage/<sec:authentication property="principal.memberId"/>"
-                               class="nav-link active" aria-current="page">
+                               class="nav-link text-white active">
                                 회원정보수정
                             </a>
                         </li>
@@ -59,8 +59,7 @@
     </div>
 </div>
 <script>
-
-  getAjax('post', '/api/mypage/<sec:authentication property="principal.memberId"/>', '', 'json',
+  getAjax('post', '/api/myPage/<sec:authentication property="principal.memberId"/>', '', 'json',
       false);
 
   function update_member() {

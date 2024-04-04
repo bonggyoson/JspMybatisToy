@@ -108,6 +108,11 @@ function swalToast(message, icon) {
       icon: 'error',
       title: message,
     });
+  } else if (icon === "warn") {
+    toast.fire({
+      icon: 'warn',
+      title: message,
+    })
   }
 
 }
@@ -162,5 +167,4 @@ function checkCapsLock(e) {
   } else {
     $("#passwordValid").html("")
   }
-
 }

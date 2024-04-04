@@ -12,17 +12,26 @@
   </appender>
 
   <!-- LOG4JDBC OPTION -->
-  <logger name="jdbc" level="OFF"/>
+  <logger name="jdbc" level="OFF" additivity="false"/>
   <!-- JDBC CONNECTION OPEN CLOSE EVENT LOGGING -->
-  <logger name="jdbc.connection" level="OFF"/>
+  <logger name="jdbc.connection" level="OFF" additivity="false"/>
   <!-- ALL JDBC CALL LOGGING -->
-  <logger name="jdbc.resultset" level="OFF"/>
+  <logger name="jdbc.resultset" level="OFF" additivity="false"/>
   <!-- SQL Logging -->
-  <logger name="jdbc.sqlonly" level="DEBUG" appender-ref="STDOUT"/>
+  <logger name="jdbc.sqlonly" level="DEBUG" additivity="false">
+    <appender-ref ref="STDOUT"/>
+  </logger>
   <!-- SQL RUN MILLISECONDS -->
-  <logger name="jdbc.sqltiming" level="DEBUG" appender-ref="STDOUT"/>
+  <logger name="jdbc.sqltiming" level="DEBUG" additivity="false">
+    <appender-ref ref="STDOUT"/>
+  </logger>
   <!-- SQL RESULT TABLE -->
-  <logger name="jdbc.resultsettable" level="OFF" appender-ref="STDOUT"/>
+  <logger name="jdbc.resultsettable" level="OFF" additivity="false">
+    <appender-ref ref="STDOUT"/>
+  </logger>
+
+  <logger name="org.springframework.jdbc" level="WARN"/>
+  <logger name="org.springframework.security" level="WARN"/>
 
   <!-- TRACE < DEBUG < INFO < WARN < ERROR -->
   <root level="DEBUG">

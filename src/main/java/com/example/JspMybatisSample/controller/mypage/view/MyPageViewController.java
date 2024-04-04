@@ -18,7 +18,7 @@ public class MyPageViewController {
         return "mypage/mypage_member";
     }
 
-    @GetMapping("/article")
+    @GetMapping("/article/{meberId}")
     public String getMyPageArticle(Model model) {
 
         return "mypage/mypage_article";

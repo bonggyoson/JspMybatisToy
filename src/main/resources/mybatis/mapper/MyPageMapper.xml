@@ -4,7 +4,7 @@
 
 <mapper namespace="com.example.JspMybatisSample.mapper.mypage.MyPageMapper">
 
-  <resultMap id="memberDto" type="com.example.JspMybatisSample.domain.member.dto.MemberDto">
+  <resultMap id="memberResultMap" type="com.example.JspMybatisSample.domain.member.dto.MemberDto">
     <id column="member_id" property="memberId"/>
     <result column="member_email" property="memberEmail"/>
     <result column="member_password" property="memberPassword"/>
@@ -13,7 +13,20 @@
     <result column="updated_at" property="updatedAt"/>
   </resultMap>
 
-  <select id="selectMyPageMember" resultMap="memberDto">
+  <resultMap id="articleResultMap"
+    type="com.example.JspMybatisSample.domain.article.dto.ArticleDto">
+    <id column="article_id" property="articleId" javaType="long"/>
+    <result column="article_title" property="articleTitle"/>
+    <result column="article_content" property="articleContent"/>
+    <result column="article_view_count" property="articleViewCount"/>
+    <result column="created_at" property="createdAt"/>
+    <result column="updated_at" property="updatedAt"/>
+    <association property="member" column="member_id"
+      javaType="com.example.JspMybatisSample.domain.member.dto.MemberDto"
+      resultMap="memberResultMap"/>
+  </resultMap>
+
+  <select id="selectMyPageMember" resultMap="memberResultMap">
     SELECT *
     FROM board.member
     WHERE member_id = #{memberId}
@@ -26,5 +39,12 @@
         member_name  = #{memberName}
     WHERE member_id = #{memberId}
   </update>
+
+  <select id="selectMyPageArticle" parameterType="java.lang.Long" resultMap="articleResultMap">
+    SELECT *
+    FROM board.article b
+           INNER JOIN board.member m ON b.member_id = #{memberId}
+    ORDER BY article_id DESC
+  </select>
 
 </mapper>
