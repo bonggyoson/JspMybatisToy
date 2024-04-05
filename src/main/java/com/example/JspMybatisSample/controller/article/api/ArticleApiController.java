@@ -56,6 +56,7 @@ public class ArticleApiController {
     @PostMapping("/insert")
     public ResponseEntity<CommonResponse<?>> insertArticle(
         @RequestBody final InsertArticleDto insertArticleDto) {
+
         return ResponseEntity.status(HttpStatus.CREATED)
             .body(CommonResponse.res("게시글 등록 성공",
                 articleQueryService.insertArticle(insertArticleDto)));

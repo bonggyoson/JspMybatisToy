@@ -17,6 +17,18 @@
 </div>
 <script>
   getAjax('post', '/api/article/${articleId}', '', 'json', false);
+
+  function insert_comment() {
+    let commentContent = $("#commentContent");
+
+    // 댓글 검증
+    if (commentContent.val() === "" || commentContent.val() === null) {
+      swalToast("댓글 내용을 입력해주세요.", "warn");
+      return false;
+    }
+
+    submitAjax('post', '/api/comment', getFormData($("#frm")), 'json', 'application/json');
+  }
 </script>
 <script id="data-template" type="text/x-handlebars-template">
     <div class="card mb-2">
@@ -125,10 +137,11 @@
         </div>
 
         <!-- Comment box  -->
-        <form class="input-group">
-                <textarea data-autoresize="" class="form-control me-2 rounded" rows="1"
+        <form id="frm" onsubmit="return false;" class="input-group">
+                <textarea id="commentContent" name="commentContent" adata-autoresize=""
+                          class="form-control me-2 rounded" rows="1"
                           placeholder="댓글을 입력해주세요."></textarea>
-            <button class="btn btn-primary mb-0 rounded" type="submit">댓글</button>
+            <button class="btn btn-primary mb-0 rounded" onclick="insert_comment()">등록</button>
         </form>
     </div>
     <!-- Comment wrap START -->

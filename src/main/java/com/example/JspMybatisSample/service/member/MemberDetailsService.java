@@ -18,9 +18,14 @@ public class MemberDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         MemberDto memberDto = memberMapper.selectMember(username);
-        if (memberDto == null) {
+        Member member = Member.builder()
+            .memberId(memberDto.getMemberId())
+            .memberEmail(memberDto.getMemberEmail())
+//            .memberPassword(memberDto.getMem)
+            .build();
+        if (member == null) {
             throw new UsernameNotFoundException(username + " 회원이 존재하지 않습니다.");
         }
-        return new Member(memberDto);
+        return member;
     }
 }

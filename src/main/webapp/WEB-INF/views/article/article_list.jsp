@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@taglib uri="http://example.com/functions" prefix="f" %>
+<%@ taglib uri="http://example.com/functions" prefix="f" %>
 <div class="container w-50 position-relative text-opacity-25">
     <div class="row mt-2 border border-1 rounded">
         <div class="col">

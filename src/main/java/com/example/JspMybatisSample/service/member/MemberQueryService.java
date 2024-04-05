@@ -28,7 +28,7 @@ public class MemberQueryService {
         return memberMapper.deleteMember(memberId);
     }
 
-    // 임시비밀번호 생성
+    // 임시 비밀번호 생성
     public String createNewPassword() {
         return RandomStringUtils.randomAlphanumeric(8);
     }

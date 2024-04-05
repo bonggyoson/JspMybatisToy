@@ -7,7 +7,6 @@
   <resultMap id="memberResultMap" type="com.example.JspMybatisSample.domain.member.dto.MemberDto">
     <id column="member_id" property="memberId"/>
     <result column="member_email" property="memberEmail"/>
-    <result column="member_password" property="memberPassword"/>
     <result column="member_name" property="memberName"/>
     <result column="created_at" property="createdAt"/>
     <result column="updated_at" property="updatedAt"/>

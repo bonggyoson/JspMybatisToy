@@ -11,7 +11,7 @@ public class InsertMemberDto {
     @NotNull(message = "이메일을 입력해 주세요.")
     private String memberEmail;
 
-    @NotNull(message = "패스워드를 입력해 주세요.")
+    @NotNull(message = "비밀번호를 입력해 주세요.")
     private String memberPassword;
 
     @NotNull(message = "이름을 입력해 주세요.")
