@@ -19,14 +19,32 @@ public class MemberDto extends BaseEntity {
 
     private String memberEmail;
 
+    private String memberPassword;
+
     private String memberName;
 
     private Role memberRole;
 
+    @Getter
+    @Setter
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    static class MemberNoPasswordDto {
+
+        private Long memberId;
+
+        private String memberEmail;
+
+        private String memberName;
+
+        private Role memberRole;
+    }
+
     @Builder
-    public MemberDto(Long memberId, String memberEmail, String memberName, Role memberRole) {
+    public MemberDto(Long memberId, String memberEmail, String memberPassword, String memberName,
+        Role memberRole) {
         this.memberId = memberId;
         this.memberEmail = memberEmail;
+        this.memberPassword = memberPassword;
         this.memberName = memberName;
         this.memberRole = memberRole;
     }

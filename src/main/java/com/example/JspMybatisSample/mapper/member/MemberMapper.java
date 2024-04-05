@@ -1,5 +1,6 @@
 package com.example.JspMybatisSample.mapper.member;
 
+import com.example.JspMybatisSample.domain.member.Member;
 import com.example.JspMybatisSample.domain.member.dto.InsertMemberDto;
 import com.example.JspMybatisSample.domain.member.dto.MemberDto;
 import com.example.JspMybatisSample.domain.member.dto.UpdateMemberDto;
