@@ -36,46 +36,46 @@ public class ArticleApiController {
 
     @PostMapping("")
     public ResponseEntity<CommonResponse<?>> selectArticles(
-            @RequestParam(required = false, defaultValue = "1") int page) {
+        @RequestParam(required = false, defaultValue = "1") int page) {
 
         return ResponseEntity.status(HttpStatus.OK)
-                .body(CommonResponse.res("게시글 조회 성공",
-                        new PageInfo<>(articleCommandService.selectArticles(page))
-                ));
+            .body(CommonResponse.res("게시글 조회 성공",
+                new PageInfo<>(articleCommandService.selectArticles(page))
+            ));
     }
 
     @PostMapping("/{articleId}")
     public ResponseEntity<CommonResponse<ArticleDto>> selectArticle(
-            @PathVariable long articleId) {
+        @PathVariable long articleId) {
 
         return ResponseEntity.status(HttpStatus.OK)
-                .body(CommonResponse.res("게시글 상세 조회 성공",
-                        articleCommandService.selectArticle(articleId)));
+            .body(CommonResponse.res("게시글 상세 조회 성공",
+                articleCommandService.selectArticle(articleId)));
     }
 
     @PostMapping("/insert")
     public ResponseEntity<CommonResponse<?>> insertArticle(
-            @RequestBody final InsertArticleDto insertArticleDto) {
+        @RequestBody final InsertArticleDto insertArticleDto) {
 
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(CommonResponse.res("게시글 등록 성공",
-                        articleQueryService.insertArticle(insertArticleDto)));
+            .body(CommonResponse.res("게시글 등록 성공",
+                articleQueryService.insertArticle(insertArticleDto)));
     }
 
     @PutMapping("/{articleId}/update")
     public ResponseEntity<CommonResponse<?>> updateArticle(
-            @PathVariable long articleId, @RequestBody UpdateArticleDto updateArticleDto) {
+        @PathVariable long articleId, @RequestBody UpdateArticleDto updateArticleDto) {
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT)
-                .body(CommonResponse.res("게시글 수정 성공",
-                        articleQueryService.updateArticle(articleId, updateArticleDto)));
+            .body(CommonResponse.res("게시글 수정 성공",
+                articleQueryService.updateArticle(articleId, updateArticleDto)));
     }
 
     @DeleteMapping("/{articleId}/delete")
     public ResponseEntity<CommonResponse<?>> deleteArticle(@PathVariable long articleId) {
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT)
-                .body(CommonResponse.res("게시글 삭제 성공",
-                        articleQueryService.deleteArticle(articleId)));
+            .body(CommonResponse.res("게시글 삭제 성공",
+                articleQueryService.deleteArticle(articleId)));
     }
 }

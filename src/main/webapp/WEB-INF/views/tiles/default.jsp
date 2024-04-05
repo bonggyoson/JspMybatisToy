@@ -13,6 +13,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Toy Article</title>
+    <link rel="icon" type="image/ico" href="${pageContext.request.contextPath}/static/images/box2-heart-fill.svg">
+
     <%-- css --%>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/main.css">
@@ -27,6 +29,11 @@
 
     <script src="${pageContext.request.contextPath}/static/js/common/common.js"></script>
     <script src="${pageContext.request.contextPath}/static/js/common/helper.js"></script>
+
+    <%-- sweetalert2 --%>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 </head>
 <body>
 <!-- Pagination Header -->

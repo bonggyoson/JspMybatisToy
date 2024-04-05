@@ -9,13 +9,14 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface CommentMapper {
 
-    List<CommentDto> selectComments(long articleId);
+    List<CommentDto> selectComments();
 
-    CommentDto selectComment();
+    CommentDto selectComment(long commentId);
 
     int insertComment(InsertCommentDto insertCommentDto);
 
-    int updateComment(long commentId, UpdateCommentDto updateCommentDto);
+    int updateComment(UpdateCommentDto updateCommentDto);
 
     int deleteComment(long commentId);
+
 }

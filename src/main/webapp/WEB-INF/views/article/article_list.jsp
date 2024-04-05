@@ -8,11 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@taglib uri="http://example.com/functions" prefix="f" %>
+<%@ taglib uri="http://example.com/functions" prefix="f" %>
 <div class="container w-50 position-relative text-opacity-25">
-    <div class="row">
+    <div class="row mt-2 border border-1 rounded">
         <div class="col">
-            <h1>TOY</h1>
+            <h1>ARTICLE</h1>
         </div>
         <div class="col-auto align-self-center">
             <button type="button" class="btn btn-secondary"
@@ -49,7 +49,7 @@
         <td>
             <a href="${pageContext.request.contextPath}/article/{{articleId}}">{{articleTitle}}</a>
         </td>
-        <td>{{articleWriter}}</td>
+        <td>{{member.memberName}}</td>
         <td>{{formatDate createdAt "YYYY-MM-DD hh:ss:mm"}}</td>
         <td>{{articleViewCount}}</td>
     </tr>

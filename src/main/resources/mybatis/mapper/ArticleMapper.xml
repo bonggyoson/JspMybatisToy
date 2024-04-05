@@ -18,7 +18,7 @@
   </resultMap>
 
   <resultMap id="memberResultMap" type="com.example.JspMybatisSample.domain.member.dto.MemberDto">
-    <id column="member_id" property="memberId" javaType="long"/>
+    <id column="member_id" property="memberId" javaType="Long"/>
     <result column="member_email" property="memberEmail"/>
     <result column="member_name" property="memberName"/>
     <result column="member_role" property="memberRole"/>
@@ -36,7 +36,7 @@
   <select id="selectArticle" parameterType="java.lang.Long" resultMap="articleResultMap">
     SELECT *
     FROM board.article b
-        INNER JOIN board.member m ON b.member_id = m.member_id
+           INNER JOIN board.member m ON b.member_id = m.member_id
     WHERE article_id = #{articleId}
   </select>
 
@@ -47,7 +47,8 @@
   </update>
 
   <insert id="insertArticle"
-    parameterType="com.example.JspMybatisSample.domain.article.dto.InsertArticleDto">
+    parameterType="com.example.JspMybatisSample.domain.article.dto.InsertArticleDto"
+    useGeneratedKeys="true" keyColumn="article_id" keyProperty="articleId">
     INSERT INTO board.article
     (article_title,
      article_content,

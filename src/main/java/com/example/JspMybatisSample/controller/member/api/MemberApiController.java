@@ -1,16 +1,22 @@
 package com.example.JspMybatisSample.controller.member.api;
 
 import com.example.JspMybatisSample.domain.member.dto.InsertMemberDto;
+import com.example.JspMybatisSample.domain.member.dto.MemberDto;
 import com.example.JspMybatisSample.domain.member.dto.UpdateMemberDto;
 import com.example.JspMybatisSample.global.common.CommonResponse;
+import com.example.JspMybatisSample.global.util.MailService;
 import com.example.JspMybatisSample.service.member.MemberCommandService;
 import com.example.JspMybatisSample.service.member.MemberQueryService;
 import com.github.pagehelper.PageInfo;
+import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.support.SessionStatus;
 
 @RestController
 @Slf4j
@@ -29,6 +36,8 @@ public class MemberApiController {
     private final MemberQueryService memberQueryService;
 
     private final MemberCommandService memberCommandService;
+
+    private final MailService mailService;
 
     @PostMapping("/join")
     public ResponseEntity<CommonResponse<?>> join(
@@ -64,18 +73,42 @@ public class MemberApiController {
 
     @PutMapping("/{memberId}/update")
     public ResponseEntity<CommonResponse<?>> updateMember(@PathVariable long memberId,
-        UpdateMemberDto updateMemberDto) {
+        @Valid @RequestBody UpdateMemberDto updateMemberDto) {
 
         return ResponseEntity.status(HttpStatus.OK)
             .body(CommonResponse.res("회원 수정 성공",
                 memberQueryService.updateMember(memberId, updateMemberDto)));
     }
 
+    @PostMapping("/{memberId}/updatePassword")
+    public ResponseEntity<CommonResponse<?>> updateMemberPassword(@PathVariable long memberId,
+        @RequestBody String memberPassword) {
+
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(CommonResponse.res("비밀번호 수정 성공",
+                memberQueryService.updateMemberPassword(memberId, memberPassword)));
+    }
+
     @DeleteMapping("/{memberId}/delete")
-    public ResponseEntity<CommonResponse<?>> deleteMember(@PathVariable long memberId) {
+    public ResponseEntity<CommonResponse<?>> deleteMember(@PathVariable long memberId,
+        HttpSession httpSession) {
+
+        httpSession.invalidate();
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT)
             .body(CommonResponse.res("회원 삭제 성공",
                 memberQueryService.deleteMember(memberId)));
+    }
+
+    // TODO: 2024-02-28 - 이메일 인증 방식 구현
+    @PostMapping("/resetPassword")
+    public ResponseEntity<CommonResponse<?>> resetPassword(
+        @RequestBody MemberDto memberDto) {
+
+        mailService.sendSimpleMessage(memberDto.getMemberEmail(), "[ToyProject] 임시 비밀번호입니다.",
+            memberQueryService.createNewPassword());
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT)
+            .body(CommonResponse.res("비밀번호 재설정 성공"));
     }
 }

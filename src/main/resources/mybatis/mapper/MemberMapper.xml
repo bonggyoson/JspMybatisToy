@@ -4,23 +4,21 @@
 
 <mapper namespace="com.example.JspMybatisSample.mapper.member.MemberMapper">
 
-  <resultMap id="memberDto" type="com.example.JspMybatisSample.domain.member.dto.MemberDto">
+  <resultMap id="memberResultMap" type="com.example.JspMybatisSample.domain.member.dto.MemberDto">
     <id column="member_id" property="memberId"/>
     <result column="member_email" property="memberEmail"/>
-    <result column="member_password" property="memberPassword"/>
     <result column="member_name" property="memberName"/>
-    <result column="member_role" property="memberRole"/>
     <result column="created_at" property="createdAt"/>
     <result column="updated_at" property="updatedAt"/>
   </resultMap>
 
-  <select id="selectMembers" resultMap="memberDto">
+  <select id="selectMembers" resultMap="memberResultMap">
     SELECT *
     FROM board.member
     ORDER BY member_id
   </select>
 
-  <select id="selectMember" resultMap="memberDto">
+  <select id="selectMember" resultMap="memberResultMap">
     SELECT *
     FROM board.member
     WHERE member_email = #{memberEmail}
@@ -49,5 +47,26 @@
             now(),
             now())
   </insert>
+
+  <update id="updateMember">
+    UPDATE board.member
+    SET member_email = #{member.memberEmail},
+        member_name  = #{member.memberName},
+        updated_at   = now()
+    WHERE member_id = #{memberId}
+  </update>
+
+  <update id="updateMemberPassword">
+    UPDATE board.member
+    SET member_password = #{memberPassword},
+        updated_at      = now()
+    WHERE member_id = #{memberId}
+  </update>
+
+  <delete id="deleteMember">
+    DELETE
+    FROM board.member
+    WHERE member_id = #{memberId}
+  </delete>
 
 </mapper>
