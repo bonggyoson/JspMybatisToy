@@ -1,20 +1,15 @@
 package com.example.JspMybatisSample.domain.member;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
+@RequiredArgsConstructor
 public enum Role {
 
-    ROLE_ADMIN("관리자"),
-    ROLE_MEMBER("회원");
+    ROLE_ADMIN("ROLE_ADMIN", "관리자"),
+    ROLE_MEMBER("ROLE_MEMBER", "회원");
 
-    final String role;
-
-    Role(String role) {
-        this.role = role;
-    }
-
-    public String value() {
-        return role;
-    }
+    private final String key;
+    private final String value;
 }

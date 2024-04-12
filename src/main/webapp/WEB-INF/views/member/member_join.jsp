@@ -15,7 +15,7 @@
             </button>
             <p class="fw-bold">회원가입</p>
             <div class="mb-2">
-                <form id="frm" onsubmit="return false;">
+                <form id="frm">
                     <div class="mb-3">
                         <div class="input-group">
                             <span class="input-group-text">
@@ -70,7 +70,8 @@
                         </div>
                         <small class="fw-bold" id="nameValid"></small>
                     </div>
-                    <button type="submit" class="btn btn-secondary me-2" onclick="join_member()">
+                    <button type="button" class="btn btn-secondary me-2" id="joinButton"
+                            onclick="return join_member()">
                         회원가입
                     </button>
                     <button type="button" class="btn btn-outline-secondary"
@@ -116,6 +117,10 @@
     if (validCount > 0) {
       return false;
     }
+
+    // 회원가입 중복 Submit 방지
+    $("#joinButton").attr("disabled", true);
+
     submitAjax('post', '/api/member/join', getFormData($("#frm")), 'json', 'application/json');
   }
 

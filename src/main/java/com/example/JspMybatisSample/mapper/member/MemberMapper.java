@@ -3,6 +3,8 @@ package com.example.JspMybatisSample.mapper.member;
 import com.example.JspMybatisSample.domain.member.Member;
 import com.example.JspMybatisSample.domain.member.dto.InsertMemberDto;
 import com.example.JspMybatisSample.domain.member.dto.MemberDto;
+import com.example.JspMybatisSample.domain.member.dto.MemberDto.MemberWithPasswordDto;
+import com.example.JspMybatisSample.domain.member.dto.MemberDto.MemberWithoutPasswordDto;
 import com.example.JspMybatisSample.domain.member.dto.UpdateMemberDto;
 import com.github.pagehelper.Page;
 
@@ -12,11 +14,11 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface MemberMapper {
 
-    Page<MemberDto> selectMembers();
+    Page<MemberWithoutPasswordDto> selectMembers();
 
-    MemberDto selectMember(String memberEmail);
+    MemberWithPasswordDto selectMember(String memberEmail);
 
-    MemberDto selectMember(long memberId);
+    MemberWithPasswordDto selectMember(long memberId);
 
     int checkDuplicateEmail(String memberEmail);
 

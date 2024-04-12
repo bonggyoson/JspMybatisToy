@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInterceptor;
 import java.util.Properties;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.type.TypeHandler;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
@@ -31,6 +32,10 @@ public class MyBatisConfig {
             applicationContext.getResource("classpath:/mybatis/mybatis-config.xml"));
         sqlSessionFactoryBean.setMapperLocations(
             applicationContext.getResources("classpath:/mybatis/mapper/*.xml"));
+
+        sqlSessionFactoryBean.setTypeHandlers(new TypeHandler[]{
+            new RoleTypeHandler()
+        });
 
         PageInterceptor pageInterceptor = new PageInterceptor();
         Properties properties = new Properties();

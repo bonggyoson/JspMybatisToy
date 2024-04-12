@@ -38,8 +38,11 @@
     </nav>
 </div>
 <script>
+  let url = window.location.search;
+
   $(function () {
-    getAjax('post', '/api/article', '', 'json', true);
+    !checkNull(url) ? getAjax('post', '/api/article' + url, '', 'json', true)
+        : getAjax('post', '/api/article', '', 'json', true);
   });
 </script>
 <script id="list-template" type="text/x-handlebars-template">
@@ -60,13 +63,13 @@
         {{#ifCond hasPreviousPage '==' true}}
         <li class="page-item">
             <a class="page-link" aria-label="first"
-               onclick="getAjax('post', '/api/article?page={{navigateFirstPage}}', '', 'json', true)">
+               onclick="getAjax('post', !checkNull(url) ? '/api/article' + url + '&page={{navigateFirstPage}}' : '/api/article?page={{navigateFirstPage}}', '', 'json', true)">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
         <li class="page-item">
             <a class="page-link" aria-label="previous"
-               onclick="getAjax('post', '/api/article?page={{math pageNum '-' 1}}', '', 'json', true)">
+               onclick="getAjax('post', !checkNull(url) ? '/api/article' + url + '&page={{math pageNum '-' 1}}' : '/api/article?page={{math pageNum '-' 1}}', '', 'json', true)">
                 <span aria-hidden="true">&lsaquo;</span>
             </a>
         </li>
@@ -74,7 +77,7 @@
         {{#each navigatepageNums}}
         <li class="page-item">
             <button class="page-link" id="{{math @index '+' 1}}page"
-                    onclick="getAjax('post', '/api/article?page={{math @index '+' 1}}', '', 'json', true)">
+                    onclick="getAjax('post', !checkNull(url) ? '/api/article' + url + '&page={{math @index '+' 1}}' : '/api/article?page={{math @index '+' 1}}' , '', 'json', true)">
                 {{math @index "+" 1}}
             </button>
         </li>
@@ -82,13 +85,13 @@
         {{#ifCond hasNextPage '==' true}}
         <li class="page-item" id="next">
             <a class="page-link" aria-label="Last"
-               onclick="getAjax('post', '/api/article?page={{math pageNum '+' 1}}', '', 'json', true)">
+               onclick="getAjax('post', !checkNull(url) ? '/api/article' + url + '&page={{math pageNum '+' 1}}' : '/api/article?page={{math pageNum '+' 1}}', '', 'json', true)">
                 <span aria-hidden="true">&rsaquo;</span>
             </a>
         </li>
         <li class="page-item" id="last">
             <a class="page-link" aria-label="Last"
-               onclick="getAjax('post', '/api/article?page={{navigateLastPage}}', '', 'json', true)">
+               onclick="getAjax('post', !checkNull(url) ? '/api/article' + url + '&page={{navigateLastPage}}' : '/api/article?page={{navigateLastPage}}', '', 'json', true)">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>

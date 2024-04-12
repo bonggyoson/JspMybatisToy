@@ -4,22 +4,34 @@
 
 <mapper namespace="com.example.JspMybatisSample.mapper.member.MemberMapper">
 
-  <resultMap id="memberResultMap" type="com.example.JspMybatisSample.domain.member.dto.MemberDto$MemberNoPasswordDto">
+  <resultMap id="memberWithPasswordResultMap"
+    type="com.example.JspMybatisSample.domain.member.dto.MemberDto$MemberWithPasswordDto">
     <id column="member_id" property="memberId"/>
     <result column="member_email" property="memberEmail"/>
     <result column="member_password" property="memberPassword"/>
     <result column="member_name" property="memberName"/>
+    <result column="member_role" property="memberRole"/>
     <result column="created_at" property="createdAt"/>
     <result column="updated_at" property="updatedAt"/>
   </resultMap>
 
-  <select id="selectMembers" resultMap="memberResultMap$MemberNoPasswordDto">
+  <resultMap id="memberWithoutPasswordResultMap"
+    type="com.example.JspMybatisSample.domain.member.dto.MemberDto$MemberWithoutPasswordDto">
+    <id column="member_id" property="memberId"/>
+    <result column="member_email" property="memberEmail"/>
+    <result column="member_name" property="memberName"/>
+    <result column="member_role" property="memberRole"/>
+    <result column="created_at" property="createdAt"/>
+    <result column="updated_at" property="updatedAt"/>
+  </resultMap>
+
+  <select id="selectMembers" resultMap="memberWithoutPasswordResultMap">
     SELECT *
     FROM board.member
     ORDER BY member_id
   </select>
 
-  <select id="selectMember" resultMap="memberResultNoPasswordMap">
+  <select id="selectMember" resultMap="memberWithPasswordResultMap">
     SELECT *
     FROM board.member
     WHERE member_email = #{memberEmail}

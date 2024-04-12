@@ -1,6 +1,7 @@
 package com.example.JspMybatisSample.service.comment;
 
 import com.example.JspMybatisSample.domain.comment.dto.InsertCommentDto;
+import com.example.JspMybatisSample.domain.comment.dto.UpdateCommentDto;
 import com.example.JspMybatisSample.mapper.comment.CommentMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,5 +16,9 @@ public class CommentQueryService {
 
     public int insertComment(InsertCommentDto insertCommentDto) {
         return commentMapper.insertComment(insertCommentDto);
+    }
+
+    public int updateComment(UpdateCommentDto updateCommentDto) {
+        return commentMapper.updateComment(updateCommentDto);
     }
 }

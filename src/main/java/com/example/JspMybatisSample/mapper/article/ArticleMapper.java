@@ -10,15 +10,17 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface ArticleMapper {
 
-    Page<ArticleDto> selectArticles();
+    Page<ArticleDto> selectArticles(String search);
 
     ArticleDto selectArticle(long articleId);
 
-    void selectArticlePlusViewCount(long articleId);
+    Page<ArticleDto> searchArticles(String search);
+
+    void updateArticlePlusViewCount(long articleId);
 
     int insertArticle(InsertArticleDto insertArticleDto);
 
-    int updateArticle(long articleId, @Param("updateArticle")UpdateArticleDto updateArticleDto);
+    int updateArticle(long articleId, @Param("updateArticle") UpdateArticleDto updateArticleDto);
 
     int deleteArticle(long articleId);
 }

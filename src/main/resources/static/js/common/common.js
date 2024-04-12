@@ -108,9 +108,9 @@ function swalToast(message, icon) {
       icon: 'error',
       title: message,
     });
-  } else if (icon === "warn") {
+  } else if (icon === "warning") {
     toast.fire({
-      icon: 'warn',
+      icon: 'warning',
       title: message,
     })
   }
@@ -152,7 +152,7 @@ function redirect_callback(url, data) {
     }
     window.history.back();
   } else {
-    swalToast("임시비밀번호가 발송되었습니다. <br/> 로그인 후 비밀번호를 재설정 해주세요.", "success");
+    swalToast("임시비밀번호가 발송되었습니다. \n로그인 후 비밀번호를 재설정 해주세요.", "success");
     setTimeout(() => {
       window.history.back();
     }, 2000);
@@ -166,5 +166,15 @@ function checkCapsLock(e) {
     $("#passwordValid").css({'color': 'red'});
   } else {
     $("#passwordValid").html("")
+  }
+}
+
+// Null Check
+function checkNull(value) {
+  if (value === "" || value === null || value === undefined || (value !== null
+      && typeof value === "object" && !Object.keys(value).length)) {
+    return true;
+  } else {
+    return false;
   }
 }

@@ -1,8 +1,11 @@
 package com.example.JspMybatisSample.domain.article.dto;
 
+import com.example.JspMybatisSample.domain.comment.dto.CommentDto;
 import com.example.JspMybatisSample.domain.member.dto.MemberDto;
+import com.example.JspMybatisSample.domain.member.dto.MemberDto.MemberWithoutPasswordDto;
 import com.example.JspMybatisSample.global.common.BaseEntity;
 
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +17,7 @@ public class ArticleDto extends BaseEntity {
     private Long articleId;
 
     /* 회원 (FK) */
-    private MemberDto member;
+    private MemberWithoutPasswordDto member;
 
     /* 제목 */
     private String articleTitle;
@@ -24,5 +27,8 @@ public class ArticleDto extends BaseEntity {
 
     /* 조회수 */
     private int articleViewCount;
+
+    /* 댓글 */
+    private List<CommentDto> comment;
 
 }

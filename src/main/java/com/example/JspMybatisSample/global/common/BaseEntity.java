@@ -6,9 +6,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class BaseEntity {
+public abstract class BaseEntity {
 
-    private LocalDateTime createdAt;
+    protected LocalDateTime createdAt;
 
-    private LocalDateTime updatedAt;
+    protected LocalDateTime updatedAt;
 }

@@ -26,9 +26,11 @@
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <div class="input-group">
-                <input class="form-control" type="text" placeholder="검색"
+                <input class="form-control" type="text" placeholder="검색" id="search" name="search"
+                       value="${search}"
                        aria-label="검색" aria-describedby="btnNavbarSearch">
-                <button type="button" class="btn btn-secondary">
+                <button type="button" class="btn btn-secondary"
+                        onclick="location.href='/article?search=' + $('#search').val()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                          fill="currentColor"
                          class="bi bi-search" viewBox="0 0 16 16">

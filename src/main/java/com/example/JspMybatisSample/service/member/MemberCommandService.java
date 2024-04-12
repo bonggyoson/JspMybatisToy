@@ -1,6 +1,7 @@
 package com.example.JspMybatisSample.service.member;
 
-import com.example.JspMybatisSample.domain.member.dto.MemberDto;
+import com.example.JspMybatisSample.domain.member.dto.MemberDto.MemberWithPasswordDto;
+import com.example.JspMybatisSample.domain.member.dto.MemberDto.MemberWithoutPasswordDto;
 import com.example.JspMybatisSample.mapper.member.MemberMapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -15,13 +16,13 @@ public class MemberCommandService {
 
     private final MemberMapper memberMapper;
 
-    public Page<MemberDto> selectMembers(int pageNum) {
+    public Page<MemberWithoutPasswordDto> selectMembers(int pageNum) {
         PageHelper.startPage(pageNum, 10);
 
         return memberMapper.selectMembers();
     }
 
-    public MemberDto selectMember(long memberId) {
+    public MemberWithPasswordDto selectMember(long memberId) {
         return memberMapper.selectMember(memberId);
     }
 

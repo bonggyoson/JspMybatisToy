@@ -17,10 +17,7 @@ public class MemberDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String memberEmail) throws UsernameNotFoundException {
 
-        Member member = Member.builder()
-            .memberEmail(memberMapper.selectMember(memberEmail).getMemberEmail())
-            .memberPassword(memberMapper.selectMember(memberEmail).getMemberPassword())
-        .build();
+        Member member = Member.builder().memberDto(memberMapper.selectMember(memberEmail)).build();
 
         if (member == null) {
             throw new UsernameNotFoundException(memberEmail + " 회원이 존재하지 않습니다.");

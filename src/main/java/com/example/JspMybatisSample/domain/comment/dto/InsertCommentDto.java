@@ -18,4 +18,10 @@ public class InsertCommentDto {
     @NotNull
     private String commentContent;
 
+    public InsertCommentDto(Long articleId, Long memberId, String commentContent) {
+        this.articleId = articleId;
+        this.memberId = memberId;
+        this.commentContent = commentContent;
+    }
+
 }

@@ -4,27 +4,21 @@
 
 <mapper namespace="com.example.JspMybatisSample.mapper.comment.CommentMapper">
 
-  <resultMap id="CommentResultMap"
+  <resultMap id="commentResultMap"
     type="com.example.JspMybatisSample.domain.comment.dto.CommentDto">
     <id column="comment_id" property="commentId" javaType="long"/>
     <result column="comment_content" property="commentContent"/>
-    <result column="created_at" property="createdAt"/>
-    <result column="updated_at" property="updatedAt"/>
+    <result column="comment_created_at" property="createdAt"/>
+    <result column="comment_updated_at" property="updatedAt"/>
     <association property="member" column="member_id"
-      javaType="com.example.JspMybatisSample.domain.member.dto.MemberDto"
-      resultMap="memberResultMap"/>
-    <association property="article" column="article_id"
-         javaType="com.example.JspMybatisSample.domain.article.dto.ArticleDto"
-         resultMap="articleResultMap"/>
-  </resultMap>
-
-  <resultMap id="memberResultMap" type="com.example.JspMybatisSample.domain.member.dto.MemberDto">
-    <id column="member_id" property="memberId" javaType="long"/>
-    <result column="member_email" property="memberEmail"/>
-    <result column="member_name" property="memberName"/>
-    <result column="member_role" property="memberRole"/>
-    <result column="created_at" property="createdAt"/>
-    <result column="updated_at" property="updatedAt"/>
+      javaType="com.example.JspMybatisSample.domain.member.dto.MemberDto$MemberWithoutPasswordDto">
+      <id column="member_id" property="memberId" javaType="Long"/>
+      <result column="member_email" property="memberEmail"/>
+      <result column="member_name" property="memberName"/>
+      <result column="member_role" property="memberRole"/>
+      <result column="member_created_at" property="createdAt"/>
+      <result column="member_updated_at" property="updatedAt"/>
+    </association>
   </resultMap>
 
   <resultMap id="articleResultMap"
@@ -40,26 +34,39 @@
       resultMap="memberResultMap"/>
   </resultMap>
 
-  <select id="selectComments" resultMap="CommentResultMap">
+  <select id="selectComments" resultMap="commentResultMap">
     SELECT *
     FROM board.comment c
            INNER JOIN board.article a ON c.article_id = a.article_id
            INNER JOIN board.member m ON c.member_id = m.member_id
-    ORDER BY article_id DESC
+    ORDER BY c.article_id DESC
   </select>
 
-  <!--  <select id="selectArticle" parameterType="java.lang.Long" resultMap="articleResultMap">-->
-  <!--    SELECT *-->
-  <!--    FROM board.article b-->
-  <!--        INNER JOIN board.member m ON b.member_id = m.member_id-->
-  <!--    WHERE article_id = #{articleId}-->
-  <!--  </select>-->
+  <select id="selectComment" parameterType="long" resultMap="commentResultMap">
+    SELECT *
+    FROM board.comment c
+           INNER JOIN board.article a ON c.article_id = a.article_id
+           INNER JOIN board.member m ON c.member_id = m.member_id
+    WHERE c.comment_id = #{commentId}
+  </select>
 
-  <!--  <update id="selectArticlePlusViewCount" parameterType="java.lang.Long">-->
-  <!--    UPDATE board.article-->
-  <!--    SET article_view_count = article_view_count + 1-->
-  <!--    WHERE article_id = #{articleId}-->
-  <!--  </update>-->
+  <select id="selectCommentByArticleId" parameterType="long" resultMap="commentResultMap">
+    SELECT c.comment_id,
+           c.article_id,
+           c.comment_content,
+           c.created_at AS comment_created_at,
+           c.updated_at AS comment_updated_at,
+           m.member_id,
+           m.member_email,
+           m.member_password,
+           m.member_name,
+           m.member_role,
+           m.created_at AS member_created_at,
+           m.updated_at AS member_updated_at
+    FROM board.comment c
+           INNER JOIN board.member m ON c.member_id = m.member_id
+    WHERE c.article_id = #{articleId}
+  </select>
 
   <insert id="insertComment"
     parameterType="com.example.JspMybatisSample.domain.comment.dto.InsertCommentDto">
@@ -76,19 +83,18 @@
             now())
   </insert>
 
-  <!--  <update id="updateArticle"-->
-  <!--    parameterType="com.example.JspMybatisSample.domain.article.dto.UpdateArticleDto">-->
-  <!--    UPDATE board.article-->
-  <!--    SET article_title   = #{updateArticle.articleTitle},-->
-  <!--        article_content = #{updateArticle.articleContent},-->
-  <!--        updated_at      = now()-->
-  <!--    WHERE article_id = #{articleId}-->
-  <!--  </update>-->
+  <update id="updateComment"
+    parameterType="com.example.JspMybatisSample.domain.comment.dto.UpdateCommentDto">
+    UPDATE board.comment
+    SET comment_content = #{updateComment.commentContent},
+        updated_at      = now()
+    WHERE comment_id = #{commentId}
+  </update>
 
-  <!--  <delete id="deleteArticle" parameterType="java.lang.Long">-->
-  <!--    DELETE-->
-  <!--    FROM board.article-->
-  <!--    WHERE article_id = #{articleId}-->
-  <!--  </delete>-->
+  <delete id="deleteComment" parameterType="long">
+    DELETE
+    FROM board.comment
+    WHERE comment_id = #{commentId}
+  </delete>
 
 </mapper>

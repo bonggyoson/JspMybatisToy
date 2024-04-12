@@ -16,18 +16,25 @@ public class ArticleCommandService {
 
     private final ArticleMapper articleMapper;
 
-    public Page<ArticleDto> selectArticles(int pageNum) {
+    public Page<ArticleDto> selectArticles(int pageNum, String search) {
         PageHelper.startPage(pageNum, 10);
 
-        return articleMapper.selectArticles();
+        return articleMapper.selectArticles(search);
     }
 
     @Transactional
     public ArticleDto selectArticle(long articleId) {
 
         // 조회수 증가
-        articleMapper.selectArticlePlusViewCount(articleId);
+        articleMapper.updateArticlePlusViewCount(articleId);
 
         return articleMapper.selectArticle(articleId);
     }
+
+    public Page<ArticleDto> searchArticles(String search, int pageNum) {
+        PageHelper.startPage(pageNum, 10);
+
+        return articleMapper.searchArticles(search);
+    }
+
 }

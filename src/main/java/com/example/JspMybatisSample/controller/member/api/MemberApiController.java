@@ -2,6 +2,7 @@ package com.example.JspMybatisSample.controller.member.api;
 
 import com.example.JspMybatisSample.domain.member.dto.InsertMemberDto;
 import com.example.JspMybatisSample.domain.member.dto.MemberDto;
+import com.example.JspMybatisSample.domain.member.dto.MemberDto.MemberWithoutPasswordDto;
 import com.example.JspMybatisSample.domain.member.dto.UpdateMemberDto;
 import com.example.JspMybatisSample.global.common.CommonResponse;
 import com.example.JspMybatisSample.global.util.MailService;
@@ -103,7 +104,7 @@ public class MemberApiController {
     // TODO: 2024-02-28 - 이메일 인증 방식 구현
     @PostMapping("/resetPassword")
     public ResponseEntity<CommonResponse<?>> resetPassword(
-        @RequestBody MemberDto memberDto) {
+        @RequestBody MemberWithoutPasswordDto memberDto) {
 
         mailService.sendSimpleMessage(memberDto.getMemberEmail(), "[ToyProject] 임시 비밀번호입니다.",
             memberQueryService.createNewPassword());

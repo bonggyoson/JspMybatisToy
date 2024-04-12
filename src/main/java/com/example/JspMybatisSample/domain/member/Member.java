@@ -1,6 +1,7 @@
 package com.example.JspMybatisSample.domain.member;
 
 import com.example.JspMybatisSample.domain.member.dto.MemberDto;
+import com.example.JspMybatisSample.domain.member.dto.MemberDto.MemberWithPasswordDto;
 import com.example.JspMybatisSample.domain.member.dto.UpdateMemberDto;
 import com.example.JspMybatisSample.global.common.BaseEntity;
 import java.util.Collection;
@@ -30,13 +31,12 @@ public class Member extends BaseEntity implements UserDetails {
     private Role memberRole;
 
     @Builder
-    public Member(Long memberId, String memberEmail, String memberPassword, String memberName,
-        Role memberRole) {
-        this.memberId = memberId;
-        this.memberEmail = memberEmail;
-        this.memberPassword = memberPassword;
-        this.memberName = memberName;
-        this.memberRole = memberRole;
+    public Member(MemberWithPasswordDto memberDto) {
+        this.memberId = memberDto.getMemberId();
+        this.memberEmail = memberDto.getMemberEmail();
+        this.memberPassword = memberDto.getMemberPassword();
+        this.memberName = memberDto.getMemberName();
+        this.memberRole = memberDto.getMemberRole();
     }
 
     @Override

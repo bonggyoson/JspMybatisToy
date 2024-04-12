@@ -10,37 +10,67 @@
     <result column="article_title" property="articleTitle"/>
     <result column="article_content" property="articleContent"/>
     <result column="article_view_count" property="articleViewCount"/>
-    <result column="created_at" property="createdAt"/>
-    <result column="updated_at" property="updatedAt"/>
+    <result column="board_created_at" property="createdAt"/>
+    <result column="board_updated_at" property="updatedAt"/>
     <association property="member" column="member_id"
-      javaType="com.example.JspMybatisSample.domain.member.dto.MemberDto"
-      resultMap="memberResultMap"/>
+      javaType="com.example.JspMybatisSample.domain.member.dto.MemberDto$MemberWithoutPasswordDto">
+      <id column="member_id" property="memberId" javaType="Long"/>
+      <result column="member_email" property="memberEmail"/>
+      <result column="member_name" property="memberName"/>
+      <result column="member_role" property="memberRole"/>
+      <result column="member_created_at" property="createdAt"/>
+      <result column="member_updated_at" property="updatedAt"/>
+    </association>
+    <collection property="comment" column="article_id"
+      javaType="List"
+      ofType="com.example.JspMybatisSample.domain.comment.dto.CommentDto"
+      select="com.example.JspMybatisSample.mapper.comment.CommentMapper.selectCommentByArticleId"/>
   </resultMap>
 
-  <resultMap id="memberResultMap" type="com.example.JspMybatisSample.domain.member.dto.MemberDto">
-    <id column="member_id" property="memberId" javaType="Long"/>
-    <result column="member_email" property="memberEmail"/>
-    <result column="member_name" property="memberName"/>
-    <result column="member_role" property="memberRole"/>
-    <result column="created_at" property="createdAt"/>
-    <result column="updated_at" property="updatedAt"/>
-  </resultMap>
-
-  <select id="selectArticles" resultMap="articleResultMap">
+  <select id="selectArticles" parameterType="String" resultMap="articleResultMap">
     SELECT *
     FROM board.article b
            INNER JOIN board.member m ON b.member_id = m.member_id
+    WHERE b.article_title LIKE '%' || #{search} || '%'
+       OR b.article_content LIKE '%' || #{search} || '%'
     ORDER BY article_id DESC
   </select>
 
-  <select id="selectArticle" parameterType="java.lang.Long" resultMap="articleResultMap">
+  <select id="selectArticle" parameterType="long" resultMap="articleResultMap">
+    SELECT b.article_id,
+           b.article_title,
+           b.article_content,
+           b.article_view_count,
+           b.created_at AS board_created_at,
+           b.updated_at AS board_updated_at,
+           m.member_id,
+           m.member_email,
+           m.member_password,
+           m.member_name,
+           m.member_role,
+           m.created_at AS member_created_at,
+           m.updated_at AS member_updated_at,
+           c.comment_id,
+           c.comment_content,
+           c.member_id,
+           c.created_at AS comment_created_at,
+           c.updated_at AS comment_updated_at
+    FROM board.article b
+           INNER JOIN board.member m ON b.member_id = m.member_id
+           LEFT OUTER JOIN board.comment c ON b.article_id = c.article_id
+    WHERE b.article_id = #{articleId}
+  </select>
+
+  <select id="searchArticles" parameterType="String" resultMap="articleResultMap">
     SELECT *
     FROM board.article b
            INNER JOIN board.member m ON b.member_id = m.member_id
-    WHERE article_id = #{articleId}
+    WHERE article_title = #{search}
+       OR article_content = #{search}
+    ORDER BY article_id DESC
   </select>
 
-  <update id="selectArticlePlusViewCount" parameterType="java.lang.Long">
+  <update id="updateArticlePlusViewCount" parameterType="long">
     UPDATE board.article
     SET article_view_count = article_view_count + 1
     WHERE article_id = #{articleId}
