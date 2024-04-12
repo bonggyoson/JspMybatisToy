@@ -20,12 +20,11 @@ class ArticleCommandServiceTest {
     ArticleMapper articleMapper;
 
     @Test
-
     void selectArticlesPaging() {
         int perPage = 10;
 
         PageHelper.startPage(2, perPage);
-        Page<ArticleDto> articleDtos = articleMapper.selectArticles();
+        Page<ArticleDto> articleDtos = articleMapper.selectArticles("");
         for (ArticleDto articleDto : articleDtos) {
             System.out.println("articleDto = " + articleDto.getArticleId());
         }
