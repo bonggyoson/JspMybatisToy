@@ -39,7 +39,25 @@ public class MemberDto {
         private String memberName;
 
         private Role memberRole;
-        
+
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    public static class UploadFile {
+
+        private String uploadFileName;
+
+        private String storeFileName;
+
+        private String storePath;
+
+        public UploadFile(String uploadFileName, String storeFileName, String storePath) {
+            this.uploadFileName = uploadFileName;
+            this.storeFileName = storeFileName;
+            this.storePath = storePath;
+        }
     }
 
 }

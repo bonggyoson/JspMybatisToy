@@ -125,17 +125,22 @@ function redirect_callback(url, data) {
       window.location.href = "/login";
     }, 2000);
   } else if (url.indexOf("insert") !== -1) {
-    let redirectUrl = url.replace(/\/api/i, '').replace(
-        new RegExp("insert", "gi"), '');
+    if (url.indexOf("article") !== -1) {
+      let redirectUrl = url.replace(/\/api/i, '').replace(
+          new RegExp("insert", "gi"), '');
 
-    window.location.href = redirectUrl + data.data;
+      window.location.href = redirectUrl + data.data;
 
-    // 데이터
-    let list = $("#template").html();
-    let listTemplate = Handlebars.compile(list);
-    let listView = listTemplate(data.data);
+      // 데이터
+      let list = $("#template").html();
+      let listTemplate = Handlebars.compile(list);
+      let listView = listTemplate(data.data);
 
-    $("#data").html(listView);
+      $("#data").html(listView);
+    } else if (url.indexOf("comment") !== -1) {
+      window.location.href = "/article/" + data.data;
+    }
+
   } else if (url.indexOf("update") !== -1) {
     if (url.indexOf("member") !== -1) {
       swalToast("회원정보가 수정되었습니다.", "success");

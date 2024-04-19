@@ -8,7 +8,7 @@ import lombok.Getter;
 public class InsertArticleDto {
 
     /* 게시글 번호 (PK) */
-    private long articleId;
+    private Long articleId;
 
     /* 제목 */
     @NotNull(message = "제목을 입력해 주세요.")
@@ -20,9 +20,9 @@ public class InsertArticleDto {
 
     /*작성자 */
     @NotNull(message = "회원 정보가 없습니다.")
-    private long memberId;
+    private Long memberId;
 
-    public InsertArticleDto(String articleTitle, String articleContent, long memberId) {
+    public InsertArticleDto(String articleTitle, String articleContent, Long memberId) {
         this.articleTitle = articleTitle;
         this.articleContent = articleContent;
         this.memberId = memberId;

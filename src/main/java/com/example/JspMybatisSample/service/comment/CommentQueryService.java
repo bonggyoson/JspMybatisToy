@@ -15,7 +15,9 @@ public class CommentQueryService {
     private final CommentMapper commentMapper;
 
     public int insertComment(InsertCommentDto insertCommentDto) {
-        return commentMapper.insertComment(insertCommentDto);
+        commentMapper.insertComment(insertCommentDto);
+        
+        return  insertCommentDto.getArticleId().intValue();
     }
 
     public int updateComment(UpdateCommentDto updateCommentDto) {

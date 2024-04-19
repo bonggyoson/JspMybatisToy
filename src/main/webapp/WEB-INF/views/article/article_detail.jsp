@@ -171,13 +171,13 @@
                     <div>
                         <div class="nav nav-divider">
                             <h6 class="nav-item card-title mb-0"><a
-                                    href="#!">{{member.memberName}} </a>
+                                    href="#">{{member.memberName}} </a>
                             </h6>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="21"
                                  fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
                                 <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"></path>
                             </svg>
-                            <span class="nav-item small">{{formatDate member.updatedAt "YYYY-MM-DD hh:ss:mm"}}</span>
+                            <span class="nav-item small">{{formatDate updatedAt "YYYY-MM-DD hh:ss:mm"}}</span>
                         </div>
                         <p class="mb-0 small">{{commentContent}}</p>
                     </div>

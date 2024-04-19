@@ -31,7 +31,7 @@ class ArticleApiControllerTest extends BaseControllerTestConfig {
             .andExpect(status().isOk())
             .andDo(print());
     }
-    
+
     @Test
     @DisplayName("Select Article API Test")
     void selectArticleApiTest() throws Exception {
