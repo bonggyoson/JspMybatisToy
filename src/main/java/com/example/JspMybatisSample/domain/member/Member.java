@@ -1,8 +1,6 @@
 package com.example.JspMybatisSample.domain.member;
 
-import com.example.JspMybatisSample.domain.member.dto.MemberDto;
 import com.example.JspMybatisSample.domain.member.dto.MemberDto.MemberWithPasswordDto;
-import com.example.JspMybatisSample.domain.member.dto.UpdateMemberDto;
 import com.example.JspMybatisSample.global.common.BaseEntity;
 import java.util.Collection;
 import lombok.AccessLevel;
@@ -30,6 +28,12 @@ public class Member extends BaseEntity implements UserDetails {
 
     private Role memberRole;
 
+    private String uploadFileName;
+
+    private String storeFileName;
+
+    private String storePath;
+
     @Builder
     public Member(MemberWithPasswordDto memberDto) {
         this.memberId = memberDto.getMemberId();
@@ -37,6 +41,9 @@ public class Member extends BaseEntity implements UserDetails {
         this.memberPassword = memberDto.getMemberPassword();
         this.memberName = memberDto.getMemberName();
         this.memberRole = memberDto.getMemberRole();
+        this.uploadFileName = memberDto.getUploadFileName();
+        this.storeFileName = memberDto.getStoreFileName();
+        this.storePath = memberDto.getStorePath();
     }
 
     @Override

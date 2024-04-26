@@ -18,6 +18,9 @@
       <result column="member_email" property="memberEmail"/>
       <result column="member_name" property="memberName"/>
       <result column="member_role" property="memberRole"/>
+      <result column="upload_file_name" property="uploadFileName"/>
+      <result column="store_file_name" property="storeFileName"/>
+      <result column="store_path" property="storePath"/>
       <result column="member_created_at" property="createdAt"/>
       <result column="member_updated_at" property="updatedAt"/>
     </association>
@@ -60,6 +63,9 @@
            m.member_password,
            m.member_name,
            m.member_role,
+           m.upload_file_name,
+           m.store_file_name,
+           m.store_path,
            m.created_at AS member_created_at,
            m.updated_at AS member_updated_at,
            c.comment_id,

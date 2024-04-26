@@ -25,6 +25,12 @@ public class MemberDto {
 
         private Role memberRole;
 
+        private String uploadFileName;
+
+        private String storeFileName;
+
+        private String storePath;
+
     }
 
     @Getter
@@ -39,6 +45,12 @@ public class MemberDto {
         private String memberName;
 
         private Role memberRole;
+        
+        private String uploadFileName;
+        
+        private String storeFileName;
+
+        private String storePath;
 
     }
 

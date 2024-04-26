@@ -49,6 +49,12 @@ function getAjax(type, url, param, dataType, paging) {
         let listView = listTemplate(data.data);
 
         $("#listData").html(listView);
+
+        if (data.data.storeFileName !== null && data.data.storeFileName
+            !== undefined) {
+          $("#imageData").attr('src',
+              '/api/member/images/' + data.data.storeFileName);
+        }
       },
       error: function () {
         alert("요청이 실패 했습니다.");
@@ -62,8 +68,9 @@ function submitAjax(type, url, data, dataType, contentType) {
   $.ajax({
     type: type,
     url: url,
-    data: dataType === 'json' ? JSON.stringify(data) : data,
+    data: data,
     dataType: dataType,
+    processData: contentType === false ? false : true,
     contentType: contentType,
     success: function (data) {
       console.log(data);

@@ -10,6 +10,9 @@
     <result column="member_email" property="memberEmail"/>
     <result column="member_password" property="memberPassword"/>
     <result column="member_name" property="memberName"/>
+    <result column="upload_file_name" property="uploadFileName"/>
+    <result column="store_file_name" property="storeFileName"/>
+    <result column="store_path" property="storePath"/>
     <result column="created_at" property="createdAt"/>
     <result column="updated_at" property="updatedAt"/>
   </resultMap>
@@ -23,8 +26,14 @@
     <result column="created_at" property="createdAt"/>
     <result column="updated_at" property="updatedAt"/>
     <association property="member" column="member_id"
-      javaType="com.example.JspMybatisSample.domain.member.dto.MemberDto"
-      resultMap="memberResultMap"/>
+      javaType="com.example.JspMybatisSample.domain.member.dto.MemberDto$MemberWithoutPasswordDto">
+      <id column="member_id" property="memberId" javaType="Long"/>
+      <result column="member_email" property="memberEmail"/>
+      <result column="member_name" property="memberName"/>
+      <result column="member_role" property="memberRole"/>
+      <result column="member_created_at" property="createdAt"/>
+      <result column="member_updated_at" property="updatedAt"/>
+    </association>
   </resultMap>
 
   <select id="selectMyPageMember" parameterType="Long" resultMap="memberWithPasswordDto">

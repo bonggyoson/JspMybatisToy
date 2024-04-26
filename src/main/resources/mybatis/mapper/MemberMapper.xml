@@ -65,6 +65,9 @@
     UPDATE board.member
     SET member_email = #{member.memberEmail},
         member_name  = #{member.memberName},
+        upload_file_name = #{member.uploadFileName},
+        store_file_name = #{member.storeFileName},
+        store_path = #{member.storePath},
         updated_at   = now()
     WHERE member_id = #{memberId}
   </update>

@@ -5,28 +5,35 @@ import com.example.JspMybatisSample.domain.member.dto.MemberDto;
 import com.example.JspMybatisSample.domain.member.dto.MemberDto.MemberWithoutPasswordDto;
 import com.example.JspMybatisSample.domain.member.dto.UpdateMemberDto;
 import com.example.JspMybatisSample.global.common.CommonResponse;
+import com.example.JspMybatisSample.global.util.FileStore;
 import com.example.JspMybatisSample.global.util.MailService;
 import com.example.JspMybatisSample.service.member.MemberCommandService;
 import com.example.JspMybatisSample.service.member.MemberQueryService;
 import com.github.pagehelper.PageInfo;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @Slf4j
@@ -39,6 +46,8 @@ public class MemberApiController {
     private final MemberCommandService memberCommandService;
 
     private final MailService mailService;
+
+    private final FileStore fileStore;
 
     @PostMapping("/join")
     public ResponseEntity<CommonResponse<?>> join(
@@ -74,11 +83,12 @@ public class MemberApiController {
 
     @PutMapping("/{memberId}/update")
     public ResponseEntity<CommonResponse<?>> updateMember(@PathVariable long memberId,
-        @Valid @RequestBody UpdateMemberDto updateMemberDto) {
+        @Valid @RequestPart(value = "data") UpdateMemberDto updateMemberDto,
+        @RequestPart(value = "img", required = false) MultipartFile file) throws IOException {
 
         return ResponseEntity.status(HttpStatus.OK)
             .body(CommonResponse.res("회원 수정 성공",
-                memberQueryService.updateMember(memberId, updateMemberDto)));
+                memberQueryService.updateMember(memberId, updateMemberDto, file)));
     }
 
     @PostMapping("/{memberId}/updatePassword")
@@ -111,5 +121,11 @@ public class MemberApiController {
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT)
             .body(CommonResponse.res("비밀번호 재설정 성공"));
+    }
+
+    @GetMapping("/images/{filename}")
+    public Resource downloadImage(@PathVariable String filename) throws MalformedURLException {
+
+        return new UrlResource("file:" + fileStore.getFullPath(filename));
     }
 }

@@ -14,12 +14,9 @@
                 <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark text-center col-3">
                     <a href="/myPage/<sec:authentication property="principal.memberId"/>"
                        class="mb-1 text-white text-decoration-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px"
-                             fill="currentColor" class="bi bi-person-bounding-box me-3"
-                             viewBox="0 0 16 16">
-                            <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5M.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5"/>
-                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                        </svg>
+                        <img id="imageData"
+                             src="/static/images/person-bounding-box.svg"
+                             width="40px" height="40px" class="rounded"/>
                         <span class="fs-4"><sec:authentication
                                 property="principal.memberName"/></span>
                     </a>
@@ -74,8 +71,15 @@
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
+        let file = $('#memberProfile')[0].files[0];
+        const formData = new FormData();
+        formData.append("img", file);
+        formData.append("data",
+            new Blob([JSON.stringify(getFormData($("#frm")))], {type: "application/json"}))
+
+        console.log(formData);
         submitAjax('put', '/api/member/<sec:authentication property="principal.memberId"/>/update',
-            getFormData($("#frm")), 'json', 'application/json');
+            formData, 'json', false);
       }
     });
   }
@@ -167,7 +171,7 @@
         </div>
         <div class="mb-3">
             <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1">
+                                        <span class="input-group-text">
                                                           <svg xmlns="http://www.w3.org/2000/svg"
                                                                width="16"
                                                                height="16" fill="currentColor"
@@ -186,15 +190,14 @@
         </div>
         <div class="mb-3">
             <div class="input-group">
-                                                <span class="input-group-text" id="basic-addon1">
-                                                                  <svg xmlns="http://www.w3.org/2000/svg"
-                                                                       width="16"
-                                                                       height="16"
-                                                                       fill="currentColor"
-                                                                       class="bi bi-person-lines-fill"
-                                                                       viewBox="0 0 16 16">
-                                                  <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"></path>
-                                                </svg>
+                                                <span class="input-group-text">
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                         width="16" height="16" fill="currentColor"
+                                                         class="bi bi-person-badge"
+                                                         viewBox="0 0 16 16">
+                                                      <path d="M6.5 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                                      <path d="M4.5 0A2.5 2.5 0 0 0 2 2.5V14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2.5A2.5 2.5 0 0 0 11.5 0zM3 2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v10.795a4.2 4.2 0 0 0-.776-.492C11.392 12.387 10.063 12 8 12s-3.392.387-4.224.803a4.2 4.2 0 0 0-.776.492z"/>
+                                                    </svg>
                                                                 </span>
                 <input type="file" class="form-control"
                        name="memberProfile"

@@ -31,13 +31,16 @@ CREATE SEQUENCE board.seq_member START 1;
 
 CREATE TABLE board.member
 (
-    member_id       int8 DEFAULT nextval('board.seq_member') NOT NULL,
-    member_email    varchar(255)                             NOT NULL,
-    member_password varchar(255)                             NOT NULL,
-    member_name     varchar(255)                             NOT NULL,
-    member_role     varchar(255)                             NOT NULL,
-    created_at      timestamp                                NOT NULL,
-    updated_at      timestamp
+    member_id        int8 DEFAULT nextval('board.seq_member') NOT NULL,
+    member_email     varchar(255)                             NOT NULL,
+    member_password  varchar(255)                             NOT NULL,
+    member_name      varchar(255)                             NOT NULL,
+    member_role      varchar(255)                             NOT NULL,
+    upload_file_name varchar(255),
+    store_file_name  varchar(255),
+    store_path       varchar(255),
+    created_at       timestamp                                NOT NULL,
+    updated_at       timestamp
 );
 
 -- board.comment definition
