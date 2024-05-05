@@ -65,6 +65,6 @@
       return false;
     }
 
-    submitAjax('post', '/api/article/insert', getFormData($("#frm")), 'json', 'application/json');
+    submitAjax('post', '/api/article/insert', JSON.stringify(getFormData($("#frm"))), 'json', 'application/json');
   }
 </script>

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalApiControllerExceptionHandler {
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler({MethodArgumentNotValidException.class, NullPointerException.class})
     public ResponseEntity<CommonResponse<ErrorResponse<?>>> handleValidationException(
         MethodArgumentNotValidException exception) {
 

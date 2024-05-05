@@ -7,6 +7,7 @@ import com.example.JspMybatisSample.domain.member.dto.UpdateMemberDto;
 import com.example.JspMybatisSample.global.common.CommonResponse;
 import com.example.JspMybatisSample.global.util.FileStore;
 import com.example.JspMybatisSample.global.util.MailService;
+import com.example.JspMybatisSample.mapper.member.MemberMapper;
 import com.example.JspMybatisSample.service.member.MemberCommandService;
 import com.example.JspMybatisSample.service.member.MemberQueryService;
 import com.github.pagehelper.PageInfo;
@@ -15,6 +16,7 @@ import java.net.MalformedURLException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
@@ -45,6 +47,8 @@ public class MemberApiController {
 
     private final MemberCommandService memberCommandService;
 
+    private final MemberMapper memberMapper;
+
     private final MailService mailService;
 
     private final FileStore fileStore;
@@ -59,7 +63,7 @@ public class MemberApiController {
     }
 
     @PostMapping("/checkDuplicateEmail")
-    public int checkDuplicateEmail(@RequestParam String memberEmail) {
+    public int checkDuplicateEmail(@RequestParam @Email String memberEmail) {
 
         return memberCommandService.checkDuplicateEmail(memberEmail);
     }
@@ -111,13 +115,18 @@ public class MemberApiController {
                 memberQueryService.deleteMember(memberId)));
     }
 
-    // TODO: 2024-02-28 - 이메일 인증 방식 구현
     @PostMapping("/resetPassword")
     public ResponseEntity<CommonResponse<?>> resetPassword(
         @RequestBody MemberWithoutPasswordDto memberDto) {
 
+        String newPassword = memberQueryService.createNewPassword();
+
         mailService.sendSimpleMessage(memberDto.getMemberEmail(), "[ToyProject] 임시 비밀번호입니다.",
-            memberQueryService.createNewPassword());
+            newPassword);
+
+        // 비밀번호 재설정
+        memberQueryService.updateMemberPassword(
+            memberMapper.selectMember(memberDto.getMemberEmail()).getMemberId(), newPassword);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT)
             .body(CommonResponse.res("비밀번호 재설정 성공"));

@@ -48,14 +48,19 @@
 <script>
   function reset_password() {
     let memberEmail = $("#memberEmail").val() === "" || $("#memberEmail").val() === null;
-    let emailValid = $("#emailValid");
     let validCount = 0;
+
+    if ($(this).val().trim().length === 0) {
+      this.style = "initial";
+      $("#emailValid").html("");
+      return false;
+    }
 
     // 이메일 공백 검증
     if (memberEmail) {
-      emailValid.html("이메일을 입력해주세요.");
-      emailValid.css({'color': 'red'});
-      emailValid.css({'border-color': 'red'});
+      $("#emailValid").html("이메일을 입력해주세요.");
+      $("#emailValid").css({'color': 'red'});
+      $("#memberEmail").css({'border-color': 'red'});
       validCount++;
     }
 
@@ -68,18 +73,31 @@
         /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([\-.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i);
 
     if (!regExpEmail.test($("#memberEmail").val())) {
-      emailValid.html("이메일 형식에 맞게 작성해주세요.");
-      emailValid.css({'color': 'red'});
-      memberEmail.css({'border-color': 'red'});
-      memberEmail.focus();
-      validCount++;
-    }
-
-    if (validCount > 0) {
+      $("#emailValid").html("이메일 형식에 맞게 작성해주세요.");
+      $("#memberEmail").css({'color': 'red'});
+      $("#emailValid").css({'border-color': 'red'});
+      $("#emailValid").focus();
       return false;
+    } else {
+      $.ajax({
+        url: '/api/member/checkDuplicateEmail',
+        type: 'post',
+        data: {
+          memberEmail: $("#memberEmail").val()
+        },
+        success: function (data) {
+          if (data === 0) {
+            $("#emailValid").html("존재하지 않는 이메일입니다.");
+            $("#emailValid").css({'color': 'red'});
+            $("#memberEmail").css({'border-color': 'red'});
+            $("#emailValid").focus();
+            return false;
+          }
+        }
+      });
     }
 
-    submitAjax('post', '/api/member/resetPassword', getFormData($("#frm")), 'json',
+    submitAjax('post', '/api/member/resetPassword', JSON.stringify(getFormData($("#frm"))), 'json',
         'application/json');
   }
 
