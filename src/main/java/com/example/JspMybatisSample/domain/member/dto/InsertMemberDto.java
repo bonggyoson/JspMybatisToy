@@ -21,7 +21,7 @@ public class InsertMemberDto {
 
     public InsertMemberDto(String memberEmail, String memberPassword, String memberName) {
         this.memberEmail = memberEmail;
-        this.memberPassword = new BCryptPasswordEncoder().encode(memberPassword);
+        this.memberPassword = memberPassword;
         this.memberName = memberName;
         this.memberRole = Role.ROLE_MEMBER;
     }

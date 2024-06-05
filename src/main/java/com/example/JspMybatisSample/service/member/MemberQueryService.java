@@ -22,8 +22,13 @@ public class MemberQueryService {
 
     private final FileStore fileStore;
 
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
     public int insertMember(InsertMemberDto insertMemberDto) {
-        return memberMapper.insertMember(insertMemberDto);
+
+        return memberMapper.insertMember(new InsertMemberDto(insertMemberDto.getMemberEmail(),
+            bCryptPasswordEncoder.encode(insertMemberDto.getMemberPassword()),
+            insertMemberDto.getMemberName()));
     }
 
     public int updateMember(long memberId, UpdateMemberDto updateMemberDto, MultipartFile file)
