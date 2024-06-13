@@ -114,6 +114,18 @@
       validCount++;
     }
 
+    // 이메일 유효성 검사
+    let regExpEmail = RegExp(
+        /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([\-.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i);
+
+    if (!regExpEmail.test($("#memberEmail").val())) {
+      $("#emailValid").html("이메일 형식에 맞게 작성해주세요.");
+      $("#memberEmail").css({'border-color': 'red'});
+      $("#emailValid").css({'color': 'red'});
+      $("#emailValid").focus();
+      return false;
+    }
+
     if (validCount > 0) {
       return false;
     }
@@ -121,7 +133,7 @@
     // 회원가입 중복 Submit 방지
     $("#joinButton").attr("disabled", true);
 
-    submitAjax('post', '/api/member/join', getFormData($("#frm")), 'json', 'application/json');
+    submitAjax('post', '/api/member/join', JSON.stringify(getFormData($("#frm"))), 'json', 'application/json');
   }
 
   // ajax 이메일 중복 체크

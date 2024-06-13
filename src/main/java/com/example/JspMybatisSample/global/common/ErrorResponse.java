@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
 @Getter
-@NoArgsConstructor
 public class ErrorResponse {
 
     private String code;
@@ -64,21 +63,5 @@ public class ErrorResponse {
 
     public static ErrorResponse of(ErrorCode errorCode, String exceptionMessage) {
         return new ErrorResponse(errorCode, exceptionMessage);
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public List<CustomFieldError> getErrors() {
-        return errors;
     }
 }

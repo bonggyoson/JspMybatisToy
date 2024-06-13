@@ -66,11 +66,15 @@ function getAjax(type, url, param, dataType, paging) {
 // 데이터 입력, 수정, 삭제 Ajax
 function submitAjax(type, url, data, dataType, contentType) {
   $.ajax({
+    // Get, Post, Put, Delete
     type: type,
+    // url
     url: url,
     data: data,
+    // json
     dataType: dataType,
-    processData: contentType === false ? false : true,
+    processData: contentType,
+    // application/json
     contentType: contentType,
     success: function (data) {
       console.log(data);
@@ -86,7 +90,7 @@ function getFormData($form) {
   let unindexed_array = $form.serializeArray();
   let indexed_array = {};
 
-  $.map(unindexed_array, function (n, i) {
+  $.map(unindexed_array, function (n) {
     indexed_array[n['name']] = n['value'];
   });
 
