@@ -16,6 +16,6 @@ public class AdminViewController {
     public String selectAdminMain() {
 
         return "admin/admin_main";
-    } 
+    }
 
 }
