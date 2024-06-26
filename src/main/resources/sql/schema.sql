@@ -62,3 +62,22 @@ CREATE TABLE board.comment
     created_at      timestamp                                 NOT NULL,
     updated_at      timestamp
 );
+
+-- board.workoutCralwer definition
+
+-- Drop table
+
+DROP TABLE IF EXISTS board.workoutCralwer;
+
+DROP SEQUENCE IF EXISTS board.seq_workout;
+
+CREATE SEQUENCE board.seq_workout START 1;
+
+CREATE TABLE board.workoutCralwer
+(
+    workout_id      int8 DEFAULT nextval('board.seq_workout') NOT NULL,
+    workout_name    varchar(255)                              NOT NULL,
+    workout_content text                                      NOT NULL,
+    created_at      timestamp                                 NOT NULL,
+    updated_at      timestamp
+);

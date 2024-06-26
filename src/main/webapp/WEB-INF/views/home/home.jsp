@@ -21,7 +21,7 @@
                         onclick="location.href='/login'">회원
                 </button>
                 <button type="button" class="btn btn-secondary"
-                        onclick="location.href='/wods'">와드
+                        onclick="location.href='/workout'">와드
                 </button>
             </div>
         </div>

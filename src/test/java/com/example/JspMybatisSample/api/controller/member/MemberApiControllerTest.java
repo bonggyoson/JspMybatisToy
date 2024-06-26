@@ -1,4 +1,4 @@
-package com.example.JspMybatisSample.api.controller.article;
+package com.example.JspMybatisSample.api.controller.member;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -15,9 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.WithMockUser;
 
 public class MemberApiControllerTest extends BaseControllerTestConfig {
-
-    @Autowired
-    MemberCommandService memberCommandService;
 
     @Test
     @WithMockUser

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.JspMybatisSample.mapper.workout.WorkoutMapper">
+
+  <insert id="insertWorkout" parameterType="list">
+    INSERT INTO board.workout
+    (workout_name, workout_content, created_at, updated_at)
+    VALUES
+    <foreach collection="list" item="item" separator=",">
+      (#{item.name},
+      #{item.description},
+      now(),
+      now())
+    </foreach>
+    ON CONFLICT (workout_name) DO NOTHING
+  </insert>
+
+  <select id="selectWorkouts">
+    select *
+    from board.workout
+  </select>
+
+</mapper>

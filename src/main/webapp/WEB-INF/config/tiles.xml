@@ -26,6 +26,12 @@
     <put-attribute name="body" value="/WEB-INF/views/article/{1}.jsp"/>
   </definition>
 
+  <definition name="workout/*" extends="main_layouts">
+    <!--    <put-attribute name="header" value=""/>-->
+    <put-attribute name="body" value="/WEB-INF/views/workout/{1}.jsp"/>
+    <put-attribute name="footer" value=""/>
+  </definition>
+
   <definition name="mypage/*" extends="main_layouts">
     <put-attribute name="body" value="/WEB-INF/views/mypage/{1}.jsp"/>
   </definition>

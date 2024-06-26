@@ -11,7 +11,7 @@
          style="border-radius: 1rem;">
         <div class="card-body p-7 text-center">
             <button type="button" class="btn btn-lg mb-2 fw-bold text-white"
-                    onclick="location.href='/article'">TOY BOARD
+                    onclick="location.href='/'">TOY BOARD
             </button>
             <p class="fw-bold">로그인</p>
             <div class="mb-2">
